@@ -15,27 +15,27 @@ function Header() {
     console.log(values[1])
 
     return (  
-        <div className='p-5'>
+        <div className='p-3'>
             <div id="carouselBasicExample" className="carousel slide carousel-fade" data-mdb-ride="carousel"> 
                 <div className="carousel-inner"> 
                     {values.map(blog=>{
                         return(
                         <div>        
-                            <div className="carousel-item" key={values[2].id} style={{opacity: "100", display: "block"}}>
+                            <div className="carousel-item" style={{opacity: "100", display: "block"}}>
                                 <img src={values[2].data.img_src} className="d-block w-100" alt="Canyon at Nigh"/>
                                 <div className="carousel-caption d-none d-md-block">
                                     <h5>{values[2].data.title}</h5>
                                     <p>{values[2].data.description}</p>
                                 </div>  
                             </div>
-                            <div className="carousel-item" key={values[1].id} style={{opacity: "100", display: "block"}}>
+                            <div className="carousel-item" style={{opacity: "100", display: "block"}}>
                                 <img src={values[1].data.img_src} className="d-block w-100" alt="Canyon at Nigh"/>
                                 <div className="carousel-caption d-none d-md-block">
                                     <h5>{values[1].data.title}</h5>
                                     <p>{values[1].data.description}</p>
                                 </div>  
                             </div>
-                            <div className="carousel-item" key={values[0].id} style={{opacity: "100", display: "block"}}>
+                            <div className="carousel-item" style={{opacity: "100", display: "block"}}>
                                 <img src={values[0].data.img_src} className="d-block w-100" alt="Canyon at Nigh"/>
                                 <div className="carousel-caption d-none d-md-block">
                                     <h5>{values[0].data.title}</h5>

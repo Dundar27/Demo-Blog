@@ -1,0 +1,22 @@
+.form-box label{
+    color: #212529;
+    font-size: 15px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 500;
+}
+.form-box input[type=email]{
+    width: 100%;
+    margin: auto;
+    padding: 0.1rem;
+    color: #212529;
+    outline: none;
+}
+.catagories-list li{
+    list-style:disc;
+}
+.catagories-list li a{
+    text-decoration: none;
+    font-size: 15px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #212529;
+}
