@@ -7,33 +7,12 @@ function Header() {
     const [values, setvalues] = useState([]);
 
     useEffect(()=>{
-        onSnapshot(collection(db, "post"), snapshop => setvalues(snapshop.docs.map(doc => ({
+        onSnapshot(collection(db, "slides"), snapshop => setvalues(snapshop.docs.map(doc => ({
             id:doc.id,data:doc.data()
         }))))
     },[])      
 
     console.log(values[1])
-
-    /* const slides = {
-        slide1 :{
-            id: values[0],
-            img_url: values[0],
-            title: values[0],
-            description: values[0]
-        },
-        slide2 :{
-            id: values[1],
-            img_url: values[1],
-            title: values[1],
-            description: values[1]
-        },
-        slide3 :{
-            id: values[2],
-            img_url: values[2],
-            title: values[2],
-            description: values[2]
-        }
-    } */
 
     return (  
         <div className='p-5'>
