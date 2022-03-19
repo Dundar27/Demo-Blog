@@ -5,14 +5,20 @@
     font-weight: 500;
 }
 .form-box input[type=email]{
-    width: 100%;
+    width: 75%;
     margin: auto;
     padding: 0.1rem;
     color: #212529;
     outline: none;
+    border: 0px;
+    border-bottom: 1px solid #7c7c7c;
+}
+.form-box input[type=submit]{
+    width: 20%;
+    padding: 00.1rem;
 }
 .catagories-list li{
-    list-style:disc;
+    list-style:none;
 }
 .catagories-list li a{
     text-decoration: none;

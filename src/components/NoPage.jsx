@@ -5,7 +5,7 @@ import React from 'react';
 const NoPage = () => {
     return (
         <div>
-            <main className="my-auto py-5">
+            <div className="my-auto py-5">
                 <div className="text-center py-5">
                     <h1 className="display-1">404</h1>
                     <h2>File not found</h2>
@@ -23,7 +23,7 @@ const NoPage = () => {
                         <p className="mb-0">Click the link above to return to the home page.</p>
                     </div>
                 </div>
-            </main>
+            </div>
         </div>
     );
 }
