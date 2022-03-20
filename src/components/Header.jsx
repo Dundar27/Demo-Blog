@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { collection, onSnapshot } from "firebase/firestore";
 import db from './Firebase';
 
-function Header() { 
+const Header = () => { 
 
     const [values, setvalues] = useState([]);
 

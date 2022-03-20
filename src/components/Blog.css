@@ -1,11 +1,12 @@
 .form-box label{
+    width: 100%;
     color: #212529;
     font-size: 15px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: 500;
 }
-.form-box input[type=email]{
-    width: 75%;
+.form-box label input[type=email]{
+    width: 100%;
     margin: auto;
     padding: 0.1rem;
     color: #212529;
@@ -14,7 +15,8 @@
     border-bottom: 1px solid #7c7c7c;
 }
 .form-box input[type=submit]{
-    width: 20%;
+    margin-top: 1rem;
+    width: 100%;
     padding: 00.1rem;
 }
 .catagories-list li{

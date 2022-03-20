@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {collection, onSnapshot} from "firebase/firestore";
+import {collection, onSnapshot, addDoc} from "firebase/firestore";
 /* import { query, where, orderBy, orderByChild, limit, limitToFirst, startAt, startAfter, endAt, endBefore, getDocs } from "firebase/firestore"; */
 import db from './Firebase';
 import './Blog.css'
@@ -14,6 +14,17 @@ const Blogs = () => {
         }))))
     },[]) 
 
+    const SubscribeForm = (event) =>{
+        event.preventDefault();
+
+        var mailValue = document.getElementById("subscribe").value;
+        const docRef =  addDoc(collection(db, "subscribers"), {
+            mail: mailValue,
+        });
+       alert("You have successfully subscribed", docRef);
+    }
+
+    
     return (
         <div className='p-3 bg-dark'>
             {/* <div className="card text-center mt-3">
@@ -76,9 +87,10 @@ const Blogs = () => {
                                     <h5>Subscribe</h5>
                                 </div>
                                 <div className='card-body'>
-                                    <form action={""} method="post" className='form-box'>
-                                        <label htmlFor="subscribe_label">Subscribe :</label> <br />
-                                        <input type="email" name="subscribe_button" id="subscribe" required /> 
+                                    <form onSubmit={SubscribeForm} className='form-box'>
+                                        <label htmlFor="subscribe_label">Subscribe : <br />
+                                            <input type="email" name="subscribe_button" id="subscribe" className='mx-auto mt-1' required /> 
+                                        </label>
                                         <input type="submit" className='btn btn-success mx-auto' value="Subscribe" />   
                                     </form>
                                 </div>
