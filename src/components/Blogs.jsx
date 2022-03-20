@@ -1,25 +1,27 @@
 import React, {useState, useEffect} from 'react';
-import {collection, onSnapshot, addDoc} from "firebase/firestore";
+import {collection, onSnapshot, addDoc, query, where, orderBy, limit} from "firebase/firestore";
 /* import { query, where, orderBy, orderByChild, limit, limitToFirst, startAt, startAfter, endAt, endBefore, getDocs } from "firebase/firestore"; */
 import db from './Firebase';
 import './Blog.css'
+
 
 const Blogs = () => {
 
     const [blogs, setBlogs] = useState([]);
 
     useEffect(()=>{
-        onSnapshot(collection(db,'blogs'), snapshop => setBlogs(snapshop.docs.map(doc => ({
+        onSnapshot(query(collection(db, 'blogs'), where("like", ">", 10), orderBy("like"), limit(4)), snapshop => setBlogs(snapshop.docs.map(doc => ({
             id:doc.id,data:doc.data()
         }))))
     },[]) 
 
-    const SubscribeForm = (event) =>{
+    const SubscribeForm = async(event) =>{
         event.preventDefault();
 
         var mailValue = document.getElementById("subscribe").value;
-        const docRef =  addDoc(collection(db, "subscribers"), {
+        const docRef = await addDoc(collection(db, "subscribers"), {
             mail: mailValue,
+            subscribeDate: new Date()
         });
        alert("You have successfully subscribed", docRef);
     }
@@ -54,7 +56,7 @@ const Blogs = () => {
                     {blogs.map((blog)=>(
                         <div className='card col-5 mx-3 my-3'>
                             <div className='card-header'>
-                                <h3>Blog Posts</h3> 
+                                <h3>Popular Blog Posts</h3> 
                             </div>
                             <div className='card-body'>
                                 <div className='my-0'>        
