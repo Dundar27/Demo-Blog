@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {collection, onSnapshot, addDoc, query, where, orderBy, limit} from "firebase/firestore";
-/* import { query, where, orderBy, orderByChild, limit, limitToFirst, startAt, startAfter, endAt, endBefore, getDocs } from "firebase/firestore"; */
-import db from './Firebase';
-import './style.css'
+import { Link } from "react-router-dom";
 
+import db from './Firebase';
+import {collection, onSnapshot, addDoc, query, where, orderBy, limit} from "firebase/firestore";
 
 const Blogs = () => {
 
@@ -72,6 +71,7 @@ const Blogs = () => {
                                                 </div>
                                             </div> 
                                         </div> 
+                                        <Link to={'blog/'+blog.id} className="btn btn-outline-primary btn-rounded">Read the Blog Post</Link>
                                     </div>
                                 </div>    
                             </div>      

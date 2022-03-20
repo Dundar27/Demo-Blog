@@ -1,5 +1,5 @@
 /**********************************************Blog Component**************************************************/
-#blog-component{
+#blog-component, #header-component{
     background: rgb(200, 200, 200);
 }
 .form-box label{

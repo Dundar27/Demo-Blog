@@ -1,15 +1,14 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Layout from './Layout';
 import Header from './Header';
 import NoPage from './NoPage';
 import Blogs from './Blogs';
 import Footer from './Footer';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import './style.css'
 
 class App extends React.Component {
-
-
-
   render(){
     return (
         <BrowserRouter>
