@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {collection, onSnapshot, addDoc, query, where, orderBy, limit} from "firebase/firestore";
 /* import { query, where, orderBy, orderByChild, limit, limitToFirst, startAt, startAfter, endAt, endBefore, getDocs } from "firebase/firestore"; */
 import db from './Firebase';
-import './Blog.css'
+import './style.css'
 
 
 const Blogs = () => {
@@ -28,7 +28,7 @@ const Blogs = () => {
 
     
     return (
-        <div className='p-3 bg-dark'>
+        <div className='p-3' id='blog-component'>
             {/* <div className="card text-center mt-3">
                 <div className="card-header">
                     <ul className="nav nav-tabs card-header-tabs">

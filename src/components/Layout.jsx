@@ -6,7 +6,7 @@ const Layout = () => {
     const [input, setInput] = useState("");
 
   return (
-    <div>
+    <div id="layout-component">
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark container-fluid">
             <div className="collapse navbar-collapse">
                 <ul className="navbar-nav me-auto">
