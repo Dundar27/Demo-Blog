@@ -1,18 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 
 import db from './Firebase';
-import {collection, onSnapshot, addDoc, query, where, orderBy, limit} from "firebase/firestore";
+import {collection, addDoc,} from "firebase/firestore";
 
-const Blogs = (props) => {
-
-    const [blogs, setBlogs] = useState([]);
-
-    useEffect(()=>{
-        onSnapshot(query(collection(db, 'blogs'), where("like", ">", 10), orderBy("like"), limit(4)), snapshop => setBlogs(snapshop.docs.map(doc => ({
-            id:doc.id,data:doc.data()
-        }))))
-    },[]) 
+const Blogs = (props) => {  
 
     const SubscribeForm = async(event) =>{
         event.preventDefault();
@@ -24,7 +16,6 @@ const Blogs = (props) => {
         });
        alert("You have successfully subscribed", docRef);
     }
-
     
     return (
         <div className='p-3' id='blog-component'>
