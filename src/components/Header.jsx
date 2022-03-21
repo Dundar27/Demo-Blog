@@ -33,30 +33,6 @@ function Header() {
                 </Carousel.Caption>
             </Carousel.Item>
         ))}
-        {/* <Carousel.Item id={slide.data.id}>
-            <img
-                className="d-block w-100"
-                src={slide.data.img_src}
-                alt="Second slide"
-            />
-    
-            <Carousel.Caption>
-                <h3>{slide.data.title}</h3>
-                <p>{slide.data.description}</p>
-            </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item id={slide.data.id}>
-            <img
-                className="d-block w-100"
-                src={slide.data.img_src}
-                alt="Third slide"
-            />
-  
-            <Carousel.Caption>
-                <h3>{slide.data.title}</h3>
-                <p>{slide.data.description}</p>
-            </Carousel.Caption>
-        </Carousel.Item> */}
       </Carousel>
     );
   }

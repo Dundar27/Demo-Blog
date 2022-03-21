@@ -16,7 +16,7 @@ class Layout extends React.Component{
                             <li className="nav-item"> <Link to="/" className="nav-link">Home</Link> </li>
                         </ul>
                         <form class="d-flex" onSubmit={this.handleForSubmit}>
-                            <input className="form-control me-2" type="text" placeholder="Search"  onChange={this.props.searchBlog}/>
+                            <input className="form-control me-2" type="text" placeholder="Search"  onChange={this.props.searchProp}/>
                             <button className="btn btn-primary" type="button">Search</button>
                         </form>
                     </div>

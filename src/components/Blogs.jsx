@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import db from './Firebase';
 import {collection, onSnapshot, addDoc, query, where, orderBy, limit} from "firebase/firestore";
 
-const Blogs = () => {
+const Blogs = (props) => {
 
     const [blogs, setBlogs] = useState([]);
 
@@ -52,7 +52,7 @@ const Blogs = () => {
             </div> */}
             <div className='row mt-3'>
                 <div className='col-8 row p-2'>
-                    {blogs.map((blog)=>(
+                    {props.blogs.map((blog)=>(
                         <div className='card col-5 mx-3 my-3'>
                             <div className='card-header'>
                                 <h3>Popular Blog Posts</h3> 
