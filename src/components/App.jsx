@@ -2,10 +2,13 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 //Components
 import Layout from './Layout';
-import Header from './Header';
-import NoPage from './NoPage';
-import Blogs from './Blogs';
 import Footer from './Footer';
+import Header from './Header';
+import Blogs from './Blogs';
+import Account from './Account';
+import Register from './Register';
+import Login from './Login';
+import NoPage from './NoPage';
 //Style files
 import './style.css'
 //Database functions
@@ -16,7 +19,8 @@ class App extends React.Component {
 
   state= {
     blogs: [],  //To keep data of blog cards
-    searchQuery: "" // To filter blog cards 
+    searchQuery: "", // To filter blog cards
+    isLoggedIn: true 
   }
 
   componentDidMount() {
@@ -52,6 +56,24 @@ class App extends React.Component {
     return (
         <BrowserRouter>
           <Routes>
+              <Route path="/register/" element={
+                <div>
+                  <Layout/>
+                  <Register /> 
+                </div>}
+              />
+              <Route path="/login/" element={
+                <div>
+                  <Layout/>
+                  <Login /> 
+                </div>}
+              />
+              <Route path='/account/' element={
+                <div>
+                  <Layout/>
+                  <Account isLoggedIn={this.state.isLoggedIn}/>
+                </div>}
+              />  
               <Route path="/" exact element={
                 <div>
                   <Layout searchProp={this.searchBlogProp}/>
@@ -60,7 +82,7 @@ class App extends React.Component {
                   <Footer />
                 </div>} 
               />
-              <Route path="*" element={<NoPage />} />
+            <Route path="*" element={<NoPage />} />
           </Routes> 
         </BrowserRouter>
     );

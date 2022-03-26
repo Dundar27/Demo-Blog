@@ -10,7 +10,7 @@ const Footer = () => {
                     <div>
                         <p className="d-flex justify-content-center align-items-center">
                             <span className="me-3">Register for free</span>                       
-                            <Link className="btn btn-outline-light btn-rounded" to="/sign-up">Sign up!</Link>
+                            <Link className="btn btn-outline-light btn-rounded" to="/register">Sign up!</Link>
                         </p>
                     </div>
                 </div>
