@@ -20,11 +20,16 @@ class App extends React.Component {
   state= {
     blogs: [],  //To keep data of blog cards
     searchQuery: "", // To filter blog cards
-    isLoggedIn: true 
+    isLoggedIn: false ,
+    mail: "",
+    password: ""
   }
 
   componentDidMount() {
     this.getBlogs();
+    if(this.state.mail !== '' && this.state.password !== ''){
+      this.setState({isLoggedIn : true});
+    }
   }
 
   // Function to get blog data from firebase database
@@ -40,6 +45,21 @@ class App extends React.Component {
   searchBlogProp = (event) =>  {
     this.setState({searchQuery: event.target.value});
     console.log(event.target.value);
+  }
+ 
+
+  registerMailProp = (event) =>  {
+    this.setState({mail: event.target.value});
+    console.log(event.target.value);
+  }
+  registerPasswordProp = (event) =>  {
+    this.setState({password: event.target.value});
+    console.log(event.target.value);
+  }
+
+  LogoutProp = () => {
+    this.setState({mail: ''});
+    this.setState({password: ''});
   }
 
   render(){
@@ -59,7 +79,10 @@ class App extends React.Component {
               <Route path="/register/" element={
                 <div>
                   <Layout/>
-                  <Register /> 
+                  <Register 
+                    registerMailProp={this.registerMailProp}
+                    registerPasswordProp={this.registerPasswordProp}
+                  /> 
                 </div>}
               />
               <Route path="/login/" element={
@@ -76,7 +99,10 @@ class App extends React.Component {
               />  
               <Route path="/" exact element={
                 <div>
-                  <Layout searchProp={this.searchBlogProp}/>
+                  <Layout 
+                    searchProp={this.searchBlogProp}
+                    LogoutProp={this.LogoutProp}
+                  />
                   <Header />
                   <Blogs blogs={filteredBlogs}/>
                   <Footer />

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 //Database functions
 import db from './Firebase';
-import {collection, addDoc,} from "firebase/firestore";
+import {collection, addDoc} from "firebase/firestore";
 
 const Blogs = (props) => {  
 
