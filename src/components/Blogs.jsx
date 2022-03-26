@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-
+//Database functions
 import db from './Firebase';
 import {collection, addDoc,} from "firebase/firestore";
 
 const Blogs = (props) => {  
 
+    //Pull form data and create subscription
     const SubscribeForm = async(event) =>{
         event.preventDefault();
 
@@ -110,8 +111,6 @@ const Blogs = (props) => {
                                 </div>
                                 <div className='card-body'>
                                     <p>Our site is still under development. You are now using the demo version. If you've discovered a bug, please let us know.</p>
-                                    <hr />
-                                    <p className="mb-0">Click the link above to return to the home page.</p>
                                 </div>
                             </div>
                         </div>

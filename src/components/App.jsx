@@ -15,23 +15,24 @@ import {collection, query, onSnapshot} from "firebase/firestore";
 class App extends React.Component {
 
   state= {
-    blogs: [],
-    searchQuery: ""
+    blogs: [],  //To keep data of blog cards
+    searchQuery: "" // To filter blog cards 
   }
 
   componentDidMount() {
     this.getBlogs();
   }
 
+  // Function to get blog data from firebase database
   async getBlogs() {
     const response = await onSnapshot(query(collection(db, 'blogs')), snapshop => this.setState({blogs: snapshop.docs.map(doc => ({
       id:doc.id,data:doc.data()
     }))}));
     
     console.log(response)
-    //this.setState({ blogs: response.data })
   }
 
+  //Get data in search button
   searchBlogProp = (event) =>  {
     this.setState({searchQuery: event.target.value});
     console.log(event.target.value);
@@ -39,6 +40,7 @@ class App extends React.Component {
 
   render(){
 
+    //Function to remove case insensitivity of data in search button
     let filteredBlogs = this.state.blogs.filter(
       (blog) => {
           return blog.data.title.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1
