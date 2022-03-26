@@ -16,20 +16,20 @@ const Register = (props) => {
         const confirmPassword = document.getElementById("password2").value;
         
         const validatePassword = () => {
-            let isValid;
+            let valid;
             if (password !== '' && confirmPassword !== ''){
               if (password !== confirmPassword) {
-                isValid = false;
                 alert('Passwords does not match');
-              }else{
-                  isValid = true;
-              } 
+                valid = false;
+              }else
+              {
+                valid = true;
+              }
+              return valid; 
             }
-            console.log(isValid);
-            return isValid;
         }
 
-        if(validatePassword){
+        if(validatePassword().valueOf === true){
             const docRef = await addDoc(query(collection(db, "users")), {
                 firstName: firstname,
                 surName: surname,
@@ -38,6 +38,8 @@ const Register = (props) => {
                 registerDate: new Date()
             });
             alert("You have successfully register", docRef);
+        }else{
+            alert("Warning")
         }
     }
   
@@ -47,36 +49,36 @@ const Register = (props) => {
             <h1 className='text-center mb-3'>Register Form</h1>
             <Form onSubmit={handleSubmit} className="mx-auto"> 
                 <div className='d-flex'>   
-                    <Form.Group className="mb-3 w-100" controlid="formBasicText">
+                    <Form.Group className="mb-3 w-100" id="formBasicText">
                         <Form.Label>First Name</Form.Label>
                         <Form.Control type="text" placeholder="John" id="firstname" required/>
                     </Form.Group>
                     
-                    <Form.Group className="mb-3 w-100" controlId="formBasicText2">
+                    <Form.Group className="mb-3 w-100" id="formBasicText2">
                         <Form.Label>Surname</Form.Label>
                         <Form.Control type="text" placeholder="Doe" id="surname" required/>
                     </Form.Group> 
                 </div>
                               
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-3" id="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control type="email" placeholder="Enter email" id="email" onChange={props.registerMailProp} required/>
                 </Form.Group>
 
 
                 <div className='d-flex'>     
-                    <Form.Group className="mb-3 w-100" controlId="formBasicPassword1">
+                    <Form.Group className="mb-3 w-100" id="formBasicPassword1">
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" placeholder="Password" id="password" onChange={props.registerPasswordProp} required/>
                     </Form.Group>
                    
-                    <Form.Group className="mb-3 w-100" controlId="formBasicPassword2">
+                    <Form.Group className="mb-3 w-100" id="formBasicPassword2">
                         <Form.Label>Repeat Password</Form.Label>
                         <Form.Control type="password" placeholder="Password" id='password2' required/>
                     </Form.Group>
                 </div>
 
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Group className="mb-3" id="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
 

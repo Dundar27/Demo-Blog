@@ -20,7 +20,7 @@ class App extends React.Component {
   state= {
     blogs: [],  //To keep data of blog cards
     searchQuery: "", // To filter blog cards
-    isLoggedIn: false ,
+    isLoggedIn: false,
     mail: "",
     password: ""
   }
@@ -44,17 +44,14 @@ class App extends React.Component {
   //Get data in search button
   searchBlogProp = (event) =>  {
     this.setState({searchQuery: event.target.value});
-    console.log(event.target.value);
   }
  
 
   registerMailProp = (event) =>  {
     this.setState({mail: event.target.value});
-    console.log(event.target.value);
   }
   registerPasswordProp = (event) =>  {
     this.setState({password: event.target.value});
-    console.log(event.target.value);
   }
 
   LogoutProp = () => {
