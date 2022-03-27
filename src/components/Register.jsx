@@ -4,7 +4,7 @@ import { Form, Button } from 'react-bootstrap';
 import db from './Firebase';
 import {collection, addDoc, query} from "firebase/firestore";
 
-const Register = (props) => {
+const Register = () => {
 
     //Function to run when the form is submitted
     const handleSubmit = async(event) => {
@@ -12,11 +12,11 @@ const Register = (props) => {
         event.preventDefault();  //Prevent page refresh when form is submitted
 
         //Values ​​of form elements
-        const firstname = document.getElementById("firstname").value;
-        const surname = document.getElementById("surname").value;
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
-        const confirmPassword = document.getElementById("password2").value;
+        const firstname = document.getElementById("register_firstname").value;
+        const surname = document.getElementById("register_surname").value;
+        const email = document.getElementById("register_email").value;
+        const password = document.getElementById("register_password").value;
+        const confirmPassword = document.getElementById("register_password2").value;
         const successMessage = document.getElementById("registration_successful");
         const errorMessage = document.getElementById("registration_failed");
         const errorPassword = document.getElementById("errorPassword");
@@ -40,11 +40,11 @@ const Register = (props) => {
 
         //Clear values ​​of form elements
         function clearValue(){
-            const firstname = document.getElementById("firstname").value = '';
-            const surname = document.getElementById("surname").value = '';
-            const email = document.getElementById("email").value = '';
-            const password = document.getElementById("password").value = '';
-            const confirmPassword = document.getElementById("password2").value = '';
+            const firstname = document.getElementById("register_firstname").value = '';
+            const surname = document.getElementById("register_surname").value = '';
+            const email = document.getElementById("register_email").value = '';
+            const password = document.getElementById("register_password").value = '';
+            const confirmPassword = document.getElementById("register_password2").value = '';
 
             console.log(firstname, surname, email, password, confirmPassword);
         }
@@ -82,7 +82,7 @@ const Register = (props) => {
                         <Form.Control 
                             type="text" 
                             placeholder="John" 
-                            id="firstname"
+                            id="register_firstname"
                             minLength={3}
                             maxLength={22} 
                             pattern={'[a-zA-Z]*'}
@@ -95,7 +95,7 @@ const Register = (props) => {
                         <Form.Control 
                             type="text" 
                             placeholder="Doe" 
-                            id="surname"
+                            id="register_surname"
                             minLength={3}
                             maxLength={14}
                             pattern={'[a-zA-Z]*'}
@@ -109,13 +109,11 @@ const Register = (props) => {
                     <Form.Control 
                         type="email" 
                         placeholder="Enter email" 
-                        id="email" 
-                        onChange={props.registerMailProp} 
+                        id="register_email" 
                         pattern={'[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$'}
                         required
                     />
                 </Form.Group>
-
 
                 <div className='d-flex'>     
                     <Form.Group className="mb-3 w-100" id="formBasicPassword1">
@@ -123,11 +121,10 @@ const Register = (props) => {
                         <Form.Control 
                         type="password" 
                         placeholder="Password" 
-                        id="password" 
-                        onChange={props.registerPasswordProp} 
+                        id="register_password"  
                         minLength={8}
                         maxLength={16}
-                        pattern={'(?=.*[a-z])(?=.*[A-Z]).{8,16}'}
+                        pattern={'(?=.*[a-z])(?=.*[A-Z]).{8,20}'}
                         required/>
                         <span className='form-text'>*Must contain at least one uppercase letter, lowercase letter, and number.</span>
                     </Form.Group>
@@ -137,10 +134,10 @@ const Register = (props) => {
                         <Form.Control 
                         type="password" 
                         placeholder="Password" 
-                        id='password2'
+                        id='register_password2'
                         minLength={8}
                         maxLength={16}
-                        pattern={'(?=.*[A-Za-z])(?=.*[0-9]){8,16}'}
+                        pattern={'(?=.*[A-Za-z])(?=.*[0-9]){8,20}'}
                         required/>
                     </Form.Group>
                 </div>

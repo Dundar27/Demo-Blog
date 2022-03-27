@@ -1,28 +1,68 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
+import { auth } from './Firebase';
+import { signInWithEmailAndPassword} from 'firebase/auth'
 
+const Login = () => {    
+    
+    const login = async(event) => {
 
-const Login = () => {
+        event.preventDefault();
+
+        const auther = auth;
+        const email = document.getElementById("login_mail").value;
+        const password = document.getElementById("login_password").value;
+
+        signInWithEmailAndPassword(auther, email, password).then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            // ...
+            console.log(user);
+
+            //Redirect to login screen after 1.5 seconds
+            setTimeout(function(){
+                window.location = "/";
+            }, 1500);
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(errorCode, errorMessage);
+        });
+    }
 
     return(
     <div className='p-3 mt-5 container' id='login-component'>
         <div>
             <h1 className='text-center mb-3'>Login Form</h1>
-            <Form className="mx-auto"> 
+            <Form className="mx-auto" onSubmit={login}> 
               
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-3" id="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" />
+                    <Form.Control 
+                        type="email" 
+                        placeholder="Enter email" 
+                        id='login_mail'
+                        pattern={'[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$'}
+                        required
+                    />
                 </Form.Group>
     
-                <Form.Group className="mb-3 w-100" controlId="formBasicPassword">
+                <Form.Group className="mb-3 w-100" id="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
+                    <Form.Control 
+                        type="password" 
+                        placeholder="Password" 
+                        id='login_password'
+                        minLength={8}
+                        maxLength={20}
+                        required
+                    />
                 </Form.Group>
 
 
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Group className="mb-3" id="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
 

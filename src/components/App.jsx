@@ -45,16 +45,7 @@ class App extends React.Component {
   searchBlogProp = (event) =>  {
     this.setState({searchQuery: event.target.value});
   }
- 
 
-  registerMailProp = (event) =>  {
-    this.setState({mail: event.target.value});
-    console.log(this.state.mail);
-  }
-  registerPasswordProp = (event) =>  {
-    this.setState({password: event.target.value});
-    console.log(this.state.password);
-  }
 
   LogoutProp = () => {
     this.setState({mail: ''});
@@ -78,10 +69,7 @@ class App extends React.Component {
               <Route path="/register/" element={
                 <div>
                   <Layout/>
-                  <Register 
-                    registerMailProp={this.registerMailProp}
-                    registerPasswordProp={this.registerPasswordProp}
-                  /> 
+                  <Register /> 
                 </div>}
               />
               <Route path="/login/" element={
