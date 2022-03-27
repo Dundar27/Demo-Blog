@@ -49,9 +49,11 @@ class App extends React.Component {
 
   registerMailProp = (event) =>  {
     this.setState({mail: event.target.value});
+    console.log(this.state.mail);
   }
   registerPasswordProp = (event) =>  {
     this.setState({password: event.target.value});
+    console.log(this.state.password);
   }
 
   LogoutProp = () => {
