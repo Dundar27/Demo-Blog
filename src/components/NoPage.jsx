@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const NoPage = () => {
     return (
@@ -9,7 +10,7 @@ const NoPage = () => {
                     <h2>File not found</h2>
                     <ul className="navbar-nav me-auto mt-4">
                         <li className="nav-item">
-                            <a href='/' className='nav-link text-primary'><h6>Back to Home</h6></a>
+                            <Link to='/' className='nav-link text-primary'><h6>Back to Home</h6></Link>
                         </li>
                     </ul>
                 </div>
