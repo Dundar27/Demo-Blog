@@ -1,11 +1,15 @@
 import React from 'react';
 import { Outlet, Link } from "react-router-dom";
+import { auth } from './Firebase';
 
 class Layout extends React.Component{
 
     //Function needed to not refresh the page when clicking the search button
     handleForSubmit = (event) => {
         event.preventDefault();
+    }
+    logout(){
+        auth.signOut();
     }
 
     render(){
@@ -24,7 +28,7 @@ class Layout extends React.Component{
                                 <button className="btn btn-primary" type="button">Search</button>
                             </form>
                             <form className='mx-3' onSubmit={this.handleForSubmit}>
-                                <input className="form-control me-2 btn btn-outline-danger" type="submit" value="Logout"  onChange={this.props.LogoutProp}/>
+                                <input className="form-control me-2 btn btn-outline-danger" type="submit" value="Logout"  onClick={this.logout}/>
                             </form>
                         </div>
                     </div>

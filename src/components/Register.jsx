@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
-import db, { auth } from './Firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
-import {collection, addDoc, query} from "firebase/firestore";
+import { auth } from './Firebase';
+import { createUserWithEmailAndPassword} from 'firebase/auth';
+//import {collection, addDoc, query} from "firebase/firestore";
 
 class Register extends React.Component {
 
     constructor(props){
+        super(props);
         this.register = this.register.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.state={
@@ -18,7 +19,7 @@ class Register extends React.Component {
 
     register(e){
         e.preventDefault();
-        auth.createUserWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
+        createUserWithEmailAndPassword(auth, this.state.email, this.state.password).then((u)=>{
             console.log(u);
         }).catch((err)=>{
             console.log(err)

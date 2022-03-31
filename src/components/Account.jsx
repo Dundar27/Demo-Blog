@@ -1,5 +1,5 @@
 import React from 'react';
-import Register from './Register';
+
 
 class Account extends React.Component{
     

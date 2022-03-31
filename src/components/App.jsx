@@ -28,10 +28,10 @@ class App extends React.Component {
 
   componentDidMount(){
     this.getBlogs();
-    this.authLister();
+    this.authListener();
   }
 
-  authLister(){
+  authListener(){
     auth.onAuthStateChanged((user)=> {
       if(user){
         this.setState({user})

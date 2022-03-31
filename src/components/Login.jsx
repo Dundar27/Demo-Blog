@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
-import db, { auth } from './Firebase';
-import { signInWithEmailAndPassword} from 'firebase/auth'
+import { auth } from './Firebase';
+import { signInWithEmailAndPassword} from 'firebase/auth';
 
 class Login extends React.Component{    
     
     constructor(props){
+        super(props);
         this.login = this.login.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.state={
@@ -17,7 +18,7 @@ class Login extends React.Component{
 
     login(e){
         e.preventDefault();
-        auth.signInWithEmailAndPassword(this.state.email,this.state.password).then((u)=>{
+        signInWithEmailAndPassword(auth,this.state.email,this.state.password).then((u)=>{
             console.log(u)
         }).catch((err)=>{
             console.log(err);
