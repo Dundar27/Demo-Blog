@@ -83,7 +83,7 @@ class App extends React.Component {
                 </div>}
               />
               <Route path='/account/' element={
-                this.state.user ? (<div><Layout/><Account/></div>) : (<Register /> )}
+                this.state.user ? (<div><Layout/><Account/></div>) : (<div><Layout/><Register/></div>)}
               />  
               <Route path="/" exact element={
                 <div>

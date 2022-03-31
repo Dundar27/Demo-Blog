@@ -16,9 +16,13 @@ class Login extends React.Component{
         }
     }
 
-    login(e){
+    login = async(e) =>{
         e.preventDefault();
         signInWithEmailAndPassword(auth,this.state.email,this.state.password).then((u)=>{
+            //Redirect to login screen after 1.5 seconds
+            setTimeout(function(){
+                window.location = "/";
+            }, 1500);
             console.log(u)
         }).catch((err)=>{
             console.log(err);
@@ -30,32 +34,8 @@ class Login extends React.Component{
             [e.target.name] : e.target.value
         })
     }
-    /* const login = async(event) => {
-
-        event.preventDefault();
-
-        const auther = auth;
-        const email = document.getElementById("login_mail").value;
-        const password = document.getElementById("login_password").value;
-
-        signInWithEmailAndPassword(auther, email, password).then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            // ...
-            console.log(user);
-
-            //Redirect to login screen after 1.5 seconds
-            setTimeout(function(){
-                window.location = "/";
-            }, 1500);
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            alert(errorCode, errorMessage);
-        });
-    }
- */ render(){
+    
+    render(){
         return(
             <div className='p-3 mt-5 container' id='login-component'>
                 <div>

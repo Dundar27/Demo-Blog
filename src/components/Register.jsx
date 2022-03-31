@@ -17,29 +17,12 @@ class Register extends React.Component {
         }
     }
 
-    register(e){
-        e.preventDefault();
-        createUserWithEmailAndPassword(auth, this.state.email, this.state.password).then((u)=>{
-            console.log(u);
-        }).catch((err)=>{
-            console.log(err)
-        })
-    }
-
-    handleChange(e){
-        this.setState({
-            [e.target.name] : e.target.value
-        })
-    }
-    /* //Function to run when the form is submitted
-    const handleSubmit = async(event) => {
-        
-        event.preventDefault();  //Prevent page refresh when form is submitted
+    //Function to run when the form is submitted
+    register = async(e) => {
+     
+        e.preventDefault();  //Prevent page refresh when form is submitted
 
         //Values ​​of form elements
-        const firstname = document.getElementById("register_firstname").value;
-        const surname = document.getElementById("register_surname").value;
-        const email = document.getElementById("register_email").value;
         const password = document.getElementById("register_password").value;
         const confirmPassword = document.getElementById("register_password2").value;
         const successMessage = document.getElementById("registration_successful");
@@ -76,13 +59,11 @@ class Register extends React.Component {
 
         //Save the values ​​of the form elements to the database if there are no errors so far
         if(validatePassword().valueOf() === true){
-            const docRef = await addDoc(query(collection(db, "users")), {
-                firstName: firstname,
-                surName: surname,
-                mail: email,
-                password: password,
-                registerDate: new Date()
-            });
+            createUserWithEmailAndPassword(auth, this.state.email, this.state.password).then((u)=>{
+                console.log(u);
+            }).catch((err)=>{
+                console.log(err)
+            })
             clearValue(); ////Clear values ​​of form elements
             successMessage.style.display = "block";  //Make registration successful message visible
 
@@ -90,11 +71,17 @@ class Register extends React.Component {
             setTimeout(function(){
                 window.location = "/login/";
             }, 1500);
-            console.log("You have successfully register", docRef);
+
         }else{
             errorMessage.style.display = "block"; //Show error message if there is an error
         }
-    } */
+    }
+
+    handleChange(e){
+        this.setState({
+            [e.target.name] : e.target.value
+        })
+    }
   
     render(){
         return(
