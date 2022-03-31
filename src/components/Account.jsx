@@ -1,18 +1,21 @@
 import React from 'react';
 import Register from './Register';
 
-function Account (props){
+class Account extends React.Component{
+    
+    constructor(props){
+        super(props);
+        this.state={
 
-    const isLoggedIn = props.isLoggedIn;
+        }
+    }
 
-    if (isLoggedIn) {
+    render(){
         return (
             <div>
                 <h1>Compoenet</h1>
             </div>
         );
-    }else{
-        return <Register />;
     }
 }
 

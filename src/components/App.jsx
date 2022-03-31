@@ -12,24 +12,34 @@ import NoPage from './NoPage';
 //Style files
 import './style.css'
 //Database functions
-import db from './Firebase';
+import db, { auth } from './Firebase';
 import {collection, query, onSnapshot} from "firebase/firestore";
 
 class App extends React.Component {
 
-  state= {
-    blogs: [],  //To keep data of blog cards
-    searchQuery: "", // To filter blog cards
-    isLoggedIn: false,
-    mail: "",
-    password: ""
+  constructor(props){
+    super(props);
+    this.state= {
+      blogs: [],  //To keep data of blog cards
+      searchQuery: "", // To filter blog cards
+      user: {}
+    }
   }
 
-  componentDidMount() {
+  componentDidMount(){
     this.getBlogs();
-    if(this.state.mail !== '' && this.state.password !== ''){
-      this.setState({isLoggedIn : true});
-    }
+    this.authLister();
+  }
+
+  authLister(){
+    auth.onAuthStateChanged((user)=> {
+      if(user){
+        this.setState({user})
+      }
+      else{
+        this.setState({user: null})
+      }
+    })
   }
 
   // Function to get blog data from firebase database
@@ -44,12 +54,6 @@ class App extends React.Component {
   //Get data in search button
   searchBlogProp = (event) =>  {
     this.setState({searchQuery: event.target.value});
-  }
-
-
-  LogoutProp = () => {
-    this.setState({mail: ''});
-    this.setState({password: ''});
   }
 
   render(){
@@ -79,10 +83,7 @@ class App extends React.Component {
                 </div>}
               />
               <Route path='/account/' element={
-                <div>
-                  <Layout/>
-                  <Account isLoggedIn={this.state.isLoggedIn}/>
-                </div>}
+                this.state.user ? (<div><Layout/><Account/></div>) : (<Register /> )}
               />  
               <Route path="/" exact element={
                 <div>

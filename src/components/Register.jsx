@@ -6,7 +6,7 @@ import {collection, addDoc, query} from "firebase/firestore";
 
 const Register = () => {
 
-    //Function to run when the form is submitted
+    /* //Function to run when the form is submitted
     const handleSubmit = async(event) => {
         
         event.preventDefault();  //Prevent page refresh when form is submitted
@@ -69,13 +69,13 @@ const Register = () => {
         }else{
             errorMessage.style.display = "block"; //Show error message if there is an error
         }
-    }
+    } */
   
     return(
     <div className='p-3 mt-5  container' id='register-component'>
         <div>
             <h1 className='text-center mb-3'>Register Form</h1>
-            <Form onSubmit={handleSubmit} className="mx-auto"> 
+            <Form /* onSubmit={handleSubmit} */ className="mx-auto"> 
                 <div className='d-flex'>   
                     <Form.Group className="mb-3 w-100" id="formBasicText">
                         <Form.Label>First Name</Form.Label>
