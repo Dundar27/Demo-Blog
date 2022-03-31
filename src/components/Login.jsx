@@ -77,7 +77,7 @@ class Login extends React.Component{
 
                         <div className='d-flex'>
                             <Button className='w-100' variant="outline-success" type="submit">
-                                Submit
+                                Login
                             </Button>
                             <Link to={"/register/"} className="w-100 btn btn-outline-primary">Register</Link>
                         </div>
