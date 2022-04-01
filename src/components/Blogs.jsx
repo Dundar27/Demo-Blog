@@ -1,23 +1,8 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-//Database functions
-import db from './Firebase';
-import {collection, addDoc} from "firebase/firestore";
 
 const Blogs = (props) => {  
 
-    //Pull form data and create subscription
-    const SubscribeForm = async(event) =>{
-        event.preventDefault();
-
-        var mailValue = document.getElementById("subscribe").value;
-        const docRef = await addDoc(collection(db, "subscribers"), {
-            mail: mailValue,
-            subscribeDate: new Date()
-        });
-       alert("You have successfully subscribed", docRef);
-    }
-    
     return (
         <div className='p-3' id='blog-component'>
             {/* <div className="card text-center mt-3">
@@ -78,15 +63,17 @@ const Blogs = (props) => {
                         <div className='card-body'>
                             <div className='card text-dark my-3'>
                                 <div className='card-header'>
-                                    <h5>Subscribe</h5>
+                                    <h5>Pages</h5>
                                 </div>
                                 <div className='card-body'>
-                                    <form onSubmit={SubscribeForm} className='form-box'>
-                                        <label htmlFor="subscribe_label">Subscribe : <br />
-                                            <input type="email" name="subscribe_button" id="subscribe" className='mx-auto mt-1' required /> 
-                                        </label>
-                                        <input type="submit" className='btn btn-success mx-auto' value="Subscribe" />   
-                                    </form>
+                                    <ul class="list-group">
+                                        <Link to={'blog/catagories/'} className={"list-group-item list-group-item-action"}>
+                                            Catagories
+                                        </Link>
+                                        <Link to={'blog/populer-blogs/'} className={"list-group-item list-group-item-action"}>
+                                            Populer Blog Posts
+                                        </Link>
+                                    </ul>
                                 </div>
                             </div>
                             <div className='card text-dark my-3'>
