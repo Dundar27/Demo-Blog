@@ -18,13 +18,22 @@ class Login extends React.Component{
 
     login = async(e) =>{
         e.preventDefault();
+
+        //some message box 
+        const successMessage = document.getElementById("login_successful");
+        const errorMessage = document.getElementById("login_failed");
+
         signInWithEmailAndPassword(auth,this.state.email,this.state.password).then((u)=>{
+            
+            successMessage.style.display = "block";  //Make login successful message visible
+
             //Redirect to login screen after 1.5 seconds
             setTimeout(function(){
                 window.location = "/";
-            }, 1500);
+            }, 500);
             console.log(u)
         }).catch((err)=>{
+            errorMessage.style.display = "block"; //Show error message if there is an error
             console.log(err);
         })
     }
@@ -82,6 +91,18 @@ class Login extends React.Component{
                             <Link to={"/register/"} className="w-100 btn btn-outline-primary">Register</Link>
                         </div>
                     </Form>
+                </div>
+                <div className='mt-3' id='login_successful' style={{display: "none"}}>
+                    <div className="alert alert-success" role="alert">
+                        <h4 className="alert-heading">Successful!</h4>
+                        <p>You are directed to the home.</p>
+                    </div>
+                </div>
+                <div className='mt-3' id='login_failed' style={{display: "none"}}>
+                    <div className="alert alert-danger" role="alert">
+                        <h4 className="alert-heading">Registration Failed!</h4>
+                        <p>Make sure you enter the correct values.</p>
+                    </div>
                 </div>
                 <div className='mt-3'>
                     <div className="alert alert-warning" role="alert">
