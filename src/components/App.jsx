@@ -70,21 +70,25 @@ class App extends React.Component {
     return (
         <BrowserRouter>
           <Routes>
+
               <Route path="/register/" element={
                 <div>
                   <Layout/>
                   <Register /> 
-                </div>}
-              />
+                </div>
+              }/>
+
               <Route path="/login/" element={
                 <div>
                   <Layout/>
                   <Login /> 
-                </div>}
-              />
+                </div>
+              }/>
+
               <Route path='/account/' element={
                 this.state.user ? (<div><Layout/><Account/></div>) : (<div><Layout/><Register/></div>)}
-              />  
+              /> 
+
               <Route path="/" exact element={
                 <div>
                   <Layout 
@@ -94,9 +98,11 @@ class App extends React.Component {
                   <Header />
                   <Blogs blogs={filteredBlogs}/>
                   <Footer />
-                </div>} 
-              />
+                </div>
+              }/>
+
             <Route path="*" element={<NoPage />} />
+            
           </Routes> 
         </BrowserRouter>
     );

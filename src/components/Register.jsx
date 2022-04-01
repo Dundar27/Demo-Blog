@@ -161,8 +161,13 @@ class Register extends React.Component {
                             </Form.Group>
                         </div>
         
-                        <Form.Group className="mb-3" id="formBasicCheckbox">
-                            <Form.Check type="checkbox" label="Check me outI have read the security and privacy terms" required/>
+                        <Form.Group className="mb-3 d-flex" id="formBasicCheckbox">
+                            <Form.Check type="checkbox" required/>
+                            <Form.Label>
+                                <Link to={"/terms"} className="mx-1">
+                                    Check me out have read the security and privacy terms
+                                </Link>
+                            </Form.Label>
                         </Form.Group>
         
                         <div className='d-flex'>

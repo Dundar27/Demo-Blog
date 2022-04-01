@@ -32,6 +32,7 @@ class Login extends React.Component{
                 window.location = "/";
             }, 500);
             console.log(u)
+            
         }).catch((err)=>{
             errorMessage.style.display = "block"; //Show error message if there is an error
             console.log(err);
@@ -78,10 +79,6 @@ class Login extends React.Component{
                                 maxLength={20}
                                 required
                             />
-                        </Form.Group>
-
-                        <Form.Group className="mb-3" id="formBasicCheckbox">
-                            <Form.Check type="checkbox" label="Check me out" />
                         </Form.Group>
 
                         <div className='d-flex'>
