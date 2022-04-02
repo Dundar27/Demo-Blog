@@ -6,6 +6,7 @@ import Footer from './Footer';
 import Header from './Header';
 import Blogs from './Blogs';
 import Account from './Account';
+import Blog from './Blog';
 import Register from './Register';
 import Login from './Login';
 import NoPage from './NoPage';
@@ -72,35 +73,42 @@ class App extends React.Component {
         <BrowserRouter>
           <Routes>
 
-              <Route path="/register/" element={
-                <div>
-                  <Layout/>
-                  <Register /> 
-                </div>
-              }/>
+            <Route path="/" exact element={
+              <div>
+                <Layout 
+                  searchProp={this.searchBlogProp}
+                  LogoutProp={this.LogoutProp}
+                />
+                <Header />
+                <Blogs blogs={filteredBlogs}/>
+                <Footer />
+              </div>
+            }/>
 
-              <Route path="/login/" element={
-                <div>
-                  <Layout/>
-                  <Login /> 
-                </div>
-              }/>
+            <Route path="/blog/" element={
+              <div>
+                <Layout/>
+                <Blog /> 
+              </div>
+            }/>
 
-              <Route path='/account/' element={
-                this.state.user ? (<div><Layout/><Account/></div>) : (<div><Layout/><Register/></div>)}
-              /> 
+            <Route path="/register/" element={
+              <div>
+                <Layout/>
+                <Register /> 
+              </div>
+            }/>
 
-              <Route path="/" exact element={
-                <div>
-                  <Layout 
-                    searchProp={this.searchBlogProp}
-                    LogoutProp={this.LogoutProp}
-                  />
-                  <Header />
-                  <Blogs blogs={filteredBlogs}/>
-                  <Footer />
-                </div>
-              }/>
+            <Route path="/login/" element={
+              <div>
+                <Layout/>
+                <Login /> 
+              </div>
+            }/>
+
+            <Route path='/account/' element={
+              this.state.user ? (<div><Layout/><Account/></div>) : (<div><Layout/><Register/></div>)}
+            /> 
 
             <Route path="*" element={<NoPage />} />
             
