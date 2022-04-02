@@ -12,8 +12,8 @@ class Register extends React.Component {
         this.register = this.register.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.state={
-            email:"",
-            password:""
+            email:"", //user mail information
+            password:"" //user password information
         }
     }
 
@@ -59,6 +59,8 @@ class Register extends React.Component {
 
         //Save the values ​​of the form elements to the database if there are no errors so far
         if(validatePassword().valueOf() === true){
+
+            //Function to get form values ​​and create a new user with firebase function
             createUserWithEmailAndPassword(auth, this.state.email, this.state.password).then((u)=>{
                 console.log(u);
             }).catch((err)=>{
@@ -77,6 +79,7 @@ class Register extends React.Component {
         }
     }
 
+    //get user mail and password information
     handleChange(e){
         this.setState({
             [e.target.name] : e.target.value

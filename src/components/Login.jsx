@@ -11,18 +11,21 @@ class Login extends React.Component{
         this.login = this.login.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.state={
-            email:"",
-            password:""
+            email:"", //user mail information
+            password:"" //user password information
         }
     }
 
+    //Login function
     login = async(e) =>{
+
         e.preventDefault();
 
         //some message box 
         const successMessage = document.getElementById("login_successful");
         const errorMessage = document.getElementById("login_failed");
 
+        //Verify login and login with firebase function
         signInWithEmailAndPassword(auth,this.state.email,this.state.password).then((u)=>{
             
             successMessage.style.display = "block";  //Make login successful message visible
@@ -39,6 +42,7 @@ class Login extends React.Component{
         })
     }
 
+    //get user mail and password information
     handleChange(e){
         this.setState({
             [e.target.name] : e.target.value

@@ -22,7 +22,7 @@ class App extends React.Component {
     this.state= {
       blogs: [],  //To keep data of blog cards
       searchQuery: "", // To filter blog cards
-      user: {}
+      user: {} 
     }
   }
 
@@ -31,6 +31,7 @@ class App extends React.Component {
     this.authListener();
   }
 
+  //Check if the user is logged in
   authListener(){
     auth.onAuthStateChanged((user)=> {
       if(user){

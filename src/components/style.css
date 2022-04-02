@@ -2,26 +2,4 @@
 #blog-component, #header-component{
     background: rgb(200, 200, 200);
 }
-/***Subscribe Form***/
-.form-box label{
-    width: 100%;
-    color: #198754;;
-    font-size: 15px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: 600;
-}
-.form-box label input[type=email]{
-    width: 100%;
-    margin: auto;
-    padding: 0.1rem;
-    color: #212529;
-    outline: none;
-    border: 0px;
-    border-bottom: 1px solid #7c7c7c;
-}
-.form-box input[type=submit]{
-    margin-top: 1rem;
-    width: 100%;
-    padding: 00.1rem;
-}
 /**************************************************************************************************************/
