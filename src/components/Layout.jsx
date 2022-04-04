@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet, Link } from "react-router-dom";
 import { auth } from './Firebase';
 
-const Layout = () => {
+const Layout = (props) => {
 
     //Function needed to not refresh the page when clicking the search button
     const handleForSubmit = (event) => {
@@ -43,7 +43,7 @@ const Layout = () => {
                     <div className='d-flex'>
 
                         <form className="d-flex mx-3" onSubmit={handleForSubmit}>
-                            <input className="form-control me-2" type="text" placeholder="Search"  onChange={this.props.searchProp}/>
+                            <input className="form-control me-2" type="text" placeholder="Search"  onChange={props.searchProp}/>
                             <button className="btn btn-primary" type="button">Search</button>
                         </form>
 
