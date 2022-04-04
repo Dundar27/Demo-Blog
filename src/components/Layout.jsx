@@ -10,7 +10,8 @@ const Layout = (props) => {
     }
 
     //Output function
-    const logout = () => {
+    const logout = (event) => {
+        event.preventDefault();
         auth.signOut();
     }
 
@@ -47,13 +48,12 @@ const Layout = (props) => {
                             <button className="btn btn-primary" type="button">Search</button>
                         </form>
 
-                        <form onSubmit={handleForSubmit}>
+                        <form onSubmit={logout}>
                             <input 
                                 className="form-control me-2 btn btn-danger" 
-                                type="submit" value="Logout"  onClick={logout}
+                                type="submit" value="Logout" 
                             />
-                        </form>
-
+                        </form>             
                     </div>
                 </div>
             </nav>

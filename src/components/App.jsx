@@ -107,7 +107,15 @@ class App extends React.Component {
             }/>
 
             <Route path='/account/' element={
-              this.state.user ? (<div><Layout/><Account/></div>) : (<div><Layout/><Register/></div>)}
+              this.state.user ? 
+              (<div>
+                <Layout/>
+                <Account/>
+              </div>) :
+              (<div>
+                <Layout/>
+                <Register/>
+              </div>)}
             /> 
 
             <Route path="*" element={<NoPage />} />
