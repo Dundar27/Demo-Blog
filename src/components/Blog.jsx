@@ -14,7 +14,7 @@ class Blog extends React.Component{
     render(){
         return (
             <div className='p-4'>
-               {this.props.getBlogs.map((posts)=>(
+               {this.props.getBlogPosts.map((posts)=>(
                 <Card className='my-5'>         
                    <Card.Header className='text-center p-3'>
                         <h2>{posts.data.title}</h2>

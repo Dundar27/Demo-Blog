@@ -28,7 +28,7 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    this.getBlogs();
+    this.getBlogPosts();
     this.authListener();
   }
 
@@ -45,7 +45,7 @@ class App extends React.Component {
   }
 
   // Function to get blog data from firebase database
-  async getBlogs() {
+  async getBlogPosts() {
     const response = await onSnapshot(query(collection(db, 'blogs')), snapshop => this.setState({blogs: snapshop.docs.map(doc => ({
       id:doc.id,data:doc.data()
     }))}));
@@ -54,7 +54,7 @@ class App extends React.Component {
   }
 
   //Get data in search button
-  searchBlogProp = (event) =>  {
+  searchBlogPostProp = (event) =>  {
     this.setState({searchQuery: event.target.value});
   }
 
@@ -76,19 +76,18 @@ class App extends React.Component {
             <Route path="/" exact element={
               <div>
                 <Layout 
-                  searchProp={this.searchBlogProp}
-                  LogoutProp={this.LogoutProp}
+                  searchProp={this.searchBlogPostProp}
                 />
                 <Header />
-                <Blogs blogs={filteredBlogs}/>
+                <Blogs getBlogPosts={filteredBlogs}/>
                 <Footer />
               </div>
             }/>
 
             <Route path="/blog/" element={
               <div>
-                <Layout searchProp={this.searchBlogProp}/>
-                <Blog getBlogs = {filteredBlogs} /> 
+                <Layout searchProp={this.searchBlogPostProp}/>
+                <Blog getBlogPosts = {filteredBlogs} />
               </div>
             }/>
 
