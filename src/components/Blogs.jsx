@@ -5,28 +5,6 @@ const Blogs = (props) => {
 
     return (
         <div className='p-3' id='blog-component'>
-            {/* <div className="card text-center mt-3">
-                <div className="card-header">
-                    <ul className="nav nav-tabs card-header-tabs">
-                        <li className="nav-item">
-                            <a className="nav-link active" aria-current="true" href="#info">Info</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link bg-success text-light" href="#create">Create</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link bg-warning text-dark" href="#update">Update</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link  bg-danger text-light" href="#delete">Delete</a>
-                        </li>
-                    </ul>
-                </div>
-                <div className="card-body">
-                    <h5 className="card-title">Create Blog Post</h5>
-                    <p className="card-text">Click the create button in the top right to create your own blog post.</p>
-                </div>
-            </div> */}
             <div className='row mt-3'>
                 <div className='col-8 row p-2'>
                     {props.getPopulerBlogPosts.map((blog)=>(
