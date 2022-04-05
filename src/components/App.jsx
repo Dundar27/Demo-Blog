@@ -87,8 +87,8 @@ class App extends React.Component {
 
             <Route path="/blog/" element={
               <div>
-                <Layout/>
-                <Blog /> 
+                <Layout searchProp={this.searchBlogProp}/>
+                <Blog getBlogs = {filteredBlogs} /> 
               </div>
             }/>
 
