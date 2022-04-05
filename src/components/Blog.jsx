@@ -1,5 +1,4 @@
 import React from 'react';
-//import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 
 class Blog extends React.Component{
@@ -14,31 +13,29 @@ class Blog extends React.Component{
     render(){
         return (
             <div className='p-4'>
-               {this.props.getBlogPosts.map((posts)=>(
                 <Card className='my-5'>         
                    <Card.Header className='text-center p-3'>
-                        <h2>{posts.data.title}</h2>
-                        <Card.Img src={posts.data.image} />
+                        <h2>example</h2>
+                        <Card.Img src={"example"} />
                    </Card.Header>
                    <Card.Body className='my-3 p-3'>
                         <Card.Title className='text-center my-3'>
-                            {posts.data.title}
+                        example
                         </Card.Title>
-                        <Card.Text>{posts.data.content}</Card.Text>
+                        <Card.Text>example</Card.Text>
                    </Card.Body>
                    <Card.Footer className="text-muted">
                        <div className='d-flex justify-content-between'>
                             <div>
-                                Writer: {posts.data.writer}
+                                Writer: example
                             </div> 
                             <div>
-                                Catagories: {posts.data.catagories} | 
-                                Date: {posts.data.date}
+                                Catagories: example | 
+                                Date: example
                             </div>
                        </div>
                     </Card.Footer>
                </Card>
-               ))}
             </div>
         );
     }

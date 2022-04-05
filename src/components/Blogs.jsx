@@ -29,7 +29,7 @@ const Blogs = (props) => {
             </div> */}
             <div className='row mt-3'>
                 <div className='col-8 row p-2'>
-                    {props.getBlogPosts.map((blog)=>(
+                    {props.getPopulerBlogPosts.map((blog)=>(
                         <div className='card col-5 mx-3 my-3'>
                             <div className='card-header'>
                                 <h3>Popular Blog Posts</h3> 

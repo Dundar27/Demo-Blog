@@ -21,7 +21,7 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state= {
-      blogs: [],  //To keep data of blog cards
+      blogPosts: [],  //To keep data of blog cards
       searchQuery: "", // To filter blog cards
       user: {} 
     }
@@ -46,7 +46,7 @@ class App extends React.Component {
 
   // Function to get blog data from firebase database
   async getBlogPosts() {
-    const response = await onSnapshot(query(collection(db, 'blogs')), snapshop => this.setState({blogs: snapshop.docs.map(doc => ({
+    const response = await onSnapshot(query(collection(db, 'blogs')), snapshop => this.setState({blogPosts: snapshop.docs.map(doc => ({
       id:doc.id,data:doc.data()
     }))}));
     
@@ -61,7 +61,7 @@ class App extends React.Component {
   render(){
 
     //Function to remove case insensitivity of data in search button
-    let filteredBlogs = this.state.blogs.filter(
+    let filteredBlogs = this.state.blogPosts.filter(
       (blog) => {
           return blog.data.title.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1
       }
@@ -79,7 +79,7 @@ class App extends React.Component {
                   searchProp={this.searchBlogPostProp}
                 />
                 <Header />
-                <Blogs getBlogPosts={filteredBlogs}/>
+                <Blogs getPopulerBlogPosts={filteredBlogs}/>
                 <Footer />
               </div>
             }/>
@@ -87,7 +87,7 @@ class App extends React.Component {
             <Route path="/blog/" element={
               <div>
                 <Layout searchProp={this.searchBlogPostProp}/>
-                <Blog getBlogPosts = {filteredBlogs} />
+                <Blog />
               </div>
             }/>
 
