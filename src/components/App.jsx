@@ -80,14 +80,14 @@ class App extends React.Component {
                 />
                 <Header />
                 <Blogs getPopulerBlogPosts={filteredBlogs}/>
-                <Footer />
+                <Footer userControl={this.state.user}/>
               </div>
             }/>
 
             <Route path="/blog/" element={
               <div>
                 <Layout searchProp={this.searchBlogPostProp}/>
-                <Blog />
+                <Blog getPopulerBlogPosts={filteredBlogs}/>
               </div>
             }/>
 

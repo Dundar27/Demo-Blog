@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Blogs = (props) => {  
 
     return (
-        <div className='p-3' id='blog-component'>
+        <div className='p-3' id='blogs-component'>
             <div className='row mt-3'>
                 <div className='col-8 row p-2'>
                     {props.getPopulerBlogPosts.map((blog)=>(

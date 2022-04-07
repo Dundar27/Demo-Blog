@@ -11,7 +11,7 @@ class Account extends React.Component{
 
     render(){
         return (
-            <div>
+            <div id='account-component'>
                 <h1>Compoenet</h1>
             </div>
         );
