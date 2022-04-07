@@ -57,7 +57,7 @@ class App extends React.Component {
 
   // Function to get blog data from firebase database
   async getPopulerBlogPosts() {
-    const response = await onSnapshot(query(collection(db, 'blogs'), orderBy('like'), limit(6)), snapshop => this.setState({populerBlogPosts: snapshop.docs.map(doc => ({
+    const response = await onSnapshot(query(collection(db, 'blogs'), orderBy('like'), limit(4)), snapshop => this.setState({populerBlogPosts: snapshop.docs.map(doc => ({
       id:doc.id,data:doc.data()
     }))}));
     
@@ -72,9 +72,11 @@ class App extends React.Component {
   render(){
 
     //Function to remove case insensitivity of data in search button
-    let filteredBlogs = this.state.blogPosts.filter(
+    let filtered = this.state.blogPosts.filter(
       (blog) => {
-          return blog.data.title.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1
+          return (blog.data.title.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1 ||
+                 blog.data.writer.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1 ||
+                 blog.data.catagories.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1)
       }
     ).sort((a, b) => {
         return a.id < b.id ? 1 : a.id > b.id ? -1 : 0;
@@ -91,28 +93,37 @@ class App extends React.Component {
                   userControl={this.state.user}
                 />
                 <Header />
-                <Blogs getPopulerBlogPosts={this.state.populerBlogPosts}/>
+                <Blogs getPopulerBlogPosts={filtered}/>
                 <Footer userControl={this.state.user}/>
               </div>
             }/>
 
             <Route path="/blog/" element={
               <div>
-                <Layout searchProp={this.searchBlogPostProp}/>
-                <Blog getPopulerBlogPosts={filteredBlogs}/>
+                <Layout 
+                  searchProp={this.searchBlogPostProp}
+                  userControl={this.state.user}
+                />
+                <Blog getPopulerBlogPosts={filtered}/>
               </div>
             }/>
 
             <Route path="/register/" element={
               <div>
-                <Layout/>
+                <Layout
+                  searchProp={this.searchBlogPostProp}
+                  userControl={this.state.user}
+                />
                 <Register /> 
               </div>
             }/>
 
             <Route path="/login/" element={
               <div>
-                <Layout/>
+                <Layout
+                  searchProp={this.searchBlogPostProp}
+                  userControl={this.state.user}
+                />
                 <Login /> 
               </div>
             }/>
@@ -120,7 +131,10 @@ class App extends React.Component {
             <Route path='/account/' element={
               this.state.user ? 
               (<div>
-                <Layout/>
+                <Layout
+                  searchProp={this.searchBlogPostProp}
+                  userControl={this.state.user}
+                />
                 <Account/>
               </div>) :
               (<div>

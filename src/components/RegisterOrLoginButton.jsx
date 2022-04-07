@@ -12,10 +12,8 @@ const RegisterOrLoginButton = (props) => {
         )
     }else{
         return (
-            <div id='registerorloginbutton-component'>
-                <p className="d-flex justify-content-center align-items-center">                     
-                    <Link className="btn btn-outline-light btn-rounded" to="/register">Sign up!</Link>
-                </p>
+            <div id='registerorloginbutton-component'>                   
+                <Link className="btn btn-outline-success" to="/register">Sign up!</Link>
             </div>
         ) 
     }

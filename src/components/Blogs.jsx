@@ -8,8 +8,8 @@ const Blogs = (props) => {
             <div className='row mt-3'>
                 <div className='col-8 row p-2'>
                     {props.getPopulerBlogPosts.map((blog)=>(
-                        <div className='card col-5 mx-3 my-3'>
-                            <div className='card-header my-2'>
+                        <div className='card col-5 mx-3 my-3 p-0'>
+                            <div className='card-header mb-2'>
                                 <h3>Popular Blog Posts</h3> 
                             </div>
                             <div className='card-body'>
@@ -29,7 +29,18 @@ const Blogs = (props) => {
                                         <Link to={'blog/'+blog.id} className="btn btn-outline-primary btn-rounded">Read the Blog Post</Link>
                                     </div>
                                 </div>    
-                            </div>      
+                            </div>
+                            <div className='card-footer mt-2'>  
+                                <div className='d-flex justify-content-between'>
+                                    <div>
+                                        Writer: {blog.data.writer}
+                                    </div> 
+                                    <div>
+                                        Catagories: {blog.data.catagories} | 
+                                        Date: {Date.parse(blog.data.date)}
+                                    </div>
+                                </div>
+                            </div>    
                         </div>
                     ))}
                 </div>

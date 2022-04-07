@@ -40,14 +40,14 @@ const Layout = (props) => {
 
                     <div className='d-flex'>
 
-                    <form className="d-flex mx-3" onSubmit={handleForSubmit}>
-                        <input className="form-control me-2" type="text" placeholder="Search"  onChange={props.searchProp}/>
-                        <div className="d-flex">
-                            <button className="btn btn-primary mx-1" type="submit">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
-                    </form>
+                        <form className="d-flex mx-3" onSubmit={handleForSubmit}>
+                            <input className="form-control me-2" type="text" placeholder="Search..."  onChange={props.searchProp}/>
+                            <div className="d-flex">
+                                <button className="btn btn-primary mx-1" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
 
                         <RegisterOrLoginButton user={userControl}/>             
                     </div>
