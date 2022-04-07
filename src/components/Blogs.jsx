@@ -9,7 +9,7 @@ const Blogs = (props) => {
                 <div className='col-8 row p-2'>
                     {props.getPopulerBlogPosts.map((blog)=>(
                         <div className='card col-5 mx-3 my-3'>
-                            <div className='card-header'>
+                            <div className='card-header my-2'>
                                 <h3>Popular Blog Posts</h3> 
                             </div>
                             <div className='card-body'>
@@ -41,7 +41,7 @@ const Blogs = (props) => {
                         <div className='card-body'>
                             <div className='card text-dark my-3'>
                                 <div className='card-header'>
-                                    <h5>Pages</h5>
+                                    <h5>Blog Pages</h5>
                                 </div>
                                 <div className='card-body'>
                                     <ul class="list-group">
@@ -56,7 +56,7 @@ const Blogs = (props) => {
                             </div>
                             <div className='card text-dark my-3'>
                                 <div className='card-header'>
-                                    <h5>Social Media</h5>
+                                    <h5>The Editor Social Media</h5>
                                 </div>
                                 <div className='card-body'>
                                     <a href={"https://www.github.com/Dundar27"} target="_blank" rel="noopener noreferrer">

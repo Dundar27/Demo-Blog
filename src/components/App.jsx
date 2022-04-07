@@ -14,13 +14,14 @@ import NoPage from './NoPage';
 import './style.css'
 //Database functions
 import db, { auth } from './Firebase';
-import {collection, query, onSnapshot} from "firebase/firestore";
+import {collection, query, onSnapshot, orderBy, limit} from "firebase/firestore";
 
 class App extends React.Component {
 
   constructor(props){
     super(props);
     this.state= {
+      populerBlogPosts: [],   
       blogPosts: [],  //To keep data of blog cards
       searchQuery: "", // To filter blog cards
       user: {} 
@@ -29,6 +30,7 @@ class App extends React.Component {
 
   componentDidMount(){
     this.getBlogPosts();
+    this.getPopulerBlogPosts();
     this.authListener();
   }
 
@@ -47,6 +49,15 @@ class App extends React.Component {
   // Function to get blog data from firebase database
   async getBlogPosts() {
     const response = await onSnapshot(query(collection(db, 'blogs')), snapshop => this.setState({blogPosts: snapshop.docs.map(doc => ({
+      id:doc.id,data:doc.data()
+    }))}));
+    
+    console.log(response)
+  }
+
+  // Function to get blog data from firebase database
+  async getPopulerBlogPosts() {
+    const response = await onSnapshot(query(collection(db, 'blogs'), orderBy('like'), limit(6)), snapshop => this.setState({populerBlogPosts: snapshop.docs.map(doc => ({
       id:doc.id,data:doc.data()
     }))}));
     
@@ -77,9 +88,10 @@ class App extends React.Component {
               <div>
                 <Layout 
                   searchProp={this.searchBlogPostProp}
+                  userControl={this.state.user}
                 />
                 <Header />
-                <Blogs getPopulerBlogPosts={filteredBlogs}/>
+                <Blogs getPopulerBlogPosts={this.state.populerBlogPosts}/>
                 <Footer userControl={this.state.user}/>
               </div>
             }/>

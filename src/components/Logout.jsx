@@ -13,7 +13,7 @@ const Layout = (props) => {
         <div id="lagout-component">
             <form onSubmit={logout}>
                 <input 
-                    className="form-control me-2 btn btn-danger" 
+                    className="form-control me-2 btn btn-outline-danger" 
                     type="submit" value="Logout" 
                 />
             </form>             

@@ -1,18 +1,15 @@
 import React from 'react';
 import { Outlet, Link } from "react-router-dom";
-import { auth } from './Firebase';
+//import SearchBar from "./SearchBar";
+import RegisterOrLoginButton from './RegisterOrLoginButton';
 
 const Layout = (props) => {
+
+    const userControl = props.userControl;
 
     //Function needed to not refresh the page when clicking the search button
     const handleForSubmit = (event) => {
         event.preventDefault();
-    }
-
-    //Output function
-    const logout = (event) => {
-        event.preventDefault();
-        auth.signOut();
     }
 
     return (
@@ -43,17 +40,16 @@ const Layout = (props) => {
 
                     <div className='d-flex'>
 
-                        <form className="d-flex mx-3" onSubmit={handleForSubmit}>
-                            <input className="form-control me-2" type="text" placeholder="Search"  onChange={props.searchProp}/>
-                            <button className="btn btn-primary" type="button">Search</button>
-                        </form>
+                    <form className="d-flex mx-3" onSubmit={handleForSubmit}>
+                        <input className="form-control me-2" type="text" placeholder="Search"  onChange={props.searchProp}/>
+                        <div className="d-flex">
+                            <button className="btn btn-primary mx-1" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
 
-                        <form onSubmit={logout}>
-                            <input 
-                                className="form-control me-2 btn btn-danger" 
-                                type="submit" value="Logout" 
-                            />
-                        </form>             
+                        <RegisterOrLoginButton user={userControl}/>             
                     </div>
                 </div>
             </nav>
