@@ -6,17 +6,15 @@ const Footer = (props) => {
     const userControl = props.userControl;
 
     return(
-        <section id='footer-component'>
-            <footer className="text-center text-white bg-dark">
-                <div className="container p-3">    
-                    <RegisterOrLoginButton user={userControl}/>
-                </div>
-                <div className="text-center p-3" style={{backgroundColor: "rgba(0, 0, 0, 0.2)"}}>
-                    © 2020 Copyright :
-                    <Link className="text-white" to="/terms"> demo-blog-page.com</Link>
-                </div>
-            </footer>
-        </section>
+        <footer className="text-center text-white bg-dark" id='footer-component'>
+            <div className="container p-3">    
+                <RegisterOrLoginButton user={userControl}/>
+            </div>
+            <div className="text-center p-3" style={{backgroundColor: "rgba(0, 0, 0, 0.2)"}}>
+                © 2022 Copyright :
+                <Link className="text-white" to="/terms"> demo-blog-page.com</Link>
+            </div>
+        </footer>
     )
 }
 
