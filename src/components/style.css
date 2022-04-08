@@ -4,5 +4,5 @@
 }
 /**********************************************Layout-component*************************************************/
 #layout-component .nav-link:hover{
-    border-bottom: 1px solid white;
+    background-color: rgb(54, 54, 54);
 }
