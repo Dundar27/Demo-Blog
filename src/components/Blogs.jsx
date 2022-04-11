@@ -32,8 +32,12 @@ const Blogs = (props) => {
                                             Writer: {blog.data.writer}
                                         </div> 
                                         <div className='d-flex justify-content-between'>
-                                            <span className='text-success mx-1'>Liked</span>: {blog.data.like} 
-                                            <span className='text-danger mx-1'>Disliked</span>: {blog.data.dislike}
+                                            <div className='btn-success p-2 mx-1'>
+                                                <span>Liked</span>: {blog.data.like} 
+                                            </div>
+                                            <div className='btn-danger p-2 mx-1'>
+                                                <span>Disliked</span>: {blog.data.dislike} 
+                                            </div>
                                         </div>
                                     </div>
                                 </Card.Footer>    
