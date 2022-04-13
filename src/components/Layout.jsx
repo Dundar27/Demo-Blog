@@ -38,7 +38,7 @@ const Layout = (props) => {
                             <form className="d-flex mx-3" onSubmit={handleForSubmit}>
                                 <input className="form-control me-2" type="text" placeholder="Search..."  onChange={props.searchProp}/>
                                 <div className="d-flex">
-                                    <Button variant="btn-light" className='mx-1'>
+                                    <Button variant="btn-light" className='mx-1' type='submit'>
                                         <i class="fa fa-search text-light"></i>
                                     </Button>
                                 </div>
