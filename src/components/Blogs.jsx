@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { Card, Row, Col, ListGroup, Alert } from 'react-bootstrap';
+import { Card, Row, Col, ListGroup, Alert, Button } from 'react-bootstrap';
 
 const Blogs = (props) => {  
 
@@ -32,12 +32,12 @@ const Blogs = (props) => {
                                             Writer: {blog.data.writer}
                                         </div> 
                                         <div className='d-flex justify-content-between'>
-                                            <div className='btn-success p-2 mx-1'>
+                                            <Button variant="success" className='p-2 mx-1'>
                                                 <span>Liked</span>: {blog.data.like} 
-                                            </div>
-                                            <div className='btn-danger p-2 mx-1'>
+                                            </Button>
+                                            <Button variant="danger" className='p-2 mx-1'>
                                                 <span>Disliked</span>: {blog.data.dislike} 
-                                            </div>
+                                            </Button>
                                         </div>
                                     </div>
                                 </Card.Footer>    
