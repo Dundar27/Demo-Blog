@@ -33,10 +33,17 @@ const Blogs = (props) => {
                                         </div> 
                                         <div className='d-flex justify-content-between'>
                                             <Button variant="success" className='p-2 mx-1'>
+<<<<<<< HEAD
                                                 <i class="fa fa-thumbs-up"></i>
                                             </Button>
                                             <Button variant="danger" className='p-2 mx-1'>
                                             <i class="fa fa-thumbs-down"></i> 
+=======
+                                                <span>Liked</span>: {blog.data.like} 
+                                            </Button>
+                                            <Button variant="danger" className='p-2 mx-1'>
+                                                <span>Disliked</span>: {blog.data.dislike} 
+>>>>>>> 816daef1f5f7d2cf1a8540e10a0efb24afd3a362
                                             </Button>
                                         </div>
                                     </div>
