@@ -1,62 +1,54 @@
 import React from 'react';
-import { Outlet, Link } from "react-router-dom";
-import { auth } from './Firebase';
+import { Outlet, Link} from "react-router-dom";
+import {Navbar, Nav, Container, Button} from "react-bootstrap";
+//import SearchBar from "./SearchBar";
+import RegisterOrLoginButton from './RegisterOrLoginButton';
 
 const Layout = (props) => {
+
+    const userControl = props.userControl;
 
     //Function needed to not refresh the page when clicking the search button
     const handleForSubmit = (event) => {
         event.preventDefault();
     }
 
-    //Output function
-    const logout = (event) => {
-        event.preventDefault();
-        auth.signOut();
-    }
-
     return (
         <div id="layout-component">
-            <nav className="navbar navbar-expand-sm navbar-dark bg-dark container-fluid">
+            <Navbar bg="dark" expand="sm">
+                <Container fluid>
+                    <Navbar.Collapse id="navbarScroll">
 
-                <div className="collapse navbar-collapse">
-
-                    <ul className="navbar-nav me-auto">
+                        <Nav className="me-auto my-2 my-lg-0" navbarScroll>
                             
-                        <li className="nav-item"> 
-                            <Link to="/account/" className="btn btn-outline-light dropdown">
+                            <Link to="/account/" className="nav-link text-light">
                                 Profile
                             </Link>
-                        </li>
-                        <li className="nav-item"> 
-                            <Link to="/" className="nav-link">
+
+                            <Link to="/" className="nav-link text-light">
                                 Home
                             </Link> 
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/blog/" className="nav-link">
+                            <Link to="/blog/" className="nav-link text-light">
                                 Blog
                             </Link> 
-                        </li>
+                        </Nav>
 
-                    </ul>
+                        <div className='d-flex'>
 
-                    <div className='d-flex'>
+                            <form className="d-flex mx-3" onSubmit={handleForSubmit}>
+                                <input className="form-control me-2" type="text" placeholder="Search..."  onChange={props.searchProp}/>
+                                <div className="d-flex">
+                                    <Button variant="btn-light" className='mx-1' type='submit'>
+                                        <i class="fa fa-search text-light"></i>
+                                    </Button>
+                                </div>
+                            </form>
 
-                        <form className="d-flex mx-3" onSubmit={handleForSubmit}>
-                            <input className="form-control me-2" type="text" placeholder="Search"  onChange={props.searchProp}/>
-                            <button className="btn btn-primary" type="button">Search</button>
-                        </form>
-
-                        <form onSubmit={logout}>
-                            <input 
-                                className="form-control me-2 btn btn-danger" 
-                                type="submit" value="Logout" 
-                            />
-                        </form>             
-                    </div>
-                </div>
-            </nav>
+                            <RegisterOrLoginButton user={userControl}/>             
+                        </div>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
 
             <Outlet />
         </div>

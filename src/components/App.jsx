@@ -14,21 +14,23 @@ import NoPage from './NoPage';
 import './style.css'
 //Database functions
 import db, { auth } from './Firebase';
-import {collection, query, onSnapshot} from "firebase/firestore";
+import {collection, query, onSnapshot, orderBy, limit} from "firebase/firestore";
 
 class App extends React.Component {
 
   constructor(props){
     super(props);
     this.state= {
-      blogs: [],  //To keep data of blog cards
+      populerBlogPosts: [],   
+      blogPosts: [],  //To keep data of blog cards
       searchQuery: "", // To filter blog cards
       user: {} 
     }
   }
 
   componentDidMount(){
-    this.getBlogs();
+    this.getBlogPosts();
+    this.getPopulerBlogPosts();
     this.authListener();
   }
 
@@ -45,8 +47,17 @@ class App extends React.Component {
   }
 
   // Function to get blog data from firebase database
-  async getBlogs() {
-    const response = await onSnapshot(query(collection(db, 'blogs')), snapshop => this.setState({blogs: snapshop.docs.map(doc => ({
+  async getBlogPosts() {
+    const response = await onSnapshot(query(collection(db, 'blogs')), snapshop => this.setState({blogPosts: snapshop.docs.map(doc => ({
+      id:doc.id,data:doc.data()
+    }))}));
+    
+    console.log(response)
+  }
+
+  // Function to get blog data from firebase database
+  async getPopulerBlogPosts() {
+    const response = await onSnapshot(query(collection(db, 'blogs'), orderBy('like'), limit(4)), snapshop => this.setState({populerBlogPosts: snapshop.docs.map(doc => ({
       id:doc.id,data:doc.data()
     }))}));
     
@@ -54,16 +65,18 @@ class App extends React.Component {
   }
 
   //Get data in search button
-  searchBlogProp = (event) =>  {
+  searchBlogPostProp = (event) =>  {
     this.setState({searchQuery: event.target.value});
   }
 
   render(){
 
     //Function to remove case insensitivity of data in search button
-    let filteredBlogs = this.state.blogs.filter(
+    let filtered = this.state.blogPosts.filter(
       (blog) => {
-          return blog.data.title.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1
+          return (blog.data.title.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1 ||
+                 blog.data.writer.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1 ||
+                 blog.data.catagories.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1)
       }
     ).sort((a, b) => {
         return a.id < b.id ? 1 : a.id > b.id ? -1 : 0;
@@ -76,32 +89,41 @@ class App extends React.Component {
             <Route path="/" exact element={
               <div>
                 <Layout 
-                  searchProp={this.searchBlogProp}
-                  LogoutProp={this.LogoutProp}
+                  searchProp={this.searchBlogPostProp}
+                  userControl={this.state.user}
                 />
                 <Header />
-                <Blogs blogs={filteredBlogs}/>
-                <Footer />
+                <Blogs getPopulerBlogPosts={filtered}/>
+                <Footer userControl={this.state.user}/>
               </div>
             }/>
 
             <Route path="/blog/" element={
               <div>
-                <Layout/>
-                <Blog /> 
+                <Layout 
+                  searchProp={this.searchBlogPostProp}
+                  userControl={this.state.user}
+                />
+                <Blog getPopulerBlogPosts={filtered}/>
               </div>
             }/>
 
             <Route path="/register/" element={
               <div>
-                <Layout/>
+                <Layout
+                  searchProp={this.searchBlogPostProp}
+                  userControl={this.state.user}
+                />
                 <Register /> 
               </div>
             }/>
 
             <Route path="/login/" element={
               <div>
-                <Layout/>
+                <Layout
+                  searchProp={this.searchBlogPostProp}
+                  userControl={this.state.user}
+                />
                 <Login /> 
               </div>
             }/>
@@ -109,7 +131,10 @@ class App extends React.Component {
             <Route path='/account/' element={
               this.state.user ? 
               (<div>
-                <Layout/>
+                <Layout
+                  searchProp={this.searchBlogPostProp}
+                  userControl={this.state.user}
+                />
                 <Account/>
               </div>) :
               (<div>
