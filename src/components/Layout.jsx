@@ -5,7 +5,6 @@ import {Navbar, Nav, Container} from 'react-bootstrap';
 import RegisterOrLoginButton from './RegisterOrLoginButton';
 import SearchBar from './SearchBar';
 
-
 const Layout = (props) => {
 
     const userControl = props.userControl;

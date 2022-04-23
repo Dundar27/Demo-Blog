@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Card, Row, Col, ListGroup, Alert, Button } from "react-bootstrap";
+import { Card, Row, Col, ListGroup, Alert } from "react-bootstrap";
 
 const Blogs = (props) => {  
     
@@ -24,21 +24,21 @@ const Blogs = (props) => {
                                             {blog.data.description}
                                         </Card.Text>        
                                     </div> 
-                                    <Link to={'blog/'+blog.id} className="btn btn-outline-primary btn-rounded">Read the Blog Post</Link>
+                                    <Link to={'blog/post-'+blog.id} className="btn btn-outline-primary btn-rounded">Read the Blog Post</Link>
                                 </Card.Body>
                                 <Card.Footer className='mt-2'>  
                                     <div className='d-flex justify-content-between'>
                                         <div>
                                             Writer: {blog.data.writer}
                                         </div> 
-                                        <div className='d-flex justify-content-between'>
+                                        {/* <div className='d-flex justify-content-between'>
                                             <Button variant="success" className='p-2 mx-1' id="like">
                                                 <i class="fa fa-thumbs-up"></i> <span >{blog.data.like}</span>
                                             </Button>
                                             <Button variant="danger" className='p-2 mx-1'>
                                                 <i class="fa fa-thumbs-down"></i> <span >{blog.data.dislike}</span>
                                             </Button>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </Card.Footer>    
                             </Card>
@@ -57,11 +57,11 @@ const Blogs = (props) => {
                                 </Card.Header>
                                 <Card.Body>
                                     <ListGroup>
-                                        <ListGroup.Item action href={'blog/catagories/'}>
-                                            Catagories
+                                        <ListGroup.Item>
+                                            <Link to={'blog/catagories/'}>Catagories</Link>  
                                         </ListGroup.Item>
-                                        <ListGroup.Item action href={'blog/populer-blogs/'}>
-                                            Populer Blog Posts
+                                        <ListGroup.Item >
+                                            <Link to={'blog/populer-blogs/'}>Populer Blog Posts</Link>    
                                         </ListGroup.Item>
                                     </ListGroup>
                                 </Card.Body>

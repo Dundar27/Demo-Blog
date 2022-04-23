@@ -104,7 +104,11 @@ class App extends React.Component {
                   searchProp={this.searchBlogPostProp}
                   userControl={this.state.user}
                 />
-                <Blog getPopulerBlogPosts={filtered}/>
+                <Blog 
+                  getPopulerBlogPosts={filtered}
+                  searchProp={this.searchBlogPostProp}
+                />
+                <Footer userControl={this.state.user}/>
               </div>
             }/>
 
