@@ -1,17 +1,14 @@
 import React from 'react';
-import { Outlet, Link} from "react-router-dom";
-import {Navbar, Nav, Container, Button} from "react-bootstrap";
+import { Outlet, Link} from 'react-router-dom';
+import {Navbar, Nav, Container} from 'react-bootstrap';
 //import SearchBar from "./SearchBar";
 import RegisterOrLoginButton from './RegisterOrLoginButton';
+import SearchBar from './SearchBar';
+
 
 const Layout = (props) => {
 
     const userControl = props.userControl;
-
-    //Function needed to not refresh the page when clicking the search button
-    const handleForSubmit = (event) => {
-        event.preventDefault();
-    }
 
     return (
         <div id="layout-component">
@@ -35,14 +32,7 @@ const Layout = (props) => {
 
                         <div className='d-flex'>
 
-                            <form className="d-flex mx-3" onSubmit={handleForSubmit}>
-                                <input className="form-control me-2" type="text" placeholder="Search..."  onChange={props.searchProp}/>
-                                <div className="d-flex">
-                                    <Button variant="btn-light" className='mx-1' type='submit'>
-                                        <i class="fa fa-search text-light"></i>
-                                    </Button>
-                                </div>
-                            </form>
+                            <SearchBar searchProp={props.searchProp}/>
 
                             <RegisterOrLoginButton user={userControl}/>             
                         </div>

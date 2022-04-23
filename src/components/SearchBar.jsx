@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from "react-bootstrap";
 
 const SearchBar = (props) => { 
 
@@ -8,11 +9,11 @@ const SearchBar = (props) => {
 
     return(
         <form className="d-flex mx-3" onSubmit={handleForSubmit}>
-            <input className="form-control me-2" type="text" placeholder="Search"  onChange={props.searchProp}/>
+            <input className="form-control me-2" type="text" placeholder="Search..."  onChange={props.searchProp}/>
             <div className="d-flex">
-                <button className="btn btn-primary mx-1" type="submit">
-                    <i class="fa fa-search"></i>
-                </button>
+                <Button variant="btn-light" className='mx-1' type='submit'>
+                    <i class="fa fa-search text-light"></i>
+                </Button>
             </div>
         </form>
     );
