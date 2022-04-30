@@ -33,10 +33,7 @@ class Blog extends React.Component{
                                 </Card.Header>
                                 <Card.Body className="conteiner">
                                     <Card.Img src={blog.data.image} className="d-block w-100" alt="Blog image_"/>
-                                    <div className='mt-5'> 
-                                        <Card.Title className='text-center'>
-                                            {blog.data.title}
-                                        </Card.Title>
+                                    <div className='mt-3'> 
                                         <Card.Text className='p-3'>
                                             {blog.data.description}
                                         </Card.Text>        

@@ -1,19 +1,19 @@
-import React from 'react';
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 //Components
-import Layout from './Layout';
-import Footer from './Footer';
-import Header from './Header';
-import Blogs from './Blogs';
-import Account from './Account';
-import Blog from './Blog';
-import Register from './Register';
-import Login from './Login';
-import NoPage from './NoPage';
+import Layout from "./Layout";
+import Footer from "./Footer";
+import Header from "./Header";
+import Blogs from "./Blogs";
+import Account from "./Account";
+import Blog from "./Blog";
+import Register from "./Register";
+import Login from "./Login";
+import NoPage from "./NoPage";
 //Style files
-import './style.css'
+import "./style.css"
 //Database functions
-import db, { auth } from './Firebase';
+import db, { auth } from "./Firebase";
 import {collection, query, onSnapshot, orderBy, limit} from "firebase/firestore";
 
 class App extends React.Component {

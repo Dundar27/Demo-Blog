@@ -6,14 +6,12 @@ const Blogs = (props) => {
     
     return (
         <div className='p-3' id='blogs-component'>
-            <Row className='mt-3'>
+            <h1 className="text-center text-primary bg-light p-2">Popular Blog Posts</h1> 
+            <Row className='mt-1'>
                 <Col sm={8} className='row p-2'>
                     {props.getPopulerBlogPosts.map((blog)=>(
                         <Col sm={6}>
                             <Card className='card m-3 p-0' id={blog.id}>
-                                <Card.Header className='mb-2'>
-                                    <Card.Title>Popular Blog Posts</Card.Title> 
-                                </Card.Header>
                                 <Card.Body className="conteiner">
                                     <Card.Img src={blog.data.image} className="d-block w-100" alt="Blog image_"/>
                                     <div className='mt-5'> 
@@ -31,14 +29,14 @@ const Blogs = (props) => {
                                         <div>
                                             Writer: {blog.data.writer}
                                         </div> 
-                                        {/* <div className='d-flex justify-content-between'>
-                                            <Button variant="success" className='p-2 mx-1' id="like">
+                                        <div className='d-flex justify-content-between'>
+                                            <button className='mx-1 btn bg-success text-light'>
                                                 <i class="fa fa-thumbs-up"></i> <span >{blog.data.like}</span>
-                                            </Button>
-                                            <Button variant="danger" className='p-2 mx-1'>
+                                            </button>
+                                            <button className='mx-1 btn bg-danger text-light'>
                                                 <i class="fa fa-thumbs-down"></i> <span >{blog.data.dislike}</span>
-                                            </Button>
-                                        </div> */}
+                                            </button>
+                                        </div>
                                     </div>
                                 </Card.Footer>    
                             </Card>
@@ -71,15 +69,15 @@ const Blogs = (props) => {
                                     <Card.Title>The Editor Social Media</Card.Title>
                                 </Card.Header>
                                 <Card.Body>
-                                    <Link to={"https://www.github.com/Dundar27"} target="_blank" rel="noopener noreferrer">
+                                    <a href={"https://www.github.com/Dundar27"} target="_blank" rel="noopener noreferrer">
                                         <i class="fab fa-github fa-2x mx-2 text-dark"></i>
-                                    </Link>
-                                    <Link to={"https://www.instagram.com/davut_burak_/"} target="_blank" rel="noopener noreferrer">
+                                    </a>
+                                    <a href={"https://www.instagram.com/davut_burak_/"} target="_blank" rel="noopener noreferrer">
                                         <i class="fab fa-instagram fa-2x mx-2 text-dark"></i>
-                                    </Link>
-                                    <Link to={"https://tr.linkedin.com/in/davutburak"} target="_blank" rel="noopener noreferrer">
+                                    </a>
+                                    <a href={"https://tr.linkedin.com/in/davutburak"} target="_blank" rel="noopener noreferrer">
                                         <i class="fab fa-linkedin fa-2x mx-2 text-dark"></i>
-                                    </Link>
+                                    </a>
                                 </Card.Body>
                             </Card>
                             <Alert variant="warning" className="my-3" role="alert">
