@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
 import Footer from "./Footer";
 import Header from "./Header";
-import Blogs from "./Blogs";
+import MainSection from "./MainSection";
 import Account from "./Account";
 import Blog from "./Blog";
 import Register from "./Register";
@@ -93,7 +93,7 @@ class App extends React.Component {
                   userControl={this.state.user}
                 />
                 <Header />
-                <Blogs getPopulerBlogPosts={filtered}/>
+                <MainSection getPopulerBlogPosts={filtered}/>
                 <Footer userControl={this.state.user}/>
               </div>
             }/>

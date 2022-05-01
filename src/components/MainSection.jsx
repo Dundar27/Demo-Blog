@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Card, Row, Col, ListGroup, Alert } from "react-bootstrap";
 
-const Blogs = (props) => {  
+const MainSection = (props) => {  
     
     return (
         <div className='p-3' id='blogs-component'>
@@ -94,4 +94,4 @@ const Blogs = (props) => {
     )
 }
 
-export default Blogs;
+export default MainSection;
