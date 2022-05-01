@@ -24,7 +24,7 @@ class App extends React.Component {
       populerBlogPosts: [],   
       blogPosts: [],  //To keep data of blog cards
       searchQuery: "", // To filter blog cards
-      user: {} 
+      user: {}
     }
   }
 
