@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Row, Col, ListGroup, Card } from "react-bootstrap";
+//import { Link } from "react-router-dom";
+import { Row, Col, ListGroup, Card, Tabs, Tab } from "react-bootstrap";
 
 class Account extends React.Component {
   constructor(props) {
@@ -25,35 +25,41 @@ class Account extends React.Component {
                 </div>
                 <div>
                   <ListGroup>
-                    <ListGroup.Item className="ListGroup.Itemst-group-item text-muted">
+                    <ListGroup.Item className="ListGroup.Itemst-group-item text-muted text-center">
                       Activity 
                     </ListGroup.Item>
-                    <ListGroup.Item className="ListGroup.Itemst-group-item text-right">
-                      Followers:
-                      <span className="pull-left mx-2">
-                        433
-                      </span>
-                      
-                    </ListGroup.Item>
-                    <ListGroup.Item className="ListGroup.Itemst-group-item text-right">
-                      Posts:
-                      <span className="pull-left mx-2">
-                      231
-                      </span>
-                    </ListGroup.Item>
-                    <ListGroup.Item className="ListGroup.Itemst-group-item text-right">
+                    <div className="d-flex">
+                      <ListGroup.Item className="ListGroup.Itemst-group-item text-right w-100">
+                        Followers:
+                        <span className="pull-left mx-2">
+                          433
+                        </span>
+                        
+                      </ListGroup.Item>
+                      <ListGroup.Item className="ListGroup.Itemst-group-item text-right w-100">
+                        Posts:
+                        <span className="pull-left mx-2">
+                        231
+                        </span>
+                      </ListGroup.Item>
+                    </div>
+                    <div className="d-flex">
+                    <ListGroup.Item className="ListGroup.Itemst-group-item text-right w-100">
                       Likes:
                       <span className="pull-left text-success mx-2">
                         3433
                       </span>
+                    </ListGroup.Item>
+                    <ListGroup.Item className="ListGroup.Itemst-group-item text-right w-100">
                       Dislikes:
                       <span className="pull-left text-danger mx-2">
                         3433
                       </span>
                     </ListGroup.Item>
-                    <ListGroup.Item className="ListGroup.Itemst-group-item text-right">
-                      average rating out of 10:
-                      <span className="pull-left mx-2">
+                    </div>
+                    <ListGroup.Item className="ListGroup.Itemst-group-item text-center">
+                      Average rating out of 10: <br />
+                      <span className="pull-left px-2 text-warning bg-secondary">
                        7.9
                       </span>      
                     </ListGroup.Item>
@@ -80,26 +86,17 @@ class Account extends React.Component {
             </Col>
 
             <Col sm={9}>
-              <ListGroup className="nav nav-tabs">
-                  
-                <ListGroup.Item className="active">
-                  <Link data-toggle="tab" to="/account/profile">
-                    Profile
-                  </Link>
-                </ListGroup.Item>
-
-                <ListGroup.Item>
-                  <Link data-toggle="tab" to="/account/profileSettings">
-                    Profile Settings
-                  </Link>
-                </ListGroup.Item>
-
-                <ListGroup.Item>
-                  <Link data-toggle="tab" to="/account/accountSettings">
-                    Account Settings
-                  </Link>
-                </ListGroup.Item>
-              </ListGroup>
+            <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
+              <Tab eventKey="profile" title="Profile">
+                
+              </Tab>
+              <Tab eventKey="account" title="Account">
+                
+              </Tab>
+              <Tab eventKey="statistics" title="Statistics">
+                
+              </Tab>
+            </Tabs>
             </Col>
           </Row>
         </div>

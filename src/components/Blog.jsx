@@ -22,6 +22,9 @@ class Blog extends React.Component{
 
                 <SearchBar searchProp={this.props.searchProp}/>
 
+                <div>
+                    
+                </div>
                 <Row>
                     {this.props.getPopulerBlogPosts.map((blog)=>(
                         <Col sm={4}>
