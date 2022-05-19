@@ -1,6 +1,8 @@
 import React from "react";
+import { auth } from './Firebase';
 //import { Link } from "react-router-dom";
 import { Row, Col, ListGroup, Card, Tabs, Tab } from "react-bootstrap";
+import { getAuth } from "firebase/auth";
 
 class Account extends React.Component {
   constructor(props) {
@@ -25,44 +27,81 @@ class Account extends React.Component {
                 </div>
                 <div>
                   <ListGroup>
-                    <ListGroup.Item className="ListGroup.Itemst-group-item text-muted text-center">
+
+                    <ListGroup.Item className="ListGroup-Item text-muted text-center">
                       Activity 
                     </ListGroup.Item>
-                    <div className="d-flex">
-                      <ListGroup.Item className="ListGroup.Itemst-group-item text-right w-100">
-                        Followers:
-                        <span className="pull-left mx-2">
-                          433
-                        </span>
-                        
-                      </ListGroup.Item>
-                      <ListGroup.Item className="ListGroup.Itemst-group-item text-right w-100">
-                        Posts:
-                        <span className="pull-left mx-2">
-                        231
-                        </span>
-                      </ListGroup.Item>
-                    </div>
-                    <div className="d-flex">
-                    <ListGroup.Item className="ListGroup.Itemst-group-item text-right w-100">
-                      Likes:
-                      <span className="pull-left text-success mx-2">
-                        3433
-                      </span>
+
+                    <ListGroup.Item className="ListGroup-Item">
+                      <Row>
+                        <Col sm={8}>
+                          <span className="fw-bold">
+                          Followers :
+                          </span>
+                        </Col>
+                        <Col sm={4}>
+                          <span className="text-center">
+                            433
+                          </span>  
+                        </Col> 
+                      </Row>               
                     </ListGroup.Item>
-                    <ListGroup.Item className="ListGroup.Itemst-group-item text-right w-100">
-                      Dislikes:
-                      <span className="pull-left text-danger mx-2">
-                        3433
-                      </span>
+
+                    <ListGroup.Item className="ListGroup-Item">
+                      <Row>
+                        <Col sm={8}>
+                          <span className="fw-bold">
+                            Posts :
+                          </span>
+                        </Col> 
+                        <Col sm={4}>
+                          <span className="text-center">
+                            231
+                          </span>
+                        </Col> 
+                      </Row> 
                     </ListGroup.Item>
-                    </div>
-                    <ListGroup.Item className="ListGroup.Itemst-group-item text-center">
-                      Average rating out of 10: <br />
-                      <span className="pull-left px-2 text-warning bg-secondary">
+
+                    <ListGroup.Item className="ListGroup-Item">                     
+                      <Row>
+                        <Col sm={8}>
+                          <span className="fw-bold">
+                            Likes :
+                          </span>
+                        </Col> 
+                        <Col sm={4}>
+                          <span className="text-success text-center">
+                            3433
+                          </span>
+                        </Col> 
+                      </Row> 
+                    </ListGroup.Item>
+
+                    <ListGroup.Item className="ListGroup-Item">
+                      <Row>
+                        <Col sm={8}>
+                          <span className="fw-bold">
+                            Dislikes :
+                          </span>
+                        </Col> 
+                        <Col sm={4}>
+                          <span className="text-danger text-center">
+                            3433
+                          </span>
+                        </Col> 
+                      </Row> 
+                    </ListGroup.Item>
+
+                    <ListGroup.Item className="ListGroup-Item text-center fw-bold">
+                      <span className="px-2">
+                        Average Rating :
+                      </span>
+                       <br />
+                      <span className="px-2 text-warning bg-secondary">
                        7.9
                       </span>      
                     </ListGroup.Item>
+
                   </ListGroup>
                 </div>
                 <div className="panel panel-default my-2 text-center">

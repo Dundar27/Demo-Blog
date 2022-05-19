@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
 import { auth } from './Firebase';
-import { createUserWithEmailAndPassword} from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth} from 'firebase/auth';
 //import {collection, addDoc, query} from "firebase/firestore";
 
 class Register extends React.Component {
@@ -49,7 +49,7 @@ class Register extends React.Component {
         //Clear values ​​of form elements
         function clearValue(){
             const firstname = document.getElementById("register_firstname").value = '';
-            const surname = document.getElementById("register_surname").value = '';
+            const surname = document.getElementById("register_phone").value = '';
             const email = document.getElementById("register_email").value = '';
             const password = document.getElementById("register_password").value = '';
             const confirmPassword = document.getElementById("register_password2").value = '';
@@ -107,14 +107,13 @@ class Register extends React.Component {
                             </Form.Group>
                             
                             <Form.Group className="mb-3 w-100" id="formBasicText2">
-                                <Form.Label>Surname</Form.Label>
+                                <Form.Label>Phone</Form.Label>
                                 <Form.Control 
-                                    type="text" 
-                                    placeholder="Doe" 
-                                    id="register_surname"
-                                    minLength={3}
-                                    maxLength={14}
-                                    pattern={'[a-zA-Z]*'}
+                                    type='tel' 
+                                    id="register_phone"
+                                    minLength={11}
+                                    maxLength={11}
+                                    pattern={'[0-9]*'}
                                     required
                                 />
                             </Form.Group> 

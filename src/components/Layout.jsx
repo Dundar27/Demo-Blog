@@ -31,8 +31,6 @@ const Layout = (props) => {
 
                         <div className='d-flex'>
 
-                            <SearchBar searchProp={props.searchProp}/>
-
                             <RegisterOrLoginButton user={userControl}/>             
                         </div>
                     </Navbar.Collapse>

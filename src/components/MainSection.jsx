@@ -6,7 +6,6 @@ const MainSection = (props) => {
     
     return (
         <div className='p-3' id='blogs-component'>
-            <h1 className="text-center text-primary bg-light p-2">Popular Blog Posts</h1> 
             <Row className='mt-1'>
                 <Col sm={8} className='row p-2'>
                     {props.getPopulerBlogPosts.map((blog)=>(
@@ -60,6 +59,9 @@ const MainSection = (props) => {
                                         </ListGroup.Item>
                                         <ListGroup.Item >
                                             <Link to={'blog/populer-blogs/'}>Populer Blog Posts</Link>    
+                                        </ListGroup.Item>
+                                        <ListGroup.Item >
+                                            <Link to={'blog/writers/'}>Writers</Link>    
                                         </ListGroup.Item>
                                     </ListGroup>
                                 </Card.Body>
