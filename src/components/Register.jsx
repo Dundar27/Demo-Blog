@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
 import { auth } from './Firebase';
-import { createUserWithEmailAndPassword, getAuth} from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 //import {collection, addDoc, query} from "firebase/firestore";
 
 class Register extends React.Component {
@@ -13,7 +13,7 @@ class Register extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.state={
             email:"", //user mail information
-            password:"" //user password information
+            password:"", //user password information
         }
     }
 
@@ -23,55 +23,99 @@ class Register extends React.Component {
         e.preventDefault();  //Prevent page refresh when form is submitted
 
         //Values ​​of form elements
+        const firstname = document.getElementById("register_firstname").value;
+        const phone = document.getElementById("register_phone").value;
+        const email = document.getElementById("register_email").value;
         const password = document.getElementById("register_password").value;
         const confirmPassword = document.getElementById("register_password2").value;
+
         const successMessage = document.getElementById("registration_successful");
         const errorMessage = document.getElementById("registration_failed");
         const errorPassword = document.getElementById("errorPassword");
+        const errorPhone = document.getElementById("errorPhone");
+        const errorEmail = document.getElementById("errorPhone");
         
         //Function used to make passwords equal to each other
-        const validatePassword = () => {
+        const validate = () => {
             
-            let valid;  
+            let valid;
+            let valid1;  
+            let valid2;
+            let valid3;
+
+            if (phone !== ''){
+
+                if(phone === auth.currentUser.phoneNumber.includes(phone)){
+                    errorPhone.style.display = "block";
+                    valid1 = false;
+                }
+                else { valid1 = true; }
+
+                return valid1;
+            }
+
+            if (email !== ''){
+
+                if(email === auth.currentUser.email.includes(email) ){
+                    errorEmail.style.display = "block";
+                    valid2 = false;
+                }
+                else { valid2 = true; }
+
+                return valid2;
+            }
 
             if (password !== '' && confirmPassword !== ''){
 
                 if (password !== confirmPassword) {
                     errorPassword.style.display = "block";  //Make the passwords do not match error message visible
-                    valid = false;
+                    valid3 = false;
                 }
-                else { valid = true; }
+                else { valid3 = true; }
 
-                return valid; //Element that will make the other function work according to the truth value
+                return valid3;
             }
+            
+            if (valid1 === valid2 === valid3){
+                valid = true;
+            }
+            else { valid= false; }
+
+            return valid; //Element that will make the other function work according to the truth value
         }
 
         //Clear values ​​of form elements
         function clearValue(){
             const firstname = document.getElementById("register_firstname").value = '';
-            const surname = document.getElementById("register_phone").value = '';
+            const phone = document.getElementById("register_phone").value = '';
             const email = document.getElementById("register_email").value = '';
             const password = document.getElementById("register_password").value = '';
             const confirmPassword = document.getElementById("register_password2").value = '';
 
-            console.log(firstname, surname, email, password, confirmPassword);
+            console.log(firstname, phone, email, password, confirmPassword);
         }
 
         //Save the values ​​of the form elements to the database if there are no errors so far
-        if(validatePassword().valueOf() === true){
+        if(validate().valueOf() === true){
 
             //Function to get form values ​​and create a new user with firebase function
             createUserWithEmailAndPassword(auth, this.state.email, this.state.password).then((u)=>{
+                
+                firstname = auth.currentUser.displayName;
+                phone = auth.currentUser.phoneNumber;
+
                 console.log(u);
+
             }).catch((err)=>{
                 console.log(err)
             })
+
             clearValue(); ////Clear values ​​of form elements
             successMessage.style.display = "block";  //Make registration successful message visible
 
             //Redirect to login screen after 1.5 seconds
             setTimeout(function(){
-                window.location = "/login/";
+                window.location = "/account/";
             }, 1500);
 
         }else{
@@ -196,6 +240,18 @@ class Register extends React.Component {
                     <div className="alert alert-danger" role="alert">
                         <h4 className="alert-heading">Passwords Do Not Match!</h4>
                         <p>Please make sure you enter the passwords correctly.</p>
+                    </div>
+                </div>
+                <div className='mt-3' id='errorEmail' style={{display: "none"}}>
+                    <div className="alert alert-danger" role="alert">
+                        <h4 className="alert-heading">This email address is used!</h4>
+                        <p>Please enter another email address.</p>
+                    </div>
+                </div>
+                <div className='mt-3' id='errorPhone' style={{display: "none"}}>
+                    <div className="alert alert-danger" role="alert">
+                        <h4 className="alert-heading">This phone number is still invalid!</h4>
+                        <p>Someone has registered with this phone number before, make sure you write your number correctly..</p>
                     </div>
                 </div>
                 <div className='mt-3'>

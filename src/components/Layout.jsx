@@ -3,7 +3,6 @@ import { Outlet, Link} from 'react-router-dom';
 import {Navbar, Nav, Container} from 'react-bootstrap';
 //import SearchBar from "./SearchBar";
 import RegisterOrLoginButton from './RegisterOrLoginButton';
-import SearchBar from './SearchBar';
 
 const Layout = (props) => {
 

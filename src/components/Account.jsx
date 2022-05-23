@@ -1,8 +1,8 @@
 import React from "react";
-import { auth } from './Firebase';
+//import { auth } from './Firebase';
 //import { Link } from "react-router-dom";
 import { Row, Col, ListGroup, Card, Tabs, Tab } from "react-bootstrap";
-import { getAuth } from "firebase/auth";
+//import { getAuth } from "firebase/auth";
 
 class Account extends React.Component {
   constructor(props) {
