@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
 import { auth } from './Firebase';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 //import {collection, addDoc, query} from "firebase/firestore";
 
 class Register extends React.Component {
@@ -14,6 +14,7 @@ class Register extends React.Component {
         this.state={
             email:"", //user mail information
             password:"", //user password information
+            firstname:""
         }
     }
 
@@ -23,101 +24,70 @@ class Register extends React.Component {
         e.preventDefault();  //Prevent page refresh when form is submitted
 
         //Values ​​of form elements
-        const firstname = document.getElementById("register_firstname").value;
-        const phone = document.getElementById("register_phone").value;
-        const email = document.getElementById("register_email").value;
+
         const password = document.getElementById("register_password").value;
         const confirmPassword = document.getElementById("register_password2").value;
 
         const successMessage = document.getElementById("registration_successful");
         const errorMessage = document.getElementById("registration_failed");
         const errorPassword = document.getElementById("errorPassword");
-        const errorPhone = document.getElementById("errorPhone");
         const errorEmail = document.getElementById("errorPhone");
         
         //Function used to make passwords equal to each other
         const validate = () => {
             
             let valid;
-            let valid1;  
-            let valid2;
-            let valid3;
-
-            if (phone !== ''){
-
-                if(phone === auth.currentUser.phoneNumber.includes(phone)){
-                    errorPhone.style.display = "block";
-                    valid1 = false;
-                }
-                else { valid1 = true; }
-
-                return valid1;
-            }
-
-            if (email !== ''){
-
-                if(email === auth.currentUser.email.includes(email) ){
-                    errorEmail.style.display = "block";
-                    valid2 = false;
-                }
-                else { valid2 = true; }
-
-                return valid2;
-            }
 
             if (password !== '' && confirmPassword !== ''){
 
                 if (password !== confirmPassword) {
                     errorPassword.style.display = "block";  //Make the passwords do not match error message visible
-                    valid3 = false;
+                    valid = false;
                 }
-                else { valid3 = true; }
+                else { valid = true; }
 
-                return valid3;
+                return valid;
             }
-            
-            if (valid1 === valid2 === valid3){
-                valid = true;
-            }
-            else { valid= false; }
 
             return valid; //Element that will make the other function work according to the truth value
         }
 
         //Clear values ​​of form elements
         function clearValue(){
-            const firstname = document.getElementById("register_firstname").value = '';
-            const phone = document.getElementById("register_phone").value = '';
-            const email = document.getElementById("register_email").value = '';
-            const password = document.getElementById("register_password").value = '';
-            const confirmPassword = document.getElementById("register_password2").value = '';
+            const firstnameValue = document.getElementById("register_firstname").value = '';
+            const phoneValue = document.getElementById("register_username").value = '';
+            const emailValue = document.getElementById("register_email").value = '';
+            const passwordValue = document.getElementById("register_password").value = '';
+            const confirmPasswordValue = document.getElementById("register_password2").value = '';
 
-            console.log(firstname, phone, email, password, confirmPassword);
+            console.log(firstnameValue, phoneValue, emailValue, passwordValue, confirmPasswordValue);
         }
 
         //Save the values ​​of the form elements to the database if there are no errors so far
         if(validate().valueOf() === true){
-
+            
             //Function to get form values ​​and create a new user with firebase function
-            createUserWithEmailAndPassword(auth, this.state.email, this.state.password).then((u)=>{
-                
-                firstname = auth.currentUser.displayName;
-                phone = auth.currentUser.phoneNumber;
+            createUserWithEmailAndPassword(auth, this.state.email, this.state.password).then((userCredential)=>{
 
-                console.log(u);
+                const user = auth.currentUser;
+                this.state.firstname = user.displayName;
+
+                console.log(userCredential);
+
+                clearValue(); ////Clear values ​​of form elements
+
+                successMessage.style.display = "block";  //Make registration successful message visible
+
+                //Redirect to login screen after 1.5 seconds
+                setTimeout(function(){
+                    window.location = "/account/";
+                }, 1500);
 
             }).catch((err)=>{
-                console.log(err)
+                errorEmail.style.display = "block";
+                console.log(err);
             })
-
-            clearValue(); ////Clear values ​​of form elements
-            successMessage.style.display = "block";  //Make registration successful message visible
-
-            //Redirect to login screen after 1.5 seconds
-            setTimeout(function(){
-                window.location = "/account/";
-            }, 1500);
-
+            
         }else{
             errorMessage.style.display = "block"; //Show error message if there is an error
         }
@@ -138,11 +108,14 @@ class Register extends React.Component {
                     <Form onSubmit={this.register} className="mx-auto"> 
                         <div className='d-flex'>   
                             <Form.Group className="mb-3 w-100" id="formBasicText">
-                                <Form.Label>First Name</Form.Label>
+                                <Form.Label>Name</Form.Label>
                                 <Form.Control 
                                     type="text" 
                                     placeholder="John" 
                                     id="register_firstname"
+                                    name='firstname'
+                                    onChange={this.handleChange}
+                                    value={this.state.firstname}
                                     minLength={3}
                                     maxLength={22} 
                                     pattern={'[a-zA-Z]*'}
@@ -151,13 +124,14 @@ class Register extends React.Component {
                             </Form.Group>
                             
                             <Form.Group className="mb-3 w-100" id="formBasicText2">
-                                <Form.Label>Phone</Form.Label>
+                                <Form.Label>User Name</Form.Label>
                                 <Form.Control 
-                                    type='tel' 
-                                    id="register_phone"
-                                    minLength={11}
-                                    maxLength={11}
-                                    pattern={'[0-9]*'}
+                                    type='text' 
+                                    placeholder='Johnnes'
+                                    id="register_username"
+                                    minLength={4}
+                                    maxLength={10}
+                                    pattern={'[a-zA-Z0-9]*'}
                                     required
                                 />
                             </Form.Group> 
@@ -168,8 +142,8 @@ class Register extends React.Component {
                             <Form.Control 
                                 type="email" 
                                 placeholder="Enter email" 
-                                name='email'
                                 id="register_email" 
+                                name='email'
                                 onChange={this.handleChange}
                                 value={this.state.email}
                                 pattern={'[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$'}
@@ -183,8 +157,8 @@ class Register extends React.Component {
                                 <Form.Control 
                                 type="password" 
                                 placeholder="Password" 
-                                name='password'
                                 id="register_password"  
+                                name='password'
                                 onChange={this.handleChange}
                                 value={this.state.password}
                                 minLength={8}
