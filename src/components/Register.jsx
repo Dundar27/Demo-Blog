@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
 import { auth } from './Firebase';
-import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 //import {collection, addDoc, query} from "firebase/firestore";
 
 class Register extends React.Component {
@@ -13,8 +13,7 @@ class Register extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.state={
             email:"", //user mail information
-            password:"", //user password information
-            firstname:""
+            password:"" //user password information
         }
     }
 
@@ -54,13 +53,13 @@ class Register extends React.Component {
 
         //Clear values ​​of form elements
         function clearValue(){
-            const firstnameValue = document.getElementById("register_firstname").value = '';
-            const phoneValue = document.getElementById("register_username").value = '';
+            const firstNameValue = document.getElementById("register_firstName").value = '';
+            const surNameValue = document.getElementById("register_surName").value = '';
             const emailValue = document.getElementById("register_email").value = '';
             const passwordValue = document.getElementById("register_password").value = '';
             const confirmPasswordValue = document.getElementById("register_password2").value = '';
 
-            console.log(firstnameValue, phoneValue, emailValue, passwordValue, confirmPasswordValue);
+            console.log(firstNameValue, surNameValue, emailValue, passwordValue, confirmPasswordValue);
         }
 
         //Save the values ​​of the form elements to the database if there are no errors so far
@@ -68,9 +67,6 @@ class Register extends React.Component {
             
             //Function to get form values ​​and create a new user with firebase function
             createUserWithEmailAndPassword(auth, this.state.email, this.state.password).then((userCredential)=>{
-
-                const user = auth.currentUser;
-                this.state.firstname = user.displayName;
 
                 console.log(userCredential);
 
@@ -112,10 +108,7 @@ class Register extends React.Component {
                                 <Form.Control 
                                     type="text" 
                                     placeholder="John" 
-                                    id="register_firstname"
-                                    name='firstname'
-                                    onChange={this.handleChange}
-                                    value={this.state.firstname}
+                                    id="register_firstName"
                                     minLength={3}
                                     maxLength={22} 
                                     pattern={'[a-zA-Z]*'}
@@ -124,14 +117,14 @@ class Register extends React.Component {
                             </Form.Group>
                             
                             <Form.Group className="mb-3 w-100" id="formBasicText2">
-                                <Form.Label>User Name</Form.Label>
+                                <Form.Label>Sur Name</Form.Label>
                                 <Form.Control 
                                     type='text' 
-                                    placeholder='Johnnes'
-                                    id="register_username"
-                                    minLength={4}
-                                    maxLength={10}
-                                    pattern={'[a-zA-Z0-9]*'}
+                                    placeholder='Doe'
+                                    id="register_surName"
+                                    minLength={3}
+                                    maxLength={12}
+                                    pattern={'[a-zA-Z]*'}
                                     required
                                 />
                             </Form.Group> 
@@ -169,7 +162,7 @@ class Register extends React.Component {
                             </Form.Group>
                            
                             <Form.Group className="mb-3 w-100" id="formBasicPassword2">
-                                <Form.Label>Repeat Password</Form.Label>
+                                <Form.Label>Confirm Password</Form.Label>
                                 <Form.Control 
                                 type="password" 
                                 placeholder="Password" 

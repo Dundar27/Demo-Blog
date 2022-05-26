@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 //Components
-import Layout from "./Layout";
+import Navbar from "./Navbar";
 import Footer from "./Footer";
-import Header from "./Header";
+import Slider from "./Slider";
 import MainSection from "./MainSection";
-import Account from "./Account";
+import Profile from "./Profile";
 import Blog from "./Blog";
 import Register from "./Register";
 import Login from "./Login";
@@ -88,11 +88,11 @@ class App extends React.Component {
 
             <Route path="/" exact element={
               <div>
-                <Layout 
+                <Navbar 
                   searchProp={this.searchBlogPostProp}
                   userControl={this.state.user}
                 />
-                <Header />
+                <Slider />
                 <MainSection getPopulerBlogPosts={filtered}/>
                 <Footer userControl={this.state.user}/>
               </div>
@@ -100,7 +100,7 @@ class App extends React.Component {
 
             <Route path="/blog/" element={
               <div>
-                <Layout 
+                <Navbar 
                   searchProp={this.searchBlogPostProp}
                   userControl={this.state.user}
                 />
@@ -114,7 +114,7 @@ class App extends React.Component {
 
             <Route path="/register/" element={
               <div>
-                <Layout
+                <Navbar
                   searchProp={this.searchBlogPostProp}
                   userControl={this.state.user}
                 />
@@ -124,7 +124,7 @@ class App extends React.Component {
 
             <Route path="/login/" element={
               <div>
-                <Layout
+                <Navbar
                   searchProp={this.searchBlogPostProp}
                   userControl={this.state.user}
                 />
@@ -132,17 +132,17 @@ class App extends React.Component {
               </div>
             }/>
 
-            <Route path='/account/' element={
+            <Route path='/profile/' element={
               this.state.user ? 
               (<div>
-                <Layout
+                <Navbar
                   searchProp={this.searchBlogPostProp}
                   userControl={this.state.user}
                 />
-                <Account/>
+                <Profile/>
               </div>) :
               (<div>
-                <Layout/>
+                <Navbar/>
                 <Register/>
               </div>)}
             /> 

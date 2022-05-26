@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import db from './Firebase';
 import { collection, onSnapshot, orderBy } from "firebase/firestore";
 
-const Header = () => {
+const Slider = () => {
     //Function to rotate slide by number
     const [index, setIndex] = useState(0);
   
@@ -43,4 +43,4 @@ const Header = () => {
     );
   }
   
-export default Header;
+export default Slider;

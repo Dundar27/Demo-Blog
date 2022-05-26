@@ -16,7 +16,7 @@ const Layout = (props) => {
 
                         <Nav className="me-auto my-2 my-lg-0" navbarScroll>
                             
-                            <Link to="/account/" className="nav-link text-light">
+                            <Link to="/profile/" className="nav-link text-light">
                                 Profile
                             </Link>
 
