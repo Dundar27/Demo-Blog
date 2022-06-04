@@ -30,7 +30,7 @@ class Register extends React.Component {
         const successMessage = document.getElementById("registration_successful");
         const errorMessage = document.getElementById("registration_failed");
         const errorPassword = document.getElementById("errorPassword");
-        const errorEmail = document.getElementById("errorPhone");
+        const errorEmail = document.getElementById("errorEmail");
         
         //Function used to make passwords equal to each other
         const validate = () => {
@@ -45,6 +45,7 @@ class Register extends React.Component {
                 }
                 else { valid = true; }
 
+
                 return valid;
             }
 
@@ -53,13 +54,11 @@ class Register extends React.Component {
 
         //Clear values ​​of form elements
         function clearValue(){
-            const firstNameValue = document.getElementById("register_firstName").value = '';
-            const surNameValue = document.getElementById("register_surName").value = '';
             const emailValue = document.getElementById("register_email").value = '';
             const passwordValue = document.getElementById("register_password").value = '';
             const confirmPasswordValue = document.getElementById("register_password2").value = '';
 
-            console.log(firstNameValue, surNameValue, emailValue, passwordValue, confirmPasswordValue);
+            console.log(emailValue, passwordValue, confirmPasswordValue);
         }
 
         //Save the values ​​of the form elements to the database if there are no errors so far
@@ -102,33 +101,6 @@ class Register extends React.Component {
                 <div>
                     <h1 className='text-center mb-3'>Register Form</h1>
                     <Form onSubmit={this.register} className="mx-auto"> 
-                        <div className='d-flex'>   
-                            <Form.Group className="mb-3 w-100" id="formBasicText">
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control 
-                                    type="text" 
-                                    placeholder="John" 
-                                    id="register_firstName"
-                                    minLength={3}
-                                    maxLength={22} 
-                                    pattern={'[a-zA-Z]*'}
-                                    required
-                                />
-                            </Form.Group>
-                            
-                            <Form.Group className="mb-3 w-100" id="formBasicText2">
-                                <Form.Label>Sur Name</Form.Label>
-                                <Form.Control 
-                                    type='text' 
-                                    placeholder='Doe'
-                                    id="register_surName"
-                                    minLength={3}
-                                    maxLength={12}
-                                    pattern={'[a-zA-Z]*'}
-                                    required
-                                />
-                            </Form.Group> 
-                        </div>
                                       
                         <Form.Group className="mb-3" id="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
@@ -213,12 +185,6 @@ class Register extends React.Component {
                     <div className="alert alert-danger" role="alert">
                         <h4 className="alert-heading">This email address is used!</h4>
                         <p>Please enter another email address.</p>
-                    </div>
-                </div>
-                <div className='mt-3' id='errorPhone' style={{display: "none"}}>
-                    <div className="alert alert-danger" role="alert">
-                        <h4 className="alert-heading">This phone number is still invalid!</h4>
-                        <p>Someone has registered with this phone number before, make sure you write your number correctly..</p>
                     </div>
                 </div>
                 <div className='mt-3'>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col, ListGroup, Card, Tabs, Tab } from "react-bootstrap";
+import ProfileSettings from "./ProfileSettings";
 
 class Account extends React.Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class Account extends React.Component {
                     className="avatar w-100"
                     alt="avatar"
                   />             
-                  <h3 className="mt-3">User</h3> 
+                  <h3 className="mt-3">{}</h3> 
                 </div>
                 <div>
                   <ListGroup>
@@ -39,7 +40,7 @@ class Account extends React.Component {
                         </Col>
                         <Col sm={4}>
                           <span className="text-center">
-                            433
+                            {}
                           </span>  
                         </Col> 
                       </Row>               
@@ -54,7 +55,7 @@ class Account extends React.Component {
                         </Col> 
                         <Col sm={4}>
                           <span className="text-center">
-                            231
+                            {}
                           </span>
                         </Col> 
                       </Row> 
@@ -69,7 +70,7 @@ class Account extends React.Component {
                         </Col> 
                         <Col sm={4}>
                           <span className="text-success text-center">
-                            3433
+                            {}
                           </span>
                         </Col> 
                       </Row> 
@@ -84,7 +85,7 @@ class Account extends React.Component {
                         </Col> 
                         <Col sm={4}>
                           <span className="text-danger text-center">
-                            3433
+                            {}
                           </span>
                         </Col> 
                       </Row> 
@@ -96,7 +97,7 @@ class Account extends React.Component {
                       </span>
                        <br />
                       <span className="px-2 text-warning bg-secondary">
-                       7.9
+                       {}
                       </span>      
                     </ListGroup.Item>
 
@@ -125,7 +126,7 @@ class Account extends React.Component {
             <Col sm={9}>
             <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
               <Tab eventKey="profile" title="Profile">
-                
+                <ProfileSettings />
               </Tab>
               <Tab eventKey="account" title="Account">
                 
