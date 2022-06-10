@@ -139,7 +139,7 @@ class App extends React.Component {
                   searchProp={this.searchBlogPostProp}
                   userControl={this.state.user}
                 />
-                <Profile/>
+                <Profile userControl={this.state.user}/>
               </div>) :
               (<div>
                 <Navbar/>
