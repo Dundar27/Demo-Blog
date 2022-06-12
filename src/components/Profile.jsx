@@ -1,8 +1,9 @@
 import React from "react";
 import { Row, Col, ListGroup, Card, Tabs, Tab } from "react-bootstrap";
 import ProfileSettings from "./ProfileSettings";
-import db,{ auth } from './Firebase';
-import { ref, onValue } from "firebase/database"
+//import db from './Firebase';
+//import { auth } from './Firebase';
+
 
 class Account extends React.Component {
   constructor(props) {
@@ -25,12 +26,7 @@ class Account extends React.Component {
                     alt="avatar"
                   />             
                   <h3 className="mt-3">
-                    {onValue(ref(db, 'users/'+ auth.currentUser.uid), (snapshot) => {
-                      const username = (snapshot.val().username);
-                      return username;
-                    },{
-                      onlyOnce: true
-                    })}
+                    {}
                   </h3> 
                 </div>
                 <div>
