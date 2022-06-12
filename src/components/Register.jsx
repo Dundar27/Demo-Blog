@@ -123,6 +123,62 @@ class Register extends React.Component {
                                 required
                             />
                         </Form.Group> 
+
+                        <Form.Group className="mb-3" id="formBasicEmail">
+                            <Form.Label>First Name</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                name='firstname'
+                                id='register_firstname'
+                                placeholder="Enter First Name"
+                                onChange={this.handleChange}
+                                value={this.state.firstname} 
+                                pattern={'[A-Za-z]{2,12}$'}
+                                required
+                            />
+                        </Form.Group> 
+
+                        <Form.Group className="mb-3" id="formBasicEmail">
+                            <Form.Label>Last Name</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                name='lastname'
+                                id='user_lastname'
+                                placeholder="Enter Last Name"
+                                onChange={this.handleChange}
+                                value={this.state.lastname} 
+                                pattern={'[A-Za-z]{2,12}$'}
+                                required
+                            />
+                        </Form.Group>    
+                        
+                        <Form.Group className="mb-3" id="formBasicEmail">
+                            <Form.Label>Contact No</Form.Label>
+                            <Form.Control 
+                                type="tel" 
+                                name='phone'
+                                id='user_tel'
+                                placeholder="Enter tel no" 
+                                onChange={this.handleChange}
+                                value={this.state.phone}
+                                pattern={'[0-9]{11}$'}
+                                required
+                            />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3" id="formBasicEmail">
+                            <Form.Label>Current Adress</Form.Label>
+                            <Form.Control 
+                                type='text' 
+                                name='adress'
+                                id='user_adress'
+                                placeholder="Enter City Where You Live"
+                                onChange={this.handleChange}
+                                value={this.state.adress} 
+                                pattern={'[A-Za-z]{4,16}$'}
+                                required
+                            />
+                        </Form.Group>
                         
                         <Form.Group className="mb-3" id="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
