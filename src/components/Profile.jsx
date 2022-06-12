@@ -2,8 +2,6 @@ import React from "react";
 import { Row, Col, ListGroup, Card, Tabs, Tab } from "react-bootstrap";
 import ProfileSettings from "./ProfileSettings";
 //import db from './Firebase';
-//import { auth } from './Firebase';
-
 
 class Account extends React.Component {
   constructor(props) {
@@ -11,7 +9,7 @@ class Account extends React.Component {
     this.state = {};
   }
 
-  render() {
+  render() { 
 
     return (
       <div id="account-component">
