@@ -54,9 +54,9 @@ class UserAbouthForm extends React.Component{
                         <Form.Label>First Name</Form.Label>
                         <Form.Control 
                             type="text" 
-                            name='firstname'
+                            placeholder="Enter First Name"   
                             id='user_firstname'
-                            placeholder="Enter First Name"
+                            name='firstname'
                             onChange={this.handleChange}
                             value={this.state.firstname} 
                             pattern={'[A-Za-z]{2,12}$'}
@@ -68,9 +68,9 @@ class UserAbouthForm extends React.Component{
                         <Form.Label>Last Name</Form.Label>
                         <Form.Control 
                             type="text" 
-                            name='lastname'
+                            placeholder="Enter Last Name"                           
                             id='user_lastname'
-                            placeholder="Enter Last Name"
+                            name='lastname'
                             onChange={this.handleChange}
                             value={this.state.lastname} 
                             pattern={'[A-Za-z]{2,12}$'}
@@ -81,10 +81,10 @@ class UserAbouthForm extends React.Component{
                     <Form.Group className="mb-3" id="formBasicEmail">
                         <Form.Label>Contact No</Form.Label>
                         <Form.Control 
-                            type="tel" 
-                            name='phone'
-                            id='user_tel'
+                            type="tel"
                             placeholder="Enter tel no" 
+                            id='user_tel'
+                            name='phone'
                             onChange={this.handleChange}
                             value={this.state.phone}
                             pattern={'[0-9]{11}$'}
@@ -95,10 +95,10 @@ class UserAbouthForm extends React.Component{
                     <Form.Group className="mb-3" id="formBasicEmail">
                         <Form.Label>Current Adress</Form.Label>
                         <Form.Control 
-                            type='text' 
-                            name='adress'
+                            type='text'
+                            placeholder="Enter City Where You Live"                            
                             id='user_adress'
-                            placeholder="Enter City Where You Live"
+                            name='adress'
                             onChange={this.handleChange}
                             value={this.state.adress} 
                             pattern={'[A-Za-z]{4,16}$'}
@@ -109,10 +109,10 @@ class UserAbouthForm extends React.Component{
                     <Form.Group className="mb-3" id="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control 
-                            type="email" 
-                            name='email'
+                            type="email"
+                            placeholder="Enter email"                            
                             id='user_mail'
-                            placeholder="Enter email"
+                            name='email'
                             onChange={this.handleChange}
                             value={this.state.email} 
                             pattern={'[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$'}
