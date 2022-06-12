@@ -6,7 +6,6 @@ import UserAbouthForm from './UserAbouthForm';
 const ProfileSettings = (props) => {
 
     const [lgShow, setLgShow] = useState(false);
-    const userControl = props.user;
 
     return (
         <div className='p-3' id='profilesettings-component'>
@@ -75,7 +74,7 @@ const ProfileSettings = (props) => {
                 </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <UserAbouthForm user={userControl}/>
+                    <UserAbouthForm/>
                 </Modal.Body>
             </Modal>
         </div>

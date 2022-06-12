@@ -10,8 +10,6 @@ class Account extends React.Component {
 
   render() {
 
-    const userControl = this.props.userControl;
-
     return (
       <div id="account-component">
         <div className="p-5">
@@ -129,7 +127,7 @@ class Account extends React.Component {
             <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
               <Tab eventKey="profile" title="Profile">
 
-                <ProfileSettings user={userControl} />
+                <ProfileSettings />
 
               </Tab>
               <Tab eventKey="account" title="Account">

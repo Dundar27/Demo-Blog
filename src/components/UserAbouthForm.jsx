@@ -1,7 +1,8 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import db from './Firebase';
-import {ref, set } from 'firebase/database';
+import { doc, setDoc } from "firebase/firestore";
+import { auth } from './Firebase';
 
 
 class UserAbouthForm extends React.Component{
@@ -19,13 +20,13 @@ class UserAbouthForm extends React.Component{
         }
     }
 
-    userInformationForm = async(e) =>{
+    writeUserData = async(e) =>{
     
         e.preventDefault();
 
-        const user = this.props.user;
+        const user = auth.currentUser.uid;
         
-        set(ref(db, 'users/'+user.uid), {
+        setDoc(doc(db, 'users/'+user), {
 
             firstname : this.state.firstname,
             lastname : this.state.lastname,
@@ -47,7 +48,7 @@ class UserAbouthForm extends React.Component{
     render(){
         return (
             <div className='p-3 container' id='userabouthform-component'>
-                <Form className="mx-auto" onSubmit={this.userInformationForm} > 
+                <Form className="mx-auto" onSubmit={this.writeUserData} > 
 
                     <Form.Group className="mb-3" id="formBasicEmail">
                         <Form.Label>First Name</Form.Label>

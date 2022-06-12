@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
 import { auth } from './Firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-//import {collection, addDoc, query} from "firebase/firestore";
+import db from './Firebase';
+import { doc, setDoc } from "firebase/firestore";
 
 class Register extends React.Component {
 
@@ -13,7 +14,8 @@ class Register extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.state={
             email:"", //user mail information
-            password:"" //user password information
+            password:"", //user password information
+            username:"" //user username information
         }
     }
 
@@ -23,7 +25,8 @@ class Register extends React.Component {
         e.preventDefault();  //Prevent page refresh when form is submitted
 
         //Values ​​of form elements
-
+        
+        const username = document.getElementById("register_username").value;
         const password = document.getElementById("register_password").value;
         const confirmPassword = document.getElementById("register_password2").value;
 
@@ -60,7 +63,8 @@ class Register extends React.Component {
 
             console.log(emailValue, passwordValue, confirmPasswordValue);
         }
-
+        
+        
         //Save the values ​​of the form elements to the database if there are no errors so far
         if(validate().valueOf() === true){
             
@@ -68,6 +72,10 @@ class Register extends React.Component {
             createUserWithEmailAndPassword(auth, this.state.email, this.state.password).then((userCredential)=>{
 
                 console.log(userCredential);
+
+                setDoc(doc(db, "users", auth.currentUser.uid), {
+                    username: username
+                });
 
                 clearValue(); ////Clear values ​​of form elements
 
@@ -102,6 +110,20 @@ class Register extends React.Component {
                     <h1 className='text-center mb-3'>Register Form</h1>
                     <Form onSubmit={this.register} className="mx-auto"> 
                                       
+                        <Form.Group className="mb-3" id="formBasicEmail">
+                            <Form.Label>User Name</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                placeholder="Enter user name" 
+                                id="register_username" 
+                                name='username'
+                                onChange={this.handleChange}
+                                value={this.state.username}
+                                pattern={'[a-zA-Z0-9._]{6,16}$'}
+                                required
+                            />
+                        </Form.Group> 
+                        
                         <Form.Group className="mb-3" id="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
                             <Form.Control 
