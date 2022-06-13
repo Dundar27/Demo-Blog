@@ -1,12 +1,14 @@
 import React from "react";
 import { Row, Col, ListGroup, Card, Tabs, Tab } from "react-bootstrap";
-import ProfileSettings from "./ProfileSettings";
 //import db from './Firebase';
+import ProfileSettings from "./ProfileSettings";
 
 class Account extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+
+    };
   }
 
   render() { 

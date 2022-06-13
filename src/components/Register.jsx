@@ -116,22 +116,9 @@ class Register extends React.Component {
         return(
             <div className='p-3 mt-5  container' id='register-component'>
                 <div>
-                    <h1 className='text-center mb-3'>Register Form</h1>
+                    <h1 className='text-center mb-5'>Register Form</h1>
                     <Form onSubmit={this.register} className="mx-auto"> 
-                                      
-                        <Form.Group className="mb-3" id="formBasicEmail">
-                            <Form.Label>User Name</Form.Label>
-                            <Form.Control 
-                                type="text" 
-                                placeholder="Enter user name" 
-                                id="register_username" 
-                                name='username'
-                                onChange={this.handleChange}
-                                value={this.state.username}
-                                pattern={'[a-zA-Z0-9._]{6,16}$'}
-                                required
-                            />
-                        </Form.Group> 
+                                       
                         <div className='d-flex'>
                             <Form.Group className="mb-3 w-100" id="formBasicEmail">
                                 <Form.Label>First Name</Form.Label>
@@ -146,7 +133,7 @@ class Register extends React.Component {
                                 />
                             </Form.Group> 
 
-                            <Form.Group className="mb-3 w-100" id="formBasicEmail">
+                            <Form.Group className="mb-3 w-100 mx-2" id="formBasicEmail">
                                 <Form.Label>Last Name</Form.Label>
                                 <Form.Control 
                                     type="text" 
@@ -174,7 +161,7 @@ class Register extends React.Component {
                                 />
                             </Form.Group>
 
-                            <Form.Group className="mb-3 w-100" id="formBasicEmail">
+                            <Form.Group className="mb-3 w-100 mx-2" id="formBasicEmail">
                                 <Form.Label>Current Adress</Form.Label>
                                 <Form.Control 
                                     type='text'
@@ -188,20 +175,36 @@ class Register extends React.Component {
                             </Form.Group>
                         </div>
                         
-                        <Form.Group className="mb-3" id="formBasicEmail">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control 
-                                type="email" 
-                                placeholder="Enter email" 
-                                id="register_email" 
-                                name='email'
-                                onChange={this.handleChange}
-                                value={this.state.email}
-                                pattern={'[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$'}
-                                required
-                            />
-                        </Form.Group>
-        
+                        <div className="d-flex">
+                            <Form.Group className="mb-3 w-100" id="formBasicEmail">
+                                <Form.Label>User Name</Form.Label>
+                                <Form.Control 
+                                    type="text" 
+                                    placeholder="Enter user name" 
+                                    id="register_username" 
+                                    name='username'
+                                    onChange={this.handleChange}
+                                    value={this.state.username}
+                                    pattern={'[a-zA-Z0-9._]{6,16}$'}
+                                    required
+                                />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3 w-100 mx-2" id="formBasicEmail">
+                                <Form.Label>Email address</Form.Label>
+                                <Form.Control 
+                                    type="email" 
+                                    placeholder="Enter email" 
+                                    id="register_email" 
+                                    name='email'
+                                    onChange={this.handleChange}
+                                    value={this.state.email}
+                                    pattern={'[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$'}
+                                    required
+                                />
+                            </Form.Group>
+                        </div>
+
                         <div className='d-flex'>     
                             <Form.Group className="mb-3 w-100" id="formBasicPassword1">
                                 <Form.Label>Password</Form.Label>
@@ -219,7 +222,7 @@ class Register extends React.Component {
                                 <span className='form-text'>*Must contain at least one uppercase letter, lowercase letter, and number.</span>
                             </Form.Group>
                            
-                            <Form.Group className="mb-3 w-100" id="formBasicPassword2">
+                            <Form.Group className="mb-3 w-100 mx-2" id="formBasicPassword2">
                                 <Form.Label>Confirm Password</Form.Label>
                                 <Form.Control 
                                 type="password" 
