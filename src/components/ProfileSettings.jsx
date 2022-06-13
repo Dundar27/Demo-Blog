@@ -1,7 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Row, Col, Button} from "react-bootstrap";
+import Modal from 'react-bootstrap/Modal';
+import UserAbouthForm from './UserAbouthForm';
 
-const ProfileSettings = () => {
+const ProfileSettings = (props) => {
+
+    const [lgShow, setLgShow] = useState(false);
+
     return (
         <div className='p-3' id='profilesettings-component'>
             <div className="responseProfile">
@@ -48,21 +53,30 @@ const ProfileSettings = () => {
                             </div>
                             <div>{}</div>    
                         </div> 
-                        <div className='d-flex justify-content-between my-3'>
-                            <div>
-                                <span>Birthday :</span>
-                            </div>
-                            <div>{}</div>    
-                        </div> 
                     </Col>
                 </Row>
             </div>
             <div className='my-2'>
-                <Button variant="warning" className='px-1'>
+                <Button variant="warning" className='px-1' onClick={() => setLgShow(true)}>
                         <i class="fas fa-edit text-light"></i>
                         <span className='text-light mx-2'>Edit</span>
                 </Button>
             </div>
+            <Modal
+                size="lg"
+                show={lgShow}
+                onHide={() => setLgShow(false)}
+                aria-labelledby="example-modal-sizes-title-lg"
+            >
+                <Modal.Header closeButton>
+                <Modal.Title id="example-modal-sizes-title-lg">
+                    Large Modal
+                </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <UserAbouthForm/>
+                </Modal.Body>
+            </Modal>
         </div>
     );
 }

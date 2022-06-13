@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
 import { auth } from './Firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-//import {collection, addDoc, query} from "firebase/firestore";
+import db from './Firebase';
+import { doc, setDoc } from "firebase/firestore";
 
 class Register extends React.Component {
 
@@ -12,8 +13,14 @@ class Register extends React.Component {
         this.register = this.register.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.state={
-            email:"", //user mail information
-            password:"" //user password information
+            email:"", 
+            password:"", 
+            password2:"",
+            username:"", 
+            firstname:"", 
+            lastname:"",
+            phone:"",
+            adress:""
         }
     }
 
@@ -24,8 +31,8 @@ class Register extends React.Component {
 
         //Values ​​of form elements
 
-        const password = document.getElementById("register_password").value;
-        const confirmPassword = document.getElementById("register_password2").value;
+        const password = this.state.password;
+        const confirmPassword = this.state.password2;
 
         const successMessage = document.getElementById("registration_successful");
         const errorMessage = document.getElementById("registration_failed");
@@ -54,13 +61,15 @@ class Register extends React.Component {
 
         //Clear values ​​of form elements
         function clearValue(){
+
             const emailValue = document.getElementById("register_email").value = '';
             const passwordValue = document.getElementById("register_password").value = '';
             const confirmPasswordValue = document.getElementById("register_password2").value = '';
 
             console.log(emailValue, passwordValue, confirmPasswordValue);
         }
-
+        
+        
         //Save the values ​​of the form elements to the database if there are no errors so far
         if(validate().valueOf() === true){
             
@@ -68,6 +77,14 @@ class Register extends React.Component {
             createUserWithEmailAndPassword(auth, this.state.email, this.state.password).then((userCredential)=>{
 
                 console.log(userCredential);
+
+                setDoc(doc(db, "users", auth.currentUser.uid), {
+                    username: this.state.username,
+                    firstname: this.state.firstname,
+                    lastname: this.state.lastname,
+                    phone: this.state.phone,
+                    adress: this.state.adress
+                });
 
                 clearValue(); ////Clear values ​​of form elements
 
@@ -102,6 +119,75 @@ class Register extends React.Component {
                     <h1 className='text-center mb-3'>Register Form</h1>
                     <Form onSubmit={this.register} className="mx-auto"> 
                                       
+                        <Form.Group className="mb-3" id="formBasicEmail">
+                            <Form.Label>User Name</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                placeholder="Enter user name" 
+                                id="register_username" 
+                                name='username'
+                                onChange={this.handleChange}
+                                value={this.state.username}
+                                pattern={'[a-zA-Z0-9._]{6,16}$'}
+                                required
+                            />
+                        </Form.Group> 
+                        <div className='d-flex'>
+                            <Form.Group className="mb-3 w-100" id="formBasicEmail">
+                                <Form.Label>First Name</Form.Label>
+                                <Form.Control 
+                                    type="text" 
+                                    placeholder="Enter First Name"   
+                                    id='register_firstname'
+                                    name='firstname'
+                                    onChange={this.handleChange}
+                                    value={this.state.firstname} 
+                                    pattern={'[A-Za-z]{2,12}$'}
+                                />
+                            </Form.Group> 
+
+                            <Form.Group className="mb-3 w-100" id="formBasicEmail">
+                                <Form.Label>Last Name</Form.Label>
+                                <Form.Control 
+                                    type="text" 
+                                    placeholder="Enter Last Name"                           
+                                    id='register_lastname'
+                                    name='lastname'
+                                    onChange={this.handleChange}
+                                    value={this.state.lastname} 
+                                    pattern={'[A-Za-z]{2,12}$'}
+                                />
+                            </Form.Group>    
+                        </div>
+
+                        <div className='d-flex'>
+                            <Form.Group className="mb-3 w-100" id="formBasicEmail">
+                                <Form.Label>Contact No</Form.Label>
+                                <Form.Control 
+                                    type="tel"
+                                    placeholder="Enter tel no" 
+                                    id='register_tel'
+                                    name='phone'
+                                    onChange={this.handleChange}
+                                    value={this.state.phone}
+                                    pattern={'[0-9]{11}$'}
+                                />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3 w-100" id="formBasicEmail">
+                                <Form.Label>Current Adress</Form.Label>
+                                <Form.Control 
+                                    type='text'
+                                    placeholder="Enter City Where You Live"                            
+                                    id='register_adress'
+                                    name='adress'
+                                    onChange={this.handleChange}
+                                    value={this.state.adress} 
+                                    pattern={'[A-Za-z]{4,16}$'}
+                                />
+                            </Form.Group>
+                        </div>
+                        
                         <Form.Group className="mb-3" id="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
                             <Form.Control 
@@ -139,6 +225,9 @@ class Register extends React.Component {
                                 type="password" 
                                 placeholder="Password" 
                                 id='register_password2'
+                                name='password2'
+                                onChange={this.handleChange}
+                                value={this.state.password2}
                                 minLength={8}
                                 maxLength={16}
                                 pattern={'(?=.*[A-Za-z])(?=.*[0-9]){8,20}'}
