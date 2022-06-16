@@ -78,6 +78,9 @@ class Register extends React.Component {
 
                 console.log(userCredential);
 
+                userCredential.user.displayName = this.state.username;
+                userCredential.user.phoneNumber = this.state.phone;
+
                 setDoc(doc(db, "users", auth.currentUser.uid), {
                     username: this.state.username,
                     firstname: this.state.firstname,

@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 import { Row, Col, ListGroup, Card, Tabs, Tab } from "react-bootstrap";
 //import db, {auth} from './Firebase';
-//import { getDoc, doc, collection } from "firebase/firestore";
+//import { getDoc, doc, collection, onSnapshot, query } from "firebase/firestore";
 import ProfileSettings from "./ProfileSettings";
 
 const Account = (props) => {
