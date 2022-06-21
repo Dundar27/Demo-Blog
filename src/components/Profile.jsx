@@ -1,12 +1,32 @@
 import React from "react";
 import { Row, Col, ListGroup, Card, Tabs, Tab } from "react-bootstrap";
-//import db, {auth} from './Firebase';
-//import { getDoc, doc, collection, onSnapshot, query } from "firebase/firestore";
+import db, {auth} from './Firebase';
+import { getDoc, doc, collection, onSnapshot, query } from "firebase/firestore";
 import ProfileSettings from "./ProfileSettings";
 
-const Account = (props) => {
+class Account extends React.Component {
 
-  //const userId = 'EKSQ2cMkjURIvVTYHSy0walRphh2';
+  constructor(props){
+    super(props);
+    this.state= {
+      userData: []
+    }
+  }
+
+  componentDidMount(){
+    this.getUserData();
+  }
+
+  userId = "EKSQ2cMkjURIvVTYHSy0walRphh2";
+
+  async getUserData() {
+    const unsub = onSnapshot(doc(db, "users", "EKSQ2cMkjURIvVTYHSy0walRphh2"), (doc) => {
+      const data = doc.data();
+      this.setState({userData: data});
+    });
+  }
+
+  render(){
 
   return (
     <div id="account-component">
@@ -21,7 +41,7 @@ const Account = (props) => {
                   alt="avatar"
                 />             
                 <h3 className="mt-3">
-                  {}
+                  {this.state.userData}
                 </h3> 
               </div>
               <div>
@@ -142,6 +162,7 @@ const Account = (props) => {
       </div>
     </div>
   );
+  }
 }
 
 
