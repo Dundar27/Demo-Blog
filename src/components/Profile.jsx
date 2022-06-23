@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col, ListGroup, Card, Tabs, Tab } from "react-bootstrap";
-import db, {auth} from './Firebase';
-import { getDoc, doc, collection, onSnapshot, query } from "firebase/firestore";
+import db from './Firebase';
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import ProfileSettings from "./ProfileSettings";
 
 class Account extends React.Component {
@@ -17,13 +17,14 @@ class Account extends React.Component {
     this.getUserData();
   }
 
-  userId = "EKSQ2cMkjURIvVTYHSy0walRphh2";
+  userId = this.props.userID;
 
   async getUserData() {
-    const unsub = onSnapshot(doc(db, "users", "EKSQ2cMkjURIvVTYHSy0walRphh2"), (doc) => {
-      const data = doc.data();
-      this.setState({userData: data});
-    });
+    const response = await onSnapshot(query(collection(db, 'users'), where("id", "==", this.userId)), snapshop => this.setState({userData: snapshop.docs.map(doc => ({
+      id:doc.id,data:doc.data()
+    }))}));
+    
+    console.log(response)
   }
 
   render(){
@@ -41,7 +42,7 @@ class Account extends React.Component {
                   alt="avatar"
                 />             
                 <h3 className="mt-3">
-                  {this.state.userData}
+                  {this.state.userData.map((user)=>(user.data.username))}
                 </h3> 
               </div>
               <div>
@@ -147,7 +148,9 @@ class Account extends React.Component {
           <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
             <Tab eventKey="profile" title="Profile">
 
-              <ProfileSettings />
+              <ProfileSettings 
+                userData={this.state.userData}
+              />
 
             </Tab>
             <Tab eventKey="account" title="Account">

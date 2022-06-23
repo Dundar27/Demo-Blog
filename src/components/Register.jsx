@@ -19,6 +19,7 @@ class Register extends React.Component {
             username:"", 
             firstname:"", 
             lastname:"",
+            birthday:"",
             phone:"",
             adress:""
         }
@@ -86,7 +87,9 @@ class Register extends React.Component {
                     firstname: this.state.firstname,
                     lastname: this.state.lastname,
                     phone: this.state.phone,
-                    adress: this.state.adress
+                    adress: this.state.adress,
+                    birthday: this.state.birthday,
+                    id: auth.currentUser.uid
                 });
 
                 clearValue(); ////Clear values ​​of form elements
@@ -150,19 +153,23 @@ class Register extends React.Component {
                             </Form.Group>    
                         </div>
 
+                        <Form.Group className="mb-3" id="formBasicEmail">
+                            <Form.Label>Age</Form.Label>
+                            <Form.Control 
+                                type="number" 
+                                placeholder="Enter date of birth"                           
+                                id='register_birthday'
+                                name='birthday'
+                                onChange={this.handleChange}
+                                value={this.state.birthday} 
+                                pattern={'[0-9]{4}$'}
+                                minLength={4}
+                                maxLength={4}
+                                required
+                            />
+                        </Form.Group>
+
                         <div className='d-flex'>
-                            <Form.Group className="mb-3 w-100" id="formBasicEmail">
-                                <Form.Label>Contact No</Form.Label>
-                                <Form.Control 
-                                    type="tel"
-                                    placeholder="Enter tel no" 
-                                    id='register_tel'
-                                    name='phone'
-                                    onChange={this.handleChange}
-                                    value={this.state.phone}
-                                    pattern={'[0-9]{11}$'}
-                                />
-                            </Form.Group>
 
                             <Form.Group className="mb-3 w-100 mx-2" id="formBasicEmail">
                                 <Form.Label>Current Adress</Form.Label>
@@ -174,6 +181,19 @@ class Register extends React.Component {
                                     onChange={this.handleChange}
                                     value={this.state.adress} 
                                     pattern={'[A-Za-z]{4,16}$'}
+                                />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3 w-100" id="formBasicEmail">
+                                <Form.Label>Contact No</Form.Label>
+                                <Form.Control 
+                                    type="tel"
+                                    placeholder="Enter tel no" 
+                                    id='register_tel'
+                                    name='phone'
+                                    onChange={this.handleChange}
+                                    value={this.state.phone}
+                                    pattern={'[0-9]{11}$'}
                                 />
                             </Form.Group>
                         </div>

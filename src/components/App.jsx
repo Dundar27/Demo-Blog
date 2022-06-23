@@ -24,7 +24,8 @@ class App extends React.Component {
       populerBlogPosts: [],   
       blogPosts: [],  //To keep data of blog cards
       searchQuery: "", // To filter blog cards
-      user: {}
+      user: {},
+      userID: ""
     }
   }
 
@@ -39,6 +40,7 @@ class App extends React.Component {
     auth.onAuthStateChanged((user)=> {
       if(user){
         this.setState({user})
+        this.setState({userID : user.uid})
       }
       else{
         this.setState({user: null})
@@ -139,7 +141,7 @@ class App extends React.Component {
                   searchProp={this.searchBlogPostProp}
                   userControl={this.state.user}
                 />
-                <Profile/>
+                <Profile userID={this.state.userID}/>
               </div>) :
               (<div>
                 <Navbar/>
