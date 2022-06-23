@@ -4,7 +4,7 @@ import db from './Firebase';
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import ProfileSettings from "./ProfileSettings";
 
-class Account extends React.Component {
+class Profile extends React.Component {
 
   constructor(props){
     super(props);
@@ -17,10 +17,10 @@ class Account extends React.Component {
     this.getUserData();
   }
 
-  userId = this.props.userID;
+  userID = toString(this.props.userID);
 
   async getUserData() {
-    const response = await onSnapshot(query(collection(db, 'users'), where("id", "==", this.userId)), snapshop => this.setState({userData: snapshop.docs.map(doc => ({
+    const response = await onSnapshot(query(collection(db, 'users'), where("id", "==", this.userID)), snapshop => this.setState({userData: snapshop.docs.map(doc => ({
       id:doc.id,data:doc.data()
     }))}));
     
@@ -169,4 +169,4 @@ class Account extends React.Component {
 }
 
 
-export default Account;
+export default Profile;

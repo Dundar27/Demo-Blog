@@ -4,7 +4,7 @@ import {Navbar, Nav, Container} from 'react-bootstrap';
 //import SearchBar from "./SearchBar";
 import RegisterOrLoginButton from './RegisterOrLoginButton';
 
-const Layout = (props) => {
+const navbarLayout = (props) => {
 
     const userControl = props.userControl;
 
@@ -41,4 +41,4 @@ const Layout = (props) => {
     )   
 };
 
-export default Layout;
+export default navbarLayout;

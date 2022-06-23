@@ -1,7 +1,7 @@
 import React from 'react';
 import { auth } from './Firebase';
 
-const Layout = (props) => {
+const Lagout = (props) => {
 
     //Output function
     const logout = (event) => {
@@ -21,4 +21,4 @@ const Layout = (props) => {
     )   
 };
 
-export default Layout;
+export default Lagout;

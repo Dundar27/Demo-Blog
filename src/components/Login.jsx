@@ -29,6 +29,7 @@ class Login extends React.Component{
         signInWithEmailAndPassword(auth,this.state.email,this.state.password).then((u)=>{
             
             successMessage.style.display = "block";  //Make login successful message visible
+            errorMessage.style.display = "none";
 
             //Redirect to login screen after 1.5 seconds
             setTimeout(function(){

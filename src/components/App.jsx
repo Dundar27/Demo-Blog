@@ -39,11 +39,11 @@ class App extends React.Component {
   authListener(){
     auth.onAuthStateChanged((user)=> {
       if(user){
-        this.setState({user})
-        this.setState({userID : user.uid})
+        this.setState({user});
+        this.setState({userID : user.uid});
       }
       else{
-        this.setState({user: null})
+        this.setState({user: null});
       }
     })
   }
