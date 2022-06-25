@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, ListGroup, Card, Tabs, Tab } from "react-bootstrap";
-import db from './Firebase';
+import db, {auth} from './Firebase';
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import ProfileSettings from "./ProfileSettings";
 
@@ -9,22 +9,28 @@ class Profile extends React.Component {
   constructor(props){
     super(props);
     this.state= {
+      userID :"",
       userData: []
     }
   }
 
   componentDidMount(){
+    this.authListener();
     this.getUserData();
   }
 
-  userID = toString(this.props.userID);
+  authListener(){
+    auth.onAuthStateChanged((user)=>{
+      if(user){
+        this.setState({userID: user.uid});
+      }
+    })   
+  }
 
   async getUserData() {
-    const response = await onSnapshot(query(collection(db, 'users'), where("id", "==", this.userID)), snapshop => this.setState({userData: snapshop.docs.map(doc => ({
+    const response = await onSnapshot(query(collection(db, 'users'), where("id", "==", this.state.userID)), snapshop => this.setState({userData: snapshop.docs.map(doc => ({
       id:doc.id,data:doc.data()
     }))}));
-    
-    console.log(response)
   }
 
   render(){

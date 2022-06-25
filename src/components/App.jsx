@@ -24,8 +24,7 @@ class App extends React.Component {
       populerBlogPosts: [],   
       blogPosts: [],  //To keep data of blog cards
       searchQuery: "", // To filter blog cards
-      user: {},
-      userID: ""
+      user: {}
     }
   }
 
@@ -40,7 +39,6 @@ class App extends React.Component {
     auth.onAuthStateChanged((user)=> {
       if(user){
         this.setState({user});
-        this.setState({userID : user.uid});
       }
       else{
         this.setState({user: null});
@@ -53,8 +51,6 @@ class App extends React.Component {
     const response = await onSnapshot(query(collection(db, 'blogs')), snapshop => this.setState({blogPosts: snapshop.docs.map(doc => ({
       id:doc.id,data:doc.data()
     }))}));
-    
-    console.log(response)
   }
 
   // Function to get blog data from firebase database
@@ -62,8 +58,6 @@ class App extends React.Component {
     const response = await onSnapshot(query(collection(db, 'blogs'), orderBy('like'), limit(4)), snapshop => this.setState({populerBlogPosts: snapshop.docs.map(doc => ({
       id:doc.id,data:doc.data()
     }))}));
-    
-    console.log(response)
   }
 
   //Get data in search button
@@ -141,7 +135,7 @@ class App extends React.Component {
                   searchProp={this.searchBlogPostProp}
                   userControl={this.state.user}
                 />
-                <Profile userID={this.state.userID}/>
+                <Profile/>
               </div>) :
               (<div>
                 <Navbar/>
