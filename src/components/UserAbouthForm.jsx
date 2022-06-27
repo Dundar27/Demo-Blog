@@ -24,11 +24,11 @@ class UserAbouthForm extends React.Component{
 
     writeUserData = async(e) =>{
     
-        e.preventDefault();
+        //e.preventDefault();
 
         const user = auth.currentUser.uid;
         const docRef = doc(db, 'users/'+user)
-        
+
         await updateDoc(docRef, {
 
             firstname : this.state.firstname,

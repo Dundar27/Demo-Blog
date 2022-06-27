@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Col, ListGroup, Card, Tabs, Tab } from "react-bootstrap";
-import db, {auth} from './Firebase';
+import db from './Firebase';
+import { auth } from './Firebase';
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import ProfileSettings from "./ProfileSettings";
 
@@ -9,7 +10,7 @@ class Profile extends React.Component {
   constructor(props){
     super(props);
     this.state= {
-      userID :"",
+      userID: "",
       userData: []
     }
   }
@@ -22,10 +23,12 @@ class Profile extends React.Component {
   authListener(){
     auth.onAuthStateChanged((user)=>{
       if(user){
-        this.setState({userID: user.uid});
+        this.setState({userID : user.uid});
       }
-    })   
+    }).bind(this) ;  
   }
+
+  //my_id = "eerRtpnrN1TpmSVL7h8mbjEhCIW2";
 
   async getUserData() {
     const response = await onSnapshot(query(collection(db, 'users'), where("id", "==", this.state.userID)), snapshop => this.setState({userData: snapshop.docs.map(doc => ({
@@ -49,87 +52,109 @@ class Profile extends React.Component {
                 />             
                 <h3 className="mt-3">
                   {this.state.userData.map((user)=>(user.data.username))}
-                </h3> 
+                </h3>
               </div>
               <div>
                 <ListGroup>
 
                   <ListGroup.Item className="ListGroup-Item text-muted text-center">
-                    Activity 
+                    Profile 
                   </ListGroup.Item>
 
-                  <ListGroup.Item className="ListGroup-Item">
-                    <Row>
-                      <Col sm={8}>
-                        <span className="fw-bold">
-                          Followers :
-                        </span>
-                      </Col>
-                      <Col sm={4}>
-                        <span className="text-center">
-                          {}
-                        </span>  
-                      </Col> 
-                    </Row>               
-                  </ListGroup.Item>
+                  {this.state.userData.map(user =>(
+                    <div>
+                      <ListGroup.Item className="ListGroup-Item">
+                        <Row>
+                          <Col sm={6}>
+                            <span className="fw-bold">
+                              First Name :
+                            </span>
+                          </Col>
+                          <Col sm={6}>
+                            <span className="text-center">
+                              {user.data.firstname}
+                            </span>  
+                          </Col> 
+                        </Row>               
+                      </ListGroup.Item>
 
-                  <ListGroup.Item className="ListGroup-Item">
-                    <Row>
-                      <Col sm={8}>
-                        <span className="fw-bold">
-                          Posts :
-                        </span>
-                      </Col> 
-                      <Col sm={4}>
-                        <span className="text-center">
-                          {}
-                        </span>
-                      </Col> 
-                    </Row> 
-                  </ListGroup.Item>
+                      <ListGroup.Item className="ListGroup-Item">
+                        <Row>
+                          <Col sm={6}>
+                            <span className="fw-bold">
+                              Last Name :
+                            </span>
+                          </Col> 
+                          <Col sm={6}>
+                            <span className="text-center">
+                              {user.data.lastname}
+                            </span>
+                          </Col> 
+                        </Row> 
+                      </ListGroup.Item>
 
-                  <ListGroup.Item className="ListGroup-Item">                     
-                    <Row>
-                      <Col sm={8}>
-                        <span className="fw-bold">
-                          Likes :
-                        </span>
-                      </Col> 
-                      <Col sm={4}>
-                        <span className="text-success text-center">
-                          {}
-                        </span>
-                      </Col> 
-                    </Row> 
-                  </ListGroup.Item>
+                      <ListGroup.Item className="ListGroup-Item">                     
+                        <Row>
+                          <Col sm={6}>
+                            <span className="fw-bold">
+                              Age :
+                            </span>
+                          </Col> 
+                          <Col sm={6}>
+                            <span className="text-center">
+                              {user.data.birthday}
+                            </span>
+                          </Col> 
+                        </Row> 
+                      </ListGroup.Item>
 
-                  <ListGroup.Item className="ListGroup-Item">
-                    <Row>
-                      <Col sm={8}>
-                        <span className="fw-bold">
-                          Dislikes :
-                        </span>
-                      </Col> 
-                      <Col sm={4}>
-                        <span className="text-danger text-center">
-                          {}
-                        </span>
-                      </Col> 
-                    </Row> 
-                  </ListGroup.Item>
+                      <ListGroup.Item className="ListGroup-Item">
+                        <Row>
+                          <Col sm={6}>
+                            <span className="fw-bold">
+                              Adress :
+                            </span>
+                          </Col> 
+                          <Col sm={6}>
+                            <span className="text-center">
+                              {user.data.adress}
+                            </span>
+                          </Col> 
+                        </Row> 
+                      </ListGroup.Item>
 
-                  <ListGroup.Item className="ListGroup-Item text-center fw-bold">
-                    <span className="px-2">
-                      Average Rating :
-                    </span>
-                     <br />
-                    <span className="px-2 text-warning bg-secondary">
-                     {}
-                    </span>      
-                  </ListGroup.Item>
+                      <ListGroup.Item className="ListGroup-Item">
+                        <Row>
+                          <Col sm={6}>
+                            <span className="fw-bold">
+                              Contact No :
+                            </span>
+                          </Col> 
+                          <Col sm={6}>
+                            <span className="text-center">
+                              {user.data.phone}
+                            </span>
+                          </Col> 
+                        </Row> 
+                      </ListGroup.Item>
 
+                      <ListGroup.Item className="ListGroup-Item">
+                        <Row>
+                          <Col sm={12}>
+                            <span className="fw-bold">
+                              Mail Adress :
+                            </span>
+                            <br />
+                            <span className="text-center">
+                              {auth.currentUser.email}
+                            </span>
+                          </Col> 
+                        </Row> 
+                      </ListGroup.Item>
+                    </div>
+                  ))}
                 </ListGroup>
-              </div>
+              </div> <br />
               <div className="panel panel-default my-2 text-center">
                   <div className="panel-heading"><h6>Social Media</h6></div>
                   <div className="panel-body">
@@ -160,9 +185,6 @@ class Profile extends React.Component {
 
             </Tab>
             <Tab eventKey="account" title="Account">
-              
-            </Tab>
-            <Tab eventKey="statistics" title="Statistics">
               
             </Tab>
           </Tabs>

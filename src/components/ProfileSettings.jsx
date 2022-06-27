@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Row, Col, Button} from "react-bootstrap";
 import Modal from 'react-bootstrap/Modal';
+import { auth } from './Firebase';
 import UserAbouthForm from './UserAbouthForm';
 
 const ProfileSettings = (props) => {
@@ -12,34 +13,35 @@ const ProfileSettings = (props) => {
             {props.userData.map(user => (
             <div>
                 <div className="responseProfile">
-                <h5>Abouth</h5> <br />
-                <div className='my-1'>
+                    <h5>Abouth</h5> <br />
+                    <div className='my-1'>
                         <p>
-                            Welcome to my profile. Hello, my name is {user.data.firstname}. I am {new Date().getFullYear()-(user.data.birthday) } years old. I live in {user.data.adress}. If you want to contact me, you can use my e-mail address and phone number. Nice the meet you.  
+                            Welcome to my profile. Hello, my name is {user.data.firstname}. I am {new Date().getFullYear()-(user.data.birthday) } years old. I live in {user.data.adress}. If you want to contact me, you can use my social media. Nice the meet you.  
                         </p>
-                        <p id='user_abouth'>
-
+                        <p id='user_message'>
+                            {"user_message"}
                         </p>
-                </div>
+                    </div> 
+                    
                     <Row>
                         <Col sm={5}>
                             <div className='d-flex justify-content-between my-2'>
                                 <div>
                                     <span>First Name :</span>
                                 </div>
-                                <div>{}</div>    
+                                <div>{user.data.firstname}</div>    
                             </div> 
                             <div className='d-flex justify-content-between my-3'>
                                 <div>
                                     <span>Age :</span>
                                 </div>
-                                <div>{}</div>    
+                                <div>{user.data.birthday}</div>    
                             </div> 
                             <div className='d-flex justify-content-between my-3'>
                                 <div>
                                     <span>Mail Adress :</span>
                                 </div>
-                                <div>{}</div>    
+                                <div>{auth.currentUser.email}</div>    
                             </div> 
                         </Col>
 
@@ -50,27 +52,28 @@ const ProfileSettings = (props) => {
                                 <div>
                                     <span>Last Name :</span>
                                 </div>
-                                <div>{}</div>    
+                                <div>{user.data.lastname}</div>    
                             </div> 
                             <div className='d-flex justify-content-between my-3'>
                                 <div>
                                     <span>Current Adress :</span>
                                 </div>
-                                <div>{}</div>    
+                                <div>{user.data.adress}</div>    
                             </div> 
                             <div className='d-flex justify-content-between my-3'>
                                 <div>
                                     <span>Contact No :</span>
                                 </div>
-                                <div>{}</div>    
+                                <div>{user.data.phone}</div>    
                             </div> 
                         </Col>
                     </Row>
                 </div>
+
                 <div className='my-2'>
                     <Button variant="warning" className='px-1' onClick={() => setLgShow(true)}>
-                            <i class="fas fa-edit text-light"></i>
-                            <span className='text-light mx-2'>Edit</span>
+                        <i class="fas fa-edit text-light"></i>
+                        <span className='text-light mx-2'>Edit</span>
                     </Button>
                 </div>
                 <Modal
