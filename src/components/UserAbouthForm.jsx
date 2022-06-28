@@ -5,7 +5,6 @@ import { doc, updateDoc } from "firebase/firestore";
 import { auth } from './Firebase';
 import { updateProfile } from "firebase/auth";
 
-
 class UserAbouthForm extends React.Component{
 
     constructor(props){
@@ -17,37 +16,81 @@ class UserAbouthForm extends React.Component{
             username:"",
             phone:"",
             adress:"",
-            email:"",
-            imgurl: ""
+            birthday:"",
+            imgurl: "",
+            usermessage:""
         }
     }
+
 
     writeUserData = async(e) =>{
     
         //e.preventDefault();
 
         const user = auth.currentUser.uid;
-        const docRef = doc(db, 'users/'+user)
+        const docRef = doc(db, 'users/'+user);
 
-        await updateDoc(docRef, {
+        const values = new Array();
+        values[0] = this.state.firstname;
+        values[1] = this.state.lastname;
+        values[2] = this.state.username;
+        values[3] = this.state.phone;
+        values[4] = this.state.adress;
+        values[5] = this.state.birthday;
+        values[6] = this.state.imgurl;
+        values[7] = this.state.usermessage;
 
-            firstname : this.state.firstname,
-            lastname : this.state.lastname,
-            username: this.state.username,
-            birthday : this.state.birthday,
-            adress : this.state.adress,  
-            phone : this.state.phone,
-            imgurl: this.state.imgurl
-        })
 
-        updateProfile(auth.currentUser, {
-            displayName: this.state.username,
-            phoneNumber: this.state.phone,
-            photoURL: this.state.imgurl
-        })
-
+        for(var i = 0; i<values.length; i++){
+            switch(i){
+                case 0:
+                    if(values[0] !== "" || null){
+                        await updateDoc(docRef, {firstname: values[0]});
+                    }
+                    break;
+                case 1:
+                    if(values[1] !== "" || null){
+                        await updateDoc(docRef, {lastname: values[1]});
+                    }
+                    break;
+                case 2:
+                    if(values[2] !== "" || null){
+                        await updateDoc(docRef, {username: values[2]});
+                        updateProfile(auth.currentUser, {displayName:values[2]});
+                    }
+                    break;
+                case 3:
+                    if(values[3] !== "" || null){
+                        await updateDoc(docRef, {phone: values[3]});
+                        updateProfile(auth.currentUser, {phoneNumber:values[3]});
+                    }
+                    break;
+                case 4:
+                    if(values[4] !== "" || null){
+                        await updateDoc(docRef, {adress: values[4]});
+                    }
+                    break;
+                case 5:
+                    if(values[5] !== "" || null){
+                        await updateDoc(docRef, {birthday: values[5]});
+                    }
+                    break;  
+                case 6:
+                    if(values[6] !== "" || null){
+                        await updateDoc(docRef, {imgurl: values[6]});
+                        updateProfile(auth.currentUser, {photoURL:values[6]});
+                    }
+                    break;  
+                case 7:
+                    if(values[7] !== "" || null){
+                        await updateDoc(docRef, {usermessage: values[7]});
+                    }
+                    break;
+                default:
+                    console.log('error code');                     
+            }
+        }
     }
-
 
     handleChange(e){
         this.setState({
@@ -141,9 +184,21 @@ class UserAbouthForm extends React.Component{
                     </Form.Group>
 
                     <Form.Group className="mb-3" id="formBasicEmail">
+                        <Form.Label>Abouth Me</Form.Label>
+                        <Form.Control 
+                            type="text" 
+                            name='usermessage'
+                            id='user_message'
+                            maxLength={350} 
+                            onChange={this.handleChange}
+                            value={this.state.usermessage}
+                        />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" id="formBasicEmail">
                         <Form.Label>Img Url</Form.Label>
                         <Form.Control 
-                            type="file" 
+                            type='url'
                             name='imgurl'
                             id='user_imgurl' 
                             onChange={this.handleChange}

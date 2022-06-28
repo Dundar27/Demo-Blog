@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Slider from "./Slider";
 import MainSection from "./MainSection";
+import Settings from "./Settings";
 import Profile from "./Profile";
 import Blog from "./Blog";
 import Register from "./Register";
@@ -24,7 +25,7 @@ class App extends React.Component {
       populerBlogPosts: [],   
       blogPosts: [],  //To keep data of blog cards
       searchQuery: "", // To filter blog cards
-      user: {}
+      user: false
     }
   }
 
@@ -41,7 +42,7 @@ class App extends React.Component {
         this.setState({user});
       }
       else{
-        this.setState({user: null});
+        this.setState({user: false});
       }
     })
   }
@@ -109,33 +110,59 @@ class App extends React.Component {
             }/>
 
             <Route path="/register/" element={
-              <div>
+              this.state.user ?
+              (<div>
+                <Navbar
+                  searchProp={this.searchBlogPostProp}
+                  userControl={this.state.user}
+                />
+                <NoPage /> 
+              </div>) : 
+              (<div>
                 <Navbar
                   searchProp={this.searchBlogPostProp}
                   userControl={this.state.user}
                 />
                 <Register /> 
-              </div>
-            }/>
+              </div>)}
+            />
 
             <Route path="/login/" element={
-              <div>
+              this.state.user ?
+              (<div>
+                <Navbar
+                  searchProp={this.searchBlogPostProp}
+                  userControl={this.state.user}
+                />
+                <NoPage /> 
+              </div>) : 
+              (<div>
                 <Navbar
                   searchProp={this.searchBlogPostProp}
                   userControl={this.state.user}
                 />
                 <Login /> 
+              </div>)}
+            />
+
+            <Route path='/profile/' element={
+              <div>
+                <Navbar
+                  searchProp={this.searchBlogPostProp}
+                  userControl={this.state.user}
+                />
+                <Profile userControl={this.state.user}/>
               </div>
             }/>
 
-            <Route path='/profile/' element={
+            <Route path='/profile/settings/' element={
               this.state.user ? 
               (<div>
                 <Navbar
                   searchProp={this.searchBlogPostProp}
                   userControl={this.state.user}
                 />
-                <Profile/>
+                <Settings userControl={this.state.user}/>
               </div>) :
               (<div>
                 <Navbar/>
