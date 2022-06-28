@@ -32,6 +32,7 @@ class Settings extends React.Component {
     <div id="account-component">
       <div className="p-5">
         <Row>
+        {this.state.userData.map(user =>(
           <Col sm={3}>
             <Card>
               <div className="text-center p-3">
@@ -41,7 +42,7 @@ class Settings extends React.Component {
                   alt="avatar"
                 />             
                 <h3 className="mt-3">
-                  {this.state.userData.map((user)=>(user.data.username))}
+                  {user.data.username}
                 </h3>
               </div>
               <div>
@@ -50,8 +51,6 @@ class Settings extends React.Component {
                   <ListGroup.Item className="ListGroup-Item text-muted text-center">
                     Profile 
                   </ListGroup.Item>
-
-                  {this.state.userData.map(user =>(
                     <div>
                       <ListGroup.Item className="ListGroup-Item">
                         <Row>
@@ -142,28 +141,39 @@ class Settings extends React.Component {
                         </Row> 
                       </ListGroup.Item>
                     </div>
-                  ))}
                 </ListGroup>
               </div> <br />
               <div className="panel panel-default my-2 text-center">
                   <div className="panel-heading"><h6>Social Media</h6></div>
                   <div className="panel-body">
-                      <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" className="mx-2">
+                      {(user.data.facebookProfileURL !== "" || null)  ?
+                        (<a href={user.data.facebookProfileURL} target="_blank" rel="noopener noreferrer" className="mx-2">
                           <i className="fab fa-facebook fa-2x"></i>
-                      </a>
-                      <a href="https://www.github.com/" target="_blank" rel="noopener noreferrer" className="mx-2">
-                          <i className="fab fa-github fa-2x"></i>
-                      </a>
-                      <a href="https://www.twitter.com/" target="_blank" rel="noopener noreferrer" className="mx-2">
+                        </a>):(
+                        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" className="mx-2">
+                          <i className="fab fa-facebook fa-2x"></i>
+                        </a>)
+                      }
+                      {(user.data.twitterProfileURL !== "" || null) ?
+                        (<a href={user.data.twitterProfileURL} target="_blank" rel="noopener noreferrer" className="mx-2">
+                            <i className="fab fa-twitter fa-2x"></i>
+                        </a>):(
+                        <a href="https://www.twitter.com/" target="_blank" rel="noopener noreferrer" className="mx-2">
                           <i className="fab fa-twitter fa-2x"></i>
-                      </a>
-                      <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" className="mx-2">
+                        </a>)
+                      }
+                      {(user.data.instagramProfileURL !== "" || null) ?  
+                        (<a href={user.data.instagramProfileURL} target="_blank" rel="noopener noreferrer" className="mx-2">
+                            <i className="fab fa-instagram fa-2x"></i>
+                        </a>):(
+                        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" className="mx-2">
                           <i className="fab fa-instagram fa-2x"></i>
-                      </a>
+                        </a>)
+                      }
                   </div>
               </div>
             </Card>
-          </Col>
+          </Col>))}
 
           <Col sm={9}>
           <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">

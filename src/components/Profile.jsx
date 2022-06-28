@@ -1,9 +1,5 @@
 import React from "react";
-import { Row, Col, ListGroup, Card, Tabs, Tab } from "react-bootstrap";
-import db from './Firebase';
-import { auth } from './Firebase';
-import { collection, onSnapshot, query, where } from "firebase/firestore";
-import ProfileSettings from "./ProfileSettings";
+import { Row, Col, ListGroup, Card } from "react-bootstrap";
 
 class Profile extends React.Component {
 

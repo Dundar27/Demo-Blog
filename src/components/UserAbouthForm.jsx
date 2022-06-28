@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import db from './Firebase';
 import { doc, updateDoc } from "firebase/firestore";
 import { auth } from './Firebase';
@@ -18,19 +18,21 @@ class UserAbouthForm extends React.Component{
             adress:"",
             birthday:"",
             imgurl: "",
-            usermessage:""
+            usermessage:"",
+            facebookProfileURL:"",
+            twitterProfileURL:"",
+            instagramProfileURL:""
         }
     }
 
-
     writeUserData = async(e) =>{
     
-        //e.preventDefault();
+        e.preventDefault();
 
         const user = auth.currentUser.uid;
         const docRef = doc(db, 'users/'+user);
 
-        const values = new Array();
+        const values = new Array(11);
         values[0] = this.state.firstname;
         values[1] = this.state.lastname;
         values[2] = this.state.username;
@@ -39,6 +41,9 @@ class UserAbouthForm extends React.Component{
         values[5] = this.state.birthday;
         values[6] = this.state.imgurl;
         values[7] = this.state.usermessage;
+        values[8] = this.state.facebookProfileURL;
+        values[9] = this.state.twitterProfileURL;
+        values[10] = this.state.instagramProfileURL;
 
 
         for(var i = 0; i<values.length; i++){
@@ -86,10 +91,26 @@ class UserAbouthForm extends React.Component{
                         await updateDoc(docRef, {usermessage: values[7]});
                     }
                     break;
+                case 8:
+                    if(values[8] !== "" || null){
+                        await updateDoc(docRef, {facebookProfileURL: values[8]});
+                    }
+                    break;  
+                case 9:
+                    if(values[9] !== "" || null){
+                        await updateDoc(docRef, {twitterProfileURL: values[9]});
+                    }
+                    break;
+                case 10:
+                    if(values[10] !== "" || null){
+                        await updateDoc(docRef, {instagramProfileURL: values[10]});
+                    }
+                    break;      
                 default:
                     console.log('error code');                     
             }
         }
+        alert("Success Update Profile Datas");
     }
 
     handleChange(e){
@@ -102,86 +123,90 @@ class UserAbouthForm extends React.Component{
         return (
             <div className='p-3 container' id='userabouthform-component'>
                 <Form className="mx-auto" onSubmit={this.writeUserData} > 
+                    <div className='d-flex'>
+                        <Form.Group className="mb-3 w-100 mx-1" id="formBasicEmail">
+                            <Form.Label>First Name</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                placeholder="Enter First Name"   
+                                id='user_firstname'
+                                name='firstname'
+                                onChange={this.handleChange}
+                                value={this.state.firstname} 
+                                pattern={'[A-Za-z]{2,12}$'}
+                            />
+                        </Form.Group> 
 
-                    <Form.Group className="mb-3" id="formBasicEmail">
-                        <Form.Label>First Name</Form.Label>
-                        <Form.Control 
-                            type="text" 
-                            placeholder="Enter First Name"   
-                            id='user_firstname'
-                            name='firstname'
-                            onChange={this.handleChange}
-                            value={this.state.firstname} 
-                            pattern={'[A-Za-z]{2,12}$'}
-                        />
-                    </Form.Group> 
+                        <Form.Group className="mb-3 w-100 mx-1" id="formBasicEmail">
+                            <Form.Label>Last Name</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                placeholder="Enter Last Name"                           
+                                id='user_lastname'
+                                name='lastname'
+                                onChange={this.handleChange}
+                                value={this.state.lastname} 
+                                pattern={'[A-Za-z]{2,12}$'}
+                            />
+                        </Form.Group>
+                    </div>
+                    <div className='d-flex'>
+                        <Form.Group className="mb-3 w-100 mx-1" id="formBasicEmail">
+                            <Form.Label>User Name</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                placeholder="Enter user name"                           
+                                id='user_username'
+                                name='username'
+                                onChange={this.handleChange}
+                                value={this.state.username} 
+                                pattern={'[a-zA-Z0-9._]{6,16}$'}
+                            />
+                        </Form.Group>   
 
-                    <Form.Group className="mb-3" id="formBasicEmail">
-                        <Form.Label>Last Name</Form.Label>
-                        <Form.Control 
-                            type="text" 
-                            placeholder="Enter Last Name"                           
-                            id='user_lastname'
-                            name='lastname'
-                            onChange={this.handleChange}
-                            value={this.state.lastname} 
-                            pattern={'[A-Za-z]{2,12}$'}
-                        />
-                    </Form.Group>
+                        <Form.Group className="mb-3 w-100 mx-1" id="formBasicEmail">
+                            <Form.Label>Age</Form.Label>
+                            <Form.Control 
+                                type="number" 
+                                placeholder="Enter date of birth"                           
+                                id='user_birthday'
+                                name='birthday'
+                                onChange={this.handleChange}
+                                value={this.state.birthday} 
+                                pattern={'[0-9]{4}$'}
+                                minLength={4}
+                                maxLength={4}
+                            />
+                        </Form.Group>  
+                    </div>
 
-                    <Form.Group className="mb-3" id="formBasicEmail">
-                        <Form.Label>User Name</Form.Label>
-                        <Form.Control 
-                            type="text" 
-                            placeholder="Enter user name"                           
-                            id='user_username'
-                            name='username'
-                            onChange={this.handleChange}
-                            value={this.state.username} 
-                            pattern={'[a-zA-Z0-9._]{6,16}$'}
-                        />
-                    </Form.Group>   
+                    <div className='d-flex'>
+                        <Form.Group className="mb-3 w-100 mx-1" id="formBasicEmail">
+                            <Form.Label>Current Adress</Form.Label>
+                            <Form.Control 
+                                type='text'
+                                placeholder="Enter City Where You Live"                            
+                                id='user_adress'
+                                name='adress'
+                                onChange={this.handleChange}
+                                value={this.state.adress} 
+                                pattern={'[A-Za-z]{4,16}$'}
+                            />
+                        </Form.Group>
 
-                    <Form.Group className="mb-3" id="formBasicEmail">
-                        <Form.Label>Age</Form.Label>
-                        <Form.Control 
-                            type="number" 
-                            placeholder="Enter date of birth"                           
-                            id='user_birthday'
-                            name='birthday'
-                            onChange={this.handleChange}
-                            value={this.state.birthday} 
-                            pattern={'[0-9]{4}$'}
-                            minLength={4}
-                            maxLength={4}
-                        />
-                    </Form.Group>  
-
-                    <Form.Group className="mb-3" id="formBasicEmail">
-                        <Form.Label>Current Adress</Form.Label>
-                        <Form.Control 
-                            type='text'
-                            placeholder="Enter City Where You Live"                            
-                            id='user_adress'
-                            name='adress'
-                            onChange={this.handleChange}
-                            value={this.state.adress} 
-                            pattern={'[A-Za-z]{4,16}$'}
-                        />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" id="formBasicEmail">
-                        <Form.Label>Contact No</Form.Label>
-                        <Form.Control 
-                            type="tel"
-                            placeholder="Enter tel no" 
-                            id='user_tel'
-                            name='phone'
-                            onChange={this.handleChange}
-                            value={this.state.phone}
-                            pattern={'[0-9]{11}$'}
-                        />
-                    </Form.Group>
+                        <Form.Group className="mb-3 w-100 mx-1" id="formBasicEmail">
+                            <Form.Label>Contact No</Form.Label>
+                            <Form.Control 
+                                type="tel"
+                                placeholder="Enter tel no" 
+                                id='user_tel'
+                                name='phone'
+                                onChange={this.handleChange}
+                                value={this.state.phone}
+                                pattern={'[0-9]{11}$'}
+                            />
+                        </Form.Group>
+                    </div>
 
                     <Form.Group className="mb-3" id="formBasicEmail">
                         <Form.Label>Abouth Me</Form.Label>
@@ -205,8 +230,46 @@ class UserAbouthForm extends React.Component{
                             value={this.state.imgurl}
                         />
                     </Form.Group>
-            
 
+                    <Row>
+                        <Col sm={4}>
+                            <Form.Group className="mb-3" id="formBasicEmail">
+                                <Form.Label>Facebook Profile Url</Form.Label>
+                                <Form.Control 
+                                    type='url'
+                                    name='facebookProfileURL'
+                                    id='user_socialURL1' 
+                                    onChange={this.handleChange}
+                                    value={this.state.facebookProfileURL}
+                                />
+                            </Form.Group>
+                        </Col>
+                        <Col sm={4}>
+                            <Form.Group className="mb-3" id="formBasicEmail">
+                                <Form.Label>Twitter Profile Url</Form.Label>
+                                <Form.Control 
+                                    type='url'
+                                    name='twitterProfileURL'
+                                    id='user_socialURL2' 
+                                    onChange={this.handleChange}
+                                    value={this.state.twitterProfileURL}
+                                />
+                            </Form.Group>
+                        </Col>
+                        <Col sm={4}>
+                            <Form.Group className="mb-3" id="formBasicEmail">
+                                <Form.Label>İnstagram Profile Url</Form.Label>
+                                <Form.Control 
+                                    type='url'
+                                    name='instagramProfileURL'
+                                    id='user_socialURL3' 
+                                    onChange={this.handleChange}
+                                    value={this.state.instagramProfileURL}
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+            
                     <div className='d-flex'>
                         <Button className='w-100' variant="outline-success" type="submit">
                             Save

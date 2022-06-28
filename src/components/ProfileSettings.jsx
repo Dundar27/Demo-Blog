@@ -15,9 +15,12 @@ const ProfileSettings = (props) => {
                 <div className="responseProfile">
                     <h5>Abouth</h5> <br />
                     <div className='my-1'>
-                        <p id='user_message'>
+                        <p>
                             Welcome to my profile. Hello, my name is {user.data.firstname}. I am {new Date().getFullYear()-(user.data.birthday) } years old. I live in {user.data.adress}. If you want to contact me, you can use my social media. Nice the meet you.  
-                        </p>
+                        </p> <br />
+                        <p id='user_message'>
+                            {user.data.usermessage}
+                        </p> <br />
                     </div> 
                     
                     <Row>

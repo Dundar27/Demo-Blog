@@ -13,7 +13,7 @@ const RegisterOrLoginButton = (props) => {
     }else{
         return (
             <div id='registerorloginbutton-component'>                   
-                <Link className="btn btn-outline-success" to="/register">Sign up!</Link>
+                <Link className="btn btn-outline-success" to="/register">Sign Up or Login</Link>
             </div>
         ) 
     }
