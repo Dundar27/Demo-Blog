@@ -16,10 +16,16 @@ const navbarLayout = (props) => {
 
                         <Nav className="me-auto my-2 my-lg-0" navbarScroll>
                             
-                            <Link to="/profile/" className="nav-link text-light">
+                            {userControl ?
+                            (<Link to="/profile/" className="nav-link text-light">
                                 Profile
-                            </Link>
-
+                            </Link>) :
+                            
+                            (<Link to="/profiles/" className="nav-link text-light">
+                                Profiles
+                            </Link>)}
+                            
+                            
                             <Link to="/" className="nav-link text-light">
                                 Home
                             </Link> 

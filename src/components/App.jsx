@@ -146,12 +146,23 @@ class App extends React.Component {
             />
 
             <Route path='/profile/' element={
-              <div>
+              this.state.user ? 
+              (<div>
                 <Navbar
                   searchProp={this.searchBlogPostProp}
                   userControl={this.state.user}
                 />
                 <Profile userControl={this.state.user}/>
+              </div>) :
+              (<div>
+                <Navbar/>
+                <Login/>
+              </div>)
+            }/>
+
+            <Route path='/profiles/' element={
+              <div>
+                <NoPage/>
               </div>
             }/>
 
@@ -166,7 +177,7 @@ class App extends React.Component {
               </div>) :
               (<div>
                 <Navbar/>
-                <Register/>
+                <Login/>
               </div>)}
             /> 
 
