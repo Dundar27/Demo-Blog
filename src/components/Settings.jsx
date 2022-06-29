@@ -18,8 +18,6 @@ class Settings extends React.Component {
     this.getUserData();
   }
 
-  //my_id = "eerRtpnrN1TpmSVL7h8mbjEhCIW2";
-
   async getUserData() {
     const response = await onSnapshot(query(collection(db, 'users'), where("id", "==", this.props.userControl.uid)), snapshop => this.setState({userData: snapshop.docs.map(doc => ({
       id:doc.id,data:doc.data()
@@ -36,11 +34,17 @@ class Settings extends React.Component {
           <Col sm={3}>
             <Card>
               <div className="text-center p-3">
-                <img
+              {(user.data.imgurl !== "" || null) ? 
+                (<img
+                  src={user.data.imgurl}
+                  className="avatar w-100"
+                  alt="avatar"
+                />):(
+                  <img
                   src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"
                   className="avatar w-100"
                   alt="avatar"
-                />             
+                />)}            
                 <h3 className="mt-3">
                   {user.data.username}
                 </h3>
@@ -91,7 +95,7 @@ class Settings extends React.Component {
                           </Col> 
                           <Col sm={6}>
                             <span className="text-center">
-                              {user.data.birthday}
+                              {new Date().getFullYear()-(user.data.birthday)}
                             </span>
                           </Col> 
                         </Row> 

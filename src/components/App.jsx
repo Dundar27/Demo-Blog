@@ -86,7 +86,6 @@ class App extends React.Component {
             <Route path="/" exact element={
               <div>
                 <Navbar 
-                  searchProp={this.searchBlogPostProp}
                   userControl={this.state.user}
                 />
                 <Slider />
@@ -98,11 +97,10 @@ class App extends React.Component {
             <Route path="/blog/" element={
               <div>
                 <Navbar 
-                  searchProp={this.searchBlogPostProp}
                   userControl={this.state.user}
                 />
                 <Blog 
-                  getPopulerBlogPosts={filtered}
+                  getBlogPosts={filtered}
                   searchProp={this.searchBlogPostProp}
                 />
                 <Footer userControl={this.state.user}/>
@@ -113,14 +111,12 @@ class App extends React.Component {
               this.state.user ?
               (<div>
                 <Navbar
-                  searchProp={this.searchBlogPostProp}
                   userControl={this.state.user}
                 />
                 <NoPage /> 
               </div>) : 
               (<div>
                 <Navbar
-                  searchProp={this.searchBlogPostProp}
                   userControl={this.state.user}
                 />
                 <Register /> 
@@ -131,14 +127,12 @@ class App extends React.Component {
               this.state.user ?
               (<div>
                 <Navbar
-                  searchProp={this.searchBlogPostProp}
                   userControl={this.state.user}
                 />
                 <NoPage /> 
               </div>) : 
               (<div>
                 <Navbar
-                  searchProp={this.searchBlogPostProp}
                   userControl={this.state.user}
                 />
                 <Login /> 
@@ -149,10 +143,12 @@ class App extends React.Component {
               this.state.user ? 
               (<div>
                 <Navbar
-                  searchProp={this.searchBlogPostProp}
                   userControl={this.state.user}
                 />
-                <Profile userControl={this.state.user}/>
+                <Profile 
+                  userControl={this.state.user}
+                  searchProp={this.searchBlogPostProp}
+                />
               </div>) :
               (<div>
                 <Navbar/>
@@ -170,7 +166,6 @@ class App extends React.Component {
               this.state.user ? 
               (<div>
                 <Navbar
-                  searchProp={this.searchBlogPostProp}
                   userControl={this.state.user}
                 />
                 <Settings userControl={this.state.user}/>

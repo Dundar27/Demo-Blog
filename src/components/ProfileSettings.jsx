@@ -35,7 +35,7 @@ const ProfileSettings = (props) => {
                                 <div>
                                     <span>Age :</span>
                                 </div>
-                                <div>{user.data.birthday}</div>    
+                                <div>{new Date().getFullYear()-(user.data.birthday)}</div>    
                             </div> 
                             <div className='d-flex justify-content-between my-3'>
                                 <div>

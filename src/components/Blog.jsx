@@ -26,7 +26,7 @@ class Blog extends React.Component{
                     
                 </div>
                 <Row>
-                    {this.props.getPopulerBlogPosts.map((blog)=>(
+                    {this.props.getBlogPosts.map((blog)=>(
                         <Col sm={4}>
                             <Card className='my-4' id={blog.id}>         
                                 <Card.Header className='text-center p-3'>

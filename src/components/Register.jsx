@@ -89,7 +89,11 @@ class Register extends React.Component {
                     phone: this.state.phone,
                     adress: this.state.adress,
                     birthday: this.state.birthday,
-                    id: auth.currentUser.uid
+                    id: auth.currentUser.uid,
+                    imgurl: "",
+                    facebookProfileURL:"",
+                    twitterProfileURL:"",
+                    instagramProfileURL:""
                 });
 
                 clearValue(); ////Clear values ​​of form elements
