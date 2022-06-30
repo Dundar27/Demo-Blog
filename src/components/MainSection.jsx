@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Card, Row, Col, ListGroup, Alert } from "react-bootstrap";
+import BlogPosts from "./BlogPosts";
 
 const MainSection = (props) => {  
     
@@ -8,40 +9,9 @@ const MainSection = (props) => {
         <div className='p-3' id='blogs-component'>
             <Row className='mt-1'>
                 <Col sm={8} className='row p-2'>
-                    {props.getPopulerBlogPosts.map((blog)=>(
-                        <Col sm={6}>
-                            <Card className='card m-3 p-0' id={blog.id}>
-                                <Card.Body className="conteiner">
-                                    <Card.Img src={blog.data.image} className="d-block w-100" alt="Blog image_"/>
-                                    <div className='mt-5'> 
-                                        <Card.Title className='text-center'>
-                                            {blog.data.title}
-                                        </Card.Title>
-                                        <Card.Text className='p-3'>
-                                            {blog.data.description}
-                                        </Card.Text>        
-                                    </div> 
-                                    <Link to={'blog/post-'+blog.id} className="btn btn-outline-primary btn-rounded">Read the Blog Post</Link>
-                                </Card.Body>
-                                <Card.Footer className='mt-2'>  
-                                    <div className='d-flex justify-content-between'>
-                                        <div>
-                                            Writer: {blog.data.writer}
-                                        </div> 
-                                        <div className='d-flex justify-content-between'>
-                                            <button className='mx-1 btn bg-success text-light'>
-                                                <i class="fa fa-thumbs-up"></i> <span >{blog.data.like}</span>
-                                            </button>
-                                            <button className='mx-1 btn bg-danger text-light'>
-                                                <i class="fa fa-thumbs-down"></i> <span >{blog.data.dislike}</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </Card.Footer>    
-                            </Card>
-                        </Col>
-                    ))}
+                    <BlogPosts BlogPosts={props.getPopulerBlogPosts} />
                 </Col>
+                
                 <Col sm={4} className='p-2 my-3'>
                     <Card>
                         <Card.Header>
