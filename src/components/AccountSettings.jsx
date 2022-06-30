@@ -1,16 +1,17 @@
 import React from "react";
-import db, { auth } from './Firebase';
+import db from './Firebase';
+import { auth } from './Firebase';
 import { updateEmail, updatePassword, deleteUser } from "firebase/auth";
 import { doc, deleteDoc, collection, query, where } from "firebase/firestore";
-import { Tab, Row, Col, Nav, Form, Button } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 
 
 class ProfileSettings extends React.Component {
 
     constructor(props){
         super(props);
-        this.updateEmail = this.updateEmail.bind(this);
-        this.updatePassword = this.updatePassword.bind(this);
+        this.newEmail = this.newEmail.bind(this);
+        this.newPassword = this.newPassword.bind(this);
         this.deleteAccount = this.deleteAccount.bind(this);
         this.handleChange = this.handleChange.bind(this);
         
@@ -20,20 +21,22 @@ class ProfileSettings extends React.Component {
         }
     }
 
-    updateEmail = async(e) => {
+    user = auth.currentUser;
+
+    newEmail = async(e) => {
         e.preventDefault();
 
-        updateEmail(auth.currentUser, this.state.email).then(() => {
+        updateEmail(this.user, this.state.email).then(() => {
             alert("Transaction successful");
         }).catch((error) => {
             alert("Operation failed");
         });
     }
 
-    updatePassword = async(e) => {
+    newPassword = async(e) => {
         e.preventDefault();
 
-        updatePassword(auth.currentUser, this.state.password).then(() => {
+        updatePassword(this.user, this.state.password).then(() => {
             alert("Transaction successful");
         }).catch((error) => {
             alert("Operation failed");
@@ -41,10 +44,10 @@ class ProfileSettings extends React.Component {
     }
 
     deleteAccount = async(e) => {
-        deleteUser(auth.currentUser).then(()=> {
+        deleteUser(this.user).then(()=> {
             
-            deleteDoc(doc(db, "users", auth.currentUser.uid));
-            deleteDoc(query(collection(db, 'blogs'), where("writer", "==", auth.currentUser.displayName)));
+            deleteDoc(doc(db, "users", this.user.uid));
+            deleteDoc(query(collection(db, 'blogs'), where("writer", "==", this.user.displayName)));
             
             alert("Transaction successful");
 
@@ -66,7 +69,7 @@ class ProfileSettings extends React.Component {
     render (){
         return (
             <div className="p-3">
-                <Form onSubmit={this.updateEmail}>
+                <Form onSubmit={this.newEmail}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Update email address</Form.Label>
                         <Form.Control 
@@ -87,7 +90,7 @@ class ProfileSettings extends React.Component {
                     </Button>
                 </Form>
 
-                <Form className="my-4" onSubmit={this.updatePassword}>
+                <Form className="my-4" onSubmit={this.newPassword}>
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Update password</Form.Label>
                         <Form.Control 
