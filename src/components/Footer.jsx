@@ -7,7 +7,7 @@ const Footer = (props) => {
     const userControl = props.userControl;
 
     return(
-        <footer className="text-center text-white bg-dark" id='footer-component'>
+        <footer className="text-center text-white bg-dark">
             <div className="container p-3">    
                 <RegisterOrLoginButton user={userControl}/>
             </div>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Outlet, Link} from 'react-router-dom';
 import {Navbar, Nav, Container} from 'react-bootstrap';
-//import SearchBar from "./SearchBar";
 import RegisterOrLoginButton from './RegisterOrLoginButton';
+import SettingsButton from './SettingsButton';
 
 const navbarLayout = (props) => {
 
@@ -14,17 +14,7 @@ const navbarLayout = (props) => {
                 <Container fluid>
                     <Navbar.Collapse id="navbarScroll">
 
-                        <Nav className="me-auto my-2 my-lg-0" navbarScroll>
-                            
-                            {userControl ?
-                            (<Link to="/profile/" className="nav-link text-light">
-                                Profile
-                            </Link>) :
-                            
-                            (<Link to="/profiles/" className="nav-link text-light">
-                                Profiles
-                            </Link>)}
-                            
+                        <Nav className="me-auto my-2 my-lg-0" navbarScroll>                   
                             
                             <Link to="/" className="nav-link text-light">
                                 Home
@@ -32,10 +22,19 @@ const navbarLayout = (props) => {
                             <Link to="/blog/" className="nav-link text-light">
                                 Blog
                             </Link> 
+                            
+                            {userControl ?
+                            (<Link to="/profile/" className="nav-link text-light">
+                                Profile
+                            </Link>) :
+                            
+                            (<Link to="/writers/" className="nav-link text-light">
+                                Writers
+                            </Link>)}
                         </Nav>
 
                         <div className='d-flex'>
-
+                            <SettingsButton user={userControl} />
                             <RegisterOrLoginButton user={userControl}/>             
                         </div>
                     </Navbar.Collapse>

@@ -44,13 +44,11 @@ class Profile extends React.Component {
           </Col>
           <Col sm={9}>
               <div>
-                <h2>Abouth Me</h2> <br />
+                <h4>Abouth Me</h4> <br />
                 <p>{this.state.userData.map(user =>(user.data.usermessage))}</p> <br />
               </div>
               <div>
-                <h2>My Blog Posts</h2> <hr />
-
-                <SearchBar searchProp={this.props.searchProp}/>
+                <h4>My Blog Posts</h4> <hr />
 
                 <BlogPosts BlogPosts={this.state.userBlogPosts} />
 

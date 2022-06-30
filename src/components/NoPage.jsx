@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const NoPage = () => {
     return (
-        <div id='nopage-component'>
+        <div>
             <div className="my-auto py-5">
                 <div className="text-center py-5">
                     <h1 className="display-1">404</h1>

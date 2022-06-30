@@ -102,7 +102,7 @@ class Register extends React.Component {
 
                 //Redirect to login screen after 1.5 seconds
                 setTimeout(function(){
-                    window.location = "/account/";
+                    window.location = "/";
                 }, 1500);
 
             }).catch((err)=>{

@@ -17,8 +17,6 @@ const RegisterOrLoginButton = (props) => {
             </div>
         ) 
     }
-    
-    
 }
 
 export default RegisterOrLoginButton;

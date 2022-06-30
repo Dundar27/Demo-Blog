@@ -9,15 +9,12 @@ const ProfileSettings = (props) => {
     const [lgShow, setLgShow] = useState(false);
 
     return (
-        <div className='p-3' id='profilesettings-component'>
+        <div className='p-3'>
             {props.userData.map(user => (
             <div>
                 <div className="responseProfile">
                     <h5>Abouth</h5> <br />
                     <div className='my-1'>
-                        <p>
-                            Welcome to my profile. Hello, my name is {user.data.firstname}. I am {new Date().getFullYear()-(user.data.birthday) } years old. I live in {user.data.adress}. If you want to contact me, you can use my social media. Nice the meet you.  
-                        </p> <br />
                         <p id='user_message'>
                             {user.data.usermessage}
                         </p> <br />
