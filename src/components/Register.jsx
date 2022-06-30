@@ -244,7 +244,7 @@ class Register extends React.Component {
                                 value={this.state.password}
                                 minLength={8}
                                 maxLength={16}
-                                pattern={'(?=.*[A-Za-z])(?=.*[0-9]){8,20}'}
+                                pattern={'(?=.*[A-Za-z])(?=.*[0-9]){8,16}'}
                                 required/>
                                 <span className='form-text'>*Must contain at least one uppercase letter, lowercase letter, and number.</span>
                             </Form.Group>

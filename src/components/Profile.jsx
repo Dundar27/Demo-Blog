@@ -1,8 +1,7 @@
 import React from "react";
-import { Row, Col, ListGroup, Card } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import db from './Firebase';
 import { collection, onSnapshot, query, where } from "firebase/firestore";
-import SearchBar from './SearchBar';
 import BlogPosts from "./BlogPosts";
 import ProfileCard from "./ProfileCard";
 

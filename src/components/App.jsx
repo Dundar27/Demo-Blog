@@ -168,7 +168,9 @@ class App extends React.Component {
                 <Navbar
                   userControl={this.state.user}
                 />
-                <Settings userControl={this.state.user}/>
+                <Settings 
+                  userControl={this.state.user}
+                />
               </div>) :
               (<div>
                 <Navbar/>
