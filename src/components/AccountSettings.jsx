@@ -20,8 +20,6 @@ class ProfileSettings extends React.Component {
         }
     }
 
-
-
     updateEmail = async(e) => {
         e.preventDefault();
 
@@ -68,88 +66,64 @@ class ProfileSettings extends React.Component {
     render (){
         return (
             <div className="p-3">
-                <Tab.Container id="left-tabs-example" defaultActiveKey="first">
-                    <Row>
-                        <Col sm={3}>
-                            <Nav variant="pills" className="flex-column">
-                                <Nav.Item>
-                                    <Nav.Link eventKey="first">Account Settings</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <Nav.Link eventKey="second">Other Settings</Nav.Link>
-                                </Nav.Item>
-                            </Nav>
-                        </Col>
-                        <Col sm={9}>
-                            <Tab.Content>
-                                <Tab.Pane eventKey="first">
-                                    <Form onSubmit={this.updateEmail}>
-                                        <Form.Group className="mb-3" controlId="formBasicEmail">
-
-                                            <Form.Label>Update email address</Form.Label>
-                                            <Form.Control 
-                                                type="email" 
-                                                placeholder="Enter email" 
-                                                name="email"
-                                                onChange={this.handleChange}
-                                                value={this.state.email}
-                                            />
+                <Form onSubmit={this.updateEmail}>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>Update email address</Form.Label>
+                        <Form.Control 
+                            type="email" 
+                            placeholder="Enter email" 
+                            name="email"
+                            onChange={this.handleChange}
+                            value={this.state.email}
+                        />
                                             
-                                            <Form.Text className="text-muted">
-                                                Make sure you spelled correctly
-                                            </Form.Text>
-                                        </Form.Group>
+                        <Form.Text className="text-muted">
+                            Make sure you spelled correctly
+                        </Form.Text>
+                    </Form.Group>
 
-                                        <Button variant="warning" type="submit" className="text-light">
-                                            Submit
-                                        </Button>
-                                    </Form>
+                    <Button variant="warning" type="submit" className="text-light">
+                        Submit
+                    </Button>
+                </Form>
 
-                                    <Form className="my-4" onSubmit={this.updatePassword}>
-                                        <Form.Group className="mb-3" controlId="formBasicPassword">
-                                            <Form.Label>Update password</Form.Label>
-                                            <Form.Control 
-                                                type="password" 
-                                                placeholder="Password"
-                                                name="password"
-                                                onChange={this.handleChange}
-                                                value={this.state.password}
-                                                minLength={8}
-                                                maxLength={16}
-                                                pattern={'(?=.*[A-Za-z])(?=.*[0-9]){8,16}'} 
-                                            />
+                <Form className="my-4" onSubmit={this.updatePassword}>
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Label>Update password</Form.Label>
+                        <Form.Control 
+                            type="password" 
+                            placeholder="Password"
+                            name="password"
+                            onChange={this.handleChange}
+                            value={this.state.password}
+                            minLength={8}
+                            maxLength={16}
+                            pattern={'(?=.*[A-Za-z])(?=.*[0-9]){8,16}'} 
+                        />
 
-                                            <Form.Text className="text-muted">
-                                                Make sure you spelled correctly
-                                            </Form.Text>
-                                        </Form.Group>
+                        <Form.Text className="text-muted">
+                            Make sure you spelled correctly
+                        </Form.Text>
+                    </Form.Group>
 
-                                        <Button variant="warning" type="submit" className="text-light">
-                                            Submit
-                                        </Button>
-                                    </Form> <hr />
+                    <Button variant="warning" type="submit" className="text-light">
+                        Submit
+                    </Button>
+                </Form> <hr />
 
-                                    <Form className="my-5" onSubmit={this.deleteAccount}>
-                                        <Form.Label className="text-danger">
-                                            Permanently delete my account
-                                        </Form.Label> <br />
+                <Form className="my-5" onSubmit={this.deleteAccount}>
+                    <Form.Label className="text-danger">
+                        Permanently delete my account
+                    </Form.Label> <br />
 
-                                        <Form.Text className="text-muted text-danger">
-                                            (When your account is deleted, your blog posts are also deleted. )
-                                        </Form.Text> <br /> <br />
+                    <Form.Text className="text-muted text-danger">
+                        (When your account is deleted, your blog posts are also deleted. )
+                    </Form.Text> <br /> <br />
                                         
-                                        <Button variant="danger" type="submit">
-                                            Delete Account
-                                        </Button>
-                                    </Form>
-                                </Tab.Pane>
-                                <Tab.Pane eventKey="second">
-                                    
-                                </Tab.Pane>
-                            </Tab.Content>
-                        </Col>
-                    </Row>
-                </Tab.Container>
+                    <Button variant="danger" type="submit">
+                        Delete Account
+                    </Button>
+                </Form>
             </div>
         )
     }
