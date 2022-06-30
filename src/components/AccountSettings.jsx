@@ -11,6 +11,7 @@ class ProfileSettings extends React.Component {
         super(props);
         this.updateEmail = this.updateEmail.bind(this);
         this.updatePassword = this.updatePassword.bind(this);
+        this.deleteAccount = this.deleteAccount.bind(this);
         this.handleChange = this.handleChange.bind(this);
         
         this.state={
@@ -18,6 +19,8 @@ class ProfileSettings extends React.Component {
             password:""
         }
     }
+
+
 
     updateEmail = async(e) => {
         e.preventDefault();
@@ -102,7 +105,7 @@ class ProfileSettings extends React.Component {
                                         </Button>
                                     </Form>
 
-                                    <Form className="my-5" onSubmit={this.updatePassword}>
+                                    <Form className="my-4" onSubmit={this.updatePassword}>
                                         <Form.Group className="mb-3" controlId="formBasicPassword">
                                             <Form.Label>Update password</Form.Label>
                                             <Form.Control 
@@ -124,20 +127,20 @@ class ProfileSettings extends React.Component {
                                         <Button variant="warning" type="submit" className="text-light">
                                             Submit
                                         </Button>
-                                    </Form>
+                                    </Form> <hr />
 
                                     <Form className="my-5" onSubmit={this.deleteAccount}>
                                         <Form.Label className="text-danger">
                                             Permanently delete my account
                                         </Form.Label> <br />
+
+                                        <Form.Text className="text-muted text-danger">
+                                            (When your account is deleted, your blog posts are also deleted. )
+                                        </Form.Text> <br /> <br />
                                         
                                         <Button variant="danger" type="submit">
                                             Delete Account
-                                        </Button> <br />
-
-                                        <Form.Text className="text-muted text-danger">
-                                                When your account is deleted, your blog posts are also deleted.
-                                        </Form.Text>
+                                        </Button>
                                     </Form>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="second">
