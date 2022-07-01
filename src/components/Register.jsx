@@ -175,7 +175,7 @@ class Register extends React.Component {
 
                         <div className='d-flex'>
 
-                            <Form.Group className="mb-3 w-100 mx-2" id="formBasicEmail">
+                            <Form.Group className="mb-3 w-100" id="formBasicEmail">
                                 <Form.Label>Current Adress</Form.Label>
                                 <Form.Control 
                                     type='text'
@@ -188,7 +188,7 @@ class Register extends React.Component {
                                 />
                             </Form.Group>
 
-                            <Form.Group className="mb-3 w-100" id="formBasicEmail">
+                            <Form.Group className="mb-3 w-100 mx-2" id="formBasicEmail">
                                 <Form.Label>Contact No</Form.Label>
                                 <Form.Control 
                                     type="tel"

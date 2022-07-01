@@ -86,7 +86,9 @@ class Login extends React.Component{
                             />
                         </Form.Group>
 
-                        <div className='d-flex'>
+                        <Link to={"/passwordReset/"} className="w-100 text-primary">Forget Password</Link>
+
+                        <div className='d-flex my-2'>
                             <Button className='w-100' variant="outline-success" type="submit">
                                 Login
                             </Button>
