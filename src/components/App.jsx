@@ -11,6 +11,7 @@ import Blog from "./Blog";
 import Register from "./Register";
 import Login from "./Login";
 import NoPage from "./NoPage";
+import PasswordReset from "./PasswordReset";
 //Style files
 import "./style.css"
 //Database functions
@@ -138,6 +139,14 @@ class App extends React.Component {
                 <Login /> 
               </div>)}
             />
+
+            <Route path="/passwordReset/" element={
+              <div>
+                <PasswordReset/>
+              </div>
+            } >
+
+            </Route>
 
             <Route path='/profile/' element={
               this.state.user ? 

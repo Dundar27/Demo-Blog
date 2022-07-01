@@ -35,7 +35,7 @@ class passwordReset extends React.Component{
     render(){
         return(
             <div className="container">
-                <Form className="mx-auto" onSubmit={this.sendMail} >
+                <Form onSubmit={this.sendMail} >
                     <Form.Group className="mb-3" id="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control 
