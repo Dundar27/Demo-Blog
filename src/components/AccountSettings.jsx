@@ -1,8 +1,8 @@
 import React from "react";
-import db from './Firebase';
+//import db from './Firebase';
 import { auth } from './Firebase';
 import { updateEmail, updatePassword, deleteUser } from "firebase/auth";
-import { doc, deleteDoc, collection, query, where } from "firebase/firestore";
+//import { doc, deleteDoc, collection, query, where } from "firebase/firestore";
 import { Form, Button } from "react-bootstrap";
 
 
@@ -29,7 +29,8 @@ class ProfileSettings extends React.Component {
         updateEmail(this.user, this.state.email).then(() => {
             alert("Transaction successful");
         }).catch((error) => {
-            alert("Operation failed");
+            alert(error.code);
+            alert(error.message);
         });
     }
 
@@ -39,25 +40,24 @@ class ProfileSettings extends React.Component {
         updatePassword(this.user, this.state.password).then(() => {
             alert("Transaction successful");
         }).catch((error) => {
-            alert("Operation failed");
+            alert(error.code);
+            alert(error.message);
         });
     }
 
     deleteAccount = async(e) => {
-        deleteUser(this.user).then(()=> {
-            
-            deleteDoc(doc(db, "users", this.user.uid));
-            deleteDoc(query(collection(db, 'blogs'), where("writer", "==", this.user.displayName)));
-            
-            alert("Transaction successful");
+        e.preventDefault();
 
-            setTimeout(function(){
-                window.location = "/";
-            }, 500);
+        deleteUser(this.user).then(()=> {
+
+            alert("Transaction successful"); 
 
         }).catch((error) => {
-            alert("Operation failed");
-        });
+            alert(error.code);
+            alert(error.message);
+        }); 
+
+        window.location = "/";
     }
 
     handleChange(e){

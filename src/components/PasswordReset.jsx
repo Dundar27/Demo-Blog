@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Button } from 'react-bootstrap';
 import { sendPasswordResetEmail } from "firebase/auth";
-import auth from "./Firebase";
+import { auth } from "./Firebase";
 
 class passwordReset extends React.Component{
 
@@ -12,9 +12,12 @@ class passwordReset extends React.Component{
         this.state={
             email:""
         }
-    }
+    }  
 
-    sendMail(){
+    sendMail = async(e) => {
+
+        e.preventDefault();
+
         sendPasswordResetEmail(auth, this.state.email)
         .then(() => {
             setTimeout(function(){
@@ -22,7 +25,8 @@ class passwordReset extends React.Component{
             }, 500);
         })
         .catch((error) => {
-            alert("Operation failed");
+            alert(error.code);
+            alert(error.message);
         });
     }
 
@@ -34,8 +38,9 @@ class passwordReset extends React.Component{
 
     render(){
         return(
-            <div className="container">
-                <Form onSubmit={this.sendMail} >
+            <div className="container my-5" id="passwordreset">
+                <h2>Password Reset</h2> <br />
+                <Form onSubmit={this.sendMail}>
                     <Form.Group className="mb-3" id="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control 

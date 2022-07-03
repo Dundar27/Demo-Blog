@@ -100,15 +100,15 @@ class Register extends React.Component {
 
                 successMessage.style.display = "block";  //Make registration successful message visible
 
-                //Redirect to login screen after 1.5 seconds
+                //Redirect to login screen after 1 seconds
                 setTimeout(function(){
                     window.location = "/";
-                }, 1500);
+                }, 1000);
 
             }).catch((err)=>{
                 errorEmail.style.display = "block";
                 console.log(err);
-            })
+            });
             
         }else{
             errorMessage.style.display = "block"; //Show error message if there is an error
