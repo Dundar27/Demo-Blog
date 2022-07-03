@@ -1,8 +1,8 @@
 import React from "react";
-//import db from './Firebase';
+import db from './Firebase';
 import { auth } from './Firebase';
 import { updateEmail, updatePassword, deleteUser } from "firebase/auth";
-//import { doc, deleteDoc, collection, query, where } from "firebase/firestore";
+import { doc, deleteDoc, collection, query, where } from "firebase/firestore";
 import { Form, Button } from "react-bootstrap";
 
 
@@ -22,6 +22,8 @@ class ProfileSettings extends React.Component {
     }
 
     user = auth.currentUser;
+    blogsRef = query(collection(db ,"blogs"), where("writer", "==", this.user.displayName));
+    userRef = doc(db, "users", this.user.uid);
 
     newEmail = async(e) => {
         e.preventDefault();
@@ -50,14 +52,15 @@ class ProfileSettings extends React.Component {
 
         deleteUser(this.user).then(()=> {
 
+            deleteDoc(this.blogsRef);
+            deleteDoc(this.userRef);
+
             alert("Transaction successful"); 
 
         }).catch((error) => {
             alert(error.code);
             alert(error.message);
         }); 
-
-        window.location = "/";
     }
 
     handleChange(e){

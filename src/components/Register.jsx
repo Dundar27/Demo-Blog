@@ -139,7 +139,7 @@ class Register extends React.Component {
                                     name='firstname'
                                     onChange={this.handleChange}
                                     value={this.state.firstname} 
-                                    pattern={'[A-Za-z]{2,12}$'}
+                                    pattern={'[A-Za-z\s]{2,12}$'}
                                 />
                             </Form.Group> 
 
