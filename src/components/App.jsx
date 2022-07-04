@@ -12,6 +12,7 @@ import Register from "./Register";
 import Login from "./Login";
 import NoPage from "./NoPage";
 import PasswordReset from "./PasswordReset";
+import Contact from "./Contact";
 //Style files
 import "./style.css"
 //Database functions
@@ -186,6 +187,13 @@ class App extends React.Component {
                 <Login/>
               </div>)}
             /> 
+
+            <Route path="/contact/" element={
+              (<div>
+                <Navbar userControl={this.state.user}/>
+                <Contact />
+              </div>)
+            } />     
 
             <Route path="*" element={<NoPage />} />
             

@@ -156,7 +156,6 @@ class Register extends React.Component {
                                 pattern={'[0-9]{4}$'}
                                 minLength={4}
                                 maxLength={4}
-                                required
                             />
                         </Form.Group>
 
@@ -191,7 +190,7 @@ class Register extends React.Component {
                         
                         <div className="d-flex">
                             <Form.Group className="mb-3 w-100" id="formBasicEmail">
-                                <Form.Label>User Name</Form.Label>
+                                <Form.Label>User Name *</Form.Label>
                                 <Form.Control 
                                     type="text" 
                                     placeholder="Enter user name" 
@@ -205,7 +204,7 @@ class Register extends React.Component {
                             </Form.Group>
 
                             <Form.Group className="mb-3 w-100 mx-2" id="formBasicEmail">
-                                <Form.Label>Email address</Form.Label>
+                                <Form.Label>Email address *</Form.Label>
                                 <Form.Control 
                                     type="email" 
                                     placeholder="Enter email" 
@@ -221,34 +220,36 @@ class Register extends React.Component {
 
                         <div className='d-flex'>     
                             <Form.Group className="mb-3 w-100" id="formBasicPassword1">
-                                <Form.Label>Password</Form.Label>
+                                <Form.Label>Password *</Form.Label>
                                 <Form.Control 
-                                type="password" 
-                                placeholder="Password" 
-                                id="register_password"  
-                                name='password'
-                                onChange={this.handleChange}
-                                value={this.state.password}
-                                minLength={8}
-                                maxLength={16}
-                                pattern={'[a-zA-Z0-9.-]{8,16}$'}
-                                required/>
+                                    type="password" 
+                                    placeholder="Password" 
+                                    id="register_password"  
+                                    name='password'
+                                    onChange={this.handleChange}
+                                    value={this.state.password}
+                                    minLength={8}
+                                    maxLength={16}
+                                    pattern={'[a-zA-Z0-9.-]{8,16}$'}
+                                    required
+                                />
                                 <span className='form-text'>*Must contain at least one uppercase letter, lowercase letter, and number.</span>
                             </Form.Group>
                            
                             <Form.Group className="mb-3 w-100 mx-2" id="formBasicPassword2">
-                                <Form.Label>Confirm Password</Form.Label>
+                                <Form.Label>Confirm Password *</Form.Label>
                                 <Form.Control 
-                                type="password" 
-                                placeholder="Password" 
-                                id='register_password2'
-                                name='password2'
-                                onChange={this.handleChange}
-                                value={this.state.password2}
-                                minLength={8}
-                                maxLength={16}
-                                pattern={'[a-zA-Z0-9.-]{8,16}$'}
-                                required/>
+                                    type="password" 
+                                    placeholder="Password" 
+                                    id='register_password2'
+                                    name='password2'
+                                    onChange={this.handleChange}
+                                    value={this.state.password2}
+                                    minLength={8}
+                                    maxLength={16}
+                                    pattern={'[a-zA-Z0-9.-]{8,16}$'}
+                                    required
+                                />
                             </Form.Group>
                         </div>
         

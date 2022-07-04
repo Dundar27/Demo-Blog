@@ -16,3 +16,13 @@
 #passwordreset h2{
     text-align: center;
 }
+
+/********************************************Contact********************************************/
+.contact a{
+    text-decoration: none;
+    color: rgb(71, 71, 71);
+}
+.contact a:hover{
+    color: green;
+    transition-duration: 1s;
+}
