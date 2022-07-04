@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button, Row, Col, Figure } from 'react-bootstrap';
 
 class Contact extends React.Component{
 
@@ -11,6 +11,18 @@ class Contact extends React.Component{
         }
     }
 
+    contactForm = async(e) => {
+        e.preventDefault();
+
+        
+    }
+
+    handleChange(e){
+        this.setState({
+            [e.target.name] : e.target.value
+        })
+    }
+
     render(){
         return(
             <div className="container my-5 contact">
@@ -18,15 +30,19 @@ class Contact extends React.Component{
                 <Row>
                     <Col sm={6} >
                         <div>
-                            <p>
-                                Hello, how can we help you? Would you like to make a problem or a suggestion?
-                                We have team members who can contact you 24/7. Fill out the form now and we'll help you.
-                            </p>
+                            <Figure>
+                                <Figure.Image
+                                    width={520}
+                                    alt="image not found"
+                                    src="https://www.hostinger.com.br/tutoriais/wp-content/uploads/sites/12/2021/03/O-Que-E-Um-Blog-Uma-Introducao-ao-Blogging.png"
+                                />
+                            </Figure>
+
                             <div>
                                 <a href="tel:+905359791374"> 
                                     <i class="fas fa-phone-alt"></i> +90 535 979 1374
-                                </a> <br /> <br />
-                                <a href="mailto:davutburakduundar@gmail.com">
+                                </a>
+                                <a href="mailto:davutburakduundar@gmail.com" className="mx-3">
                                     <i class="fas fa-at"></i> davutburakduundar@gmail.com
                                 </a>
                             </div>
