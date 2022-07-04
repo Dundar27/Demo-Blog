@@ -135,7 +135,7 @@ class Contact extends React.Component{
                         <strong className="me-auto mx-1">Demo Blog Page</strong>
                         <small>0 mins ago</small>
                     </Toast.Header>
-                    <Toast.Body className="mx-2">Successfuly</Toast.Body>
+                    <Toast.Body className="mx-2 text-success">Successfuly</Toast.Body>
                 </Toast>    
             </div>
         )

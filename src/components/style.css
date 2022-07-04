@@ -26,6 +26,8 @@
     color: green;
     transition-duration: 1s;
 }
+
+/****************************************Toast***************************************************/
 .toast{
     position: absolute;
     top: 15%;

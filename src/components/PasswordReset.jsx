@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Toast } from 'react-bootstrap';
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "./Firebase";
 
@@ -10,9 +10,18 @@ class passwordReset extends React.Component{
         this.sendMail = this.sendMail.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.state={
-            email:""
+            email:"",
+            showA: false
         }
-    }  
+    }
+    
+    toggleShowA = () => {
+        if(this.state.showA){
+            this.setState({showA : false})
+        }else{
+            this.setState({showA : true})
+        }
+    };
 
     sendMail = async(e) => {
 
@@ -20,9 +29,7 @@ class passwordReset extends React.Component{
 
         sendPasswordResetEmail(auth, this.state.email)
         .then(() => {
-            setTimeout(function(){
-                window.location = "/login/";
-            }, 500);
+            this.toggleShowA();
         })
         .catch((error) => {
             alert(error.code);
@@ -58,6 +65,15 @@ class passwordReset extends React.Component{
                         Send Mail
                     </Button>
                 </Form>
+
+                <Toast show={this.state.showA} onClose={this.toggleShowA} className="toast" id="toast">
+                    <Toast.Header>
+                        <i className="fas fa-at"></i>
+                        <strong className="me-auto mx-1">Demo Blog Page</strong>
+                        <small>0 mins ago</small>
+                    </Toast.Header>
+                    <Toast.Body className="mx-2">Successfuly</Toast.Body>
+                </Toast>  
             </div>
         )
     }
