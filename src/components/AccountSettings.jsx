@@ -22,7 +22,7 @@ class ProfileSettings extends React.Component {
     }
 
     user = auth.currentUser;
-    blogsRef = query(collection(db ,"blogs"), where("writer", "==", this.user.displayName));
+    //blogsRef = query(collection(db ,"blogs"), where("writer", "==", this.user.displayName));
     userRef = doc(db, "users", this.user.uid);
 
     newEmail = async(e) => {
@@ -51,11 +51,15 @@ class ProfileSettings extends React.Component {
         e.preventDefault();
 
         deleteUser(this.user).then(()=> {
-
-            deleteDoc(this.blogsRef);
-            deleteDoc(this.userRef);
-
-            alert("Transaction successful"); 
+    
+            deleteDoc(this.userRef).then(()=>{
+                
+                console.log("Transaction successful");
+    
+            }).catch((error) => {
+                alert(error.code);
+                alert(error.message);
+            }); 
 
         }).catch((error) => {
             alert(error.code);

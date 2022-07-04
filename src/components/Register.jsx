@@ -53,21 +53,10 @@ class Register extends React.Component {
                 }
                 else { valid = true; }
 
-
                 return valid;
             }
 
             return valid; //Element that will make the other function work according to the truth value
-        }
-
-        //Clear values ​​of form elements
-        function clearValue(){
-
-            const emailValue = document.getElementById("register_email").value = '';
-            const passwordValue = document.getElementById("register_password").value = '';
-            const confirmPasswordValue = document.getElementById("register_password2").value = '';
-
-            console.log(emailValue, passwordValue, confirmPasswordValue);
         }
         
         
@@ -96,14 +85,12 @@ class Register extends React.Component {
                     instagramProfileURL:""
                 });
 
-                clearValue(); ////Clear values ​​of form elements
-
                 successMessage.style.display = "block";  //Make registration successful message visible
 
                 //Redirect to login screen after 1 seconds
                 setTimeout(function(){
-                    window.location = "/";
-                }, 1000);
+                    window.location = "/profile/";
+                }, 1500);
 
             }).catch((err)=>{
                 errorEmail.style.display = "block";
@@ -244,7 +231,7 @@ class Register extends React.Component {
                                 value={this.state.password}
                                 minLength={8}
                                 maxLength={16}
-                                pattern={'(?=.*[A-Za-z])(?=.*[0-9]){8,16}'}
+                                pattern={'[a-zA-Z0-9.-]{8,16}$'}
                                 required/>
                                 <span className='form-text'>*Must contain at least one uppercase letter, lowercase letter, and number.</span>
                             </Form.Group>
@@ -260,7 +247,7 @@ class Register extends React.Component {
                                 value={this.state.password2}
                                 minLength={8}
                                 maxLength={16}
-                                pattern={'(?=.*[A-Za-z])(?=.*[0-9]){8,20}'}
+                                pattern={'[a-zA-Z0-9.-]{8,16}$'}
                                 required/>
                             </Form.Group>
                         </div>
