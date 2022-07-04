@@ -1,16 +1,46 @@
-import React, { useRef } from "react";
-import { Form, Button, Row, Col, Figure } from 'react-bootstrap';
-import emailjs from '@emailjs/browser';
+import React from "react";
+import { Form, Button, Row, Col, Figure, Toast } from "react-bootstrap";
+import emailjs from "emailjs-com";
 
 class Contact extends React.Component{
 
     constructor(props){
         super(props);
+        this.contactForm = this.contactForm.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.state={
-            name:"",
-            email:"",
-            message:""
+            from_name:"",
+            from_mail:"",
+            message:"",
+            showA: false
         }
+    }
+
+    toggleShowA = () => {
+        if(this.state.showA){
+            this.setState({showA : false})
+        }else{
+            this.setState({showA : true})
+        }
+    };
+
+    clearFields(){
+        const name = document.getElementById("contact_name").value = "";
+        const email = document.getElementById("contact_mail").value = "";
+        const message = document.getElementById("contact_message").value = "";
+    }
+
+    contactForm = async(e) => {
+        e.preventDefault();
+
+        emailjs.sendForm('service_0zoh8i9', 'template_o5sjyyg', Form.current, 'cWuHlCDD3vOdezCYv')
+        .then(() => {
+            this.toggleShowA();
+            this.clearFields();
+        }, (error) => {
+            console.log(error.text);
+        });
+
     }
 
     handleChange(e){
@@ -46,7 +76,7 @@ class Contact extends React.Component{
                     </Col>
                     <Col sm={6} >
                         <div>
-                            <Form className="mx-auto" onSubmit={} >
+                            <Form className="mx-auto" ref={Form} onSubmit={this.contactForm} >
                                 
                                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                     <Form.Label>Name *</Form.Label>
@@ -54,10 +84,10 @@ class Contact extends React.Component{
                                         type="text" 
                                         placeholder="Enter is name" 
                                         id='contact_name'
-                                        name='name'
+                                        name='from_name'
                                         onChange={this.handleChange}
-                                        value={this.state.name} 
-                                        pattern={'[A-Za-z\s]{2,12}$'}
+                                        value={this.state.from_name} 
+                                        pattern={'[A-Za-z]{2,12}$'}
                                         required
                                     />
                                 </Form.Group>
@@ -68,9 +98,9 @@ class Contact extends React.Component{
                                         type="email" 
                                         placeholder="name@example.com" 
                                         id="contact_mail" 
-                                        name='email'
+                                        name='from_mail'
                                         onChange={this.handleChange}
-                                        value={this.state.email}
+                                        value={this.state.from_mail}
                                         pattern={'[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$'}
                                         required
                                     />
@@ -81,11 +111,11 @@ class Contact extends React.Component{
                                     <Form.Control 
                                         as="textarea" 
                                         rows={3} 
-                                        id="contact_mail" 
+                                        id="contact_message" 
                                         name='message'
                                         onChange={this.handleChange}
                                         value={this.state.message}
-                                        pattern={'[A-Za-z0-9.%+-\s]{12,300}$'}
+                                        pattern={'[A-Za-z0-9.%+-]{12,300}$'}
                                         minLength={12}
                                         maxLength={300}
                                         required
@@ -98,7 +128,15 @@ class Contact extends React.Component{
                             </Form>
                         </div>
                     </Col>    
-                </Row>    
+                </Row>
+                <Toast show={this.state.showA} onClose={this.toggleShowA} className="toast" id="toast">
+                    <Toast.Header>
+                        <i className="fas fa-at"></i>
+                        <strong className="me-auto mx-1">Demo Blog Page</strong>
+                        <small>0 mins ago</small>
+                    </Toast.Header>
+                    <Toast.Body className="mx-2">Successfuly</Toast.Body>
+                </Toast>    
             </div>
         )
     }

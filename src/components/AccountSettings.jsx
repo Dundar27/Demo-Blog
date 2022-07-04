@@ -2,7 +2,7 @@ import React from "react";
 import db from './Firebase';
 import { auth } from './Firebase';
 import { updateEmail, updatePassword, deleteUser } from "firebase/auth";
-import { doc, deleteDoc, collection, query, where } from "firebase/firestore";
+import { doc, deleteDoc } from "firebase/firestore";
 import { Form, Button } from "react-bootstrap";
 
 

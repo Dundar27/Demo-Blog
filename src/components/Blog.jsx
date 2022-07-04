@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import SearchBar from './SearchBar';
 import BlogPosts from "./BlogPosts";
 

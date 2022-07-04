@@ -1,6 +1,5 @@
 import React from "react";
 import { Row, Col, Card, ListGroup } from "react-bootstrap";
-import { propTypes } from "react-bootstrap/esm/Image";
 import { auth } from './Firebase';
 
 const ProfileCard = (props) => {

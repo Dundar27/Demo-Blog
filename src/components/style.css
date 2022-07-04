@@ -26,3 +26,8 @@
     color: green;
     transition-duration: 1s;
 }
+.toast{
+    position: absolute;
+    top: 15%;
+    left: 66%;
+}
