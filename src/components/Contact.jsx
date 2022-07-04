@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Form, Button, Row, Col, Figure } from 'react-bootstrap';
+import emailjs from '@emailjs/browser';
 
 class Contact extends React.Component{
 
@@ -10,12 +11,6 @@ class Contact extends React.Component{
             email:"",
             message:""
         }
-    }
-
-    contactForm = async(e) => {
-        e.preventDefault();
-
-        
     }
 
     handleChange(e){
@@ -51,7 +46,7 @@ class Contact extends React.Component{
                     </Col>
                     <Col sm={6} >
                         <div>
-                            <Form className="mx-auto" onSubmit={this.contactForm} >
+                            <Form className="mx-auto" onSubmit={} >
                                 
                                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                     <Form.Label>Name *</Form.Label>
