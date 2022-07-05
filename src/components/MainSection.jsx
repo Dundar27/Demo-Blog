@@ -38,7 +38,7 @@ const MainSection = (props) => {
                             </Card>
                             <Card className='text-dark my-3'>
                                 <Card.Header>
-                                    <Card.Title>The Editor Social Media</Card.Title>
+                                    <Card.Title>Contact for front-end developer</Card.Title>
                                 </Card.Header>
                                 <Card.Body>
                                     <a href={"https://www.github.com/Dundar27"} target="_blank" rel="noopener noreferrer">

@@ -4,6 +4,7 @@ import db from './Firebase';
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import ProfileSettings from "./ProfileSettings";
 import AccountSettings from "./AccountSettings";
+import BlogsSettings from "./BlogsSettings";
 import ProfileCard from "./ProfileCard";
 
 class Settings extends React.Component {
@@ -47,6 +48,9 @@ class Settings extends React.Component {
               </Tab>
               <Tab eventKey="account" title="Account">
                 <AccountSettings />
+              </Tab>
+              <Tab eventKey="blogs" title="Blogs">
+                <BlogsSettings />
               </Tab>
             </Tabs>
           </Col>

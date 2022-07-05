@@ -102,7 +102,7 @@ class ProfileSettings extends React.Component {
                     </Form.Group>
 
                     <Button variant="warning" type="submit" className="text-light">
-                        Submit
+                        Update
                     </Button>
                 </Form>
 
@@ -126,7 +126,7 @@ class ProfileSettings extends React.Component {
                     </Form.Group>
 
                     <Button variant="warning" type="submit" className="text-light">
-                        Submit
+                        Update
                     </Button>
                 </Form> <hr />
 
