@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button, Row, Col, Toast } from 'react-bootstrap';
 import db from './Firebase';
 import { doc, updateDoc } from "firebase/firestore";
 import { auth } from './Firebase';
@@ -21,9 +21,18 @@ class UserAbouthForm extends React.Component{
             usermessage:"",
             facebookProfileURL:"",
             twitterProfileURL:"",
-            instagramProfileURL:""
+            instagramProfileURL:"",
+            showA: false
         }
     }
+
+    toggleShowA = () => {
+        if(this.state.showA){
+            this.setState({showA : false})
+        }else{
+            this.setState({showA : true})
+        }
+    };
 
     writeUserData = async(e) =>{
     
@@ -110,7 +119,7 @@ class UserAbouthForm extends React.Component{
                     console.log('error code');                     
             }
         }
-        alert("Success Update Profile Datas");
+        this.toggleShowA();
     }
 
     handleChange(e){
@@ -276,6 +285,14 @@ class UserAbouthForm extends React.Component{
                         </Button>
                     </div>
                 </Form>
+                <Toast show={this.state.showA} onClose={this.toggleShowA} className="toast" id="toast">
+                    <Toast.Header>
+                        <i className="fas fa-at"></i>
+                        <strong className="me-auto mx-1">Demo Blog Page</strong>
+                        <small>0 mins ago</small>
+                    </Toast.Header>
+                    <Toast.Body className="mx-2 text-success">Successfuly</Toast.Body>
+                </Toast> 
             </div>
         );
     }

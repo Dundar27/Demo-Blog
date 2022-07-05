@@ -3,7 +3,7 @@ import db from './Firebase';
 import { auth } from './Firebase';
 import { updateEmail, updatePassword, deleteUser } from "firebase/auth";
 import { doc, deleteDoc } from "firebase/firestore";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Toast } from "react-bootstrap";
 
 
 class ProfileSettings extends React.Component {
@@ -17,9 +17,18 @@ class ProfileSettings extends React.Component {
         
         this.state={
             email:"", 
-            password:""
+            password:"",
+            showA: false
         }
     }
+
+    toggleShowA = () => {
+        if(this.state.showA){
+            this.setState({showA : false})
+        }else{
+            this.setState({showA : true})
+        }
+    };
 
     user = auth.currentUser;
     //blogsRef = query(collection(db ,"blogs"), where("writer", "==", this.user.displayName));
@@ -29,7 +38,7 @@ class ProfileSettings extends React.Component {
         e.preventDefault();
 
         updateEmail(this.user, this.state.email).then(() => {
-            alert("Transaction successful");
+            this.toggleShowA();
         }).catch((error) => {
             alert(error.code);
             alert(error.message);
@@ -40,7 +49,7 @@ class ProfileSettings extends React.Component {
         e.preventDefault();
 
         updatePassword(this.user, this.state.password).then(() => {
-            alert("Transaction successful");
+            this.toggleShowA();
         }).catch((error) => {
             alert(error.code);
             alert(error.message);
@@ -54,7 +63,7 @@ class ProfileSettings extends React.Component {
     
             deleteDoc(this.userRef).then(()=>{
                 
-                console.log("Transaction successful");
+                this.toggleShowA();
     
             }).catch((error) => {
                 alert(error.code);
@@ -134,6 +143,14 @@ class ProfileSettings extends React.Component {
                         Delete Account
                     </Button>
                 </Form>
+                <Toast show={this.state.showA} onClose={this.toggleShowA} className="toast" id="toast">
+                    <Toast.Header>
+                        <i className="fas fa-at"></i>
+                        <strong className="me-auto mx-1">Demo Blog Page</strong>
+                        <small>0 mins ago</small>
+                    </Toast.Header>
+                    <Toast.Body className="mx-2 text-success">Successfuly</Toast.Body>
+                </Toast>
             </div>
         )
     }
