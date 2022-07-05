@@ -4,7 +4,7 @@ import { Form, Button } from 'react-bootstrap';
 import { auth } from './Firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import db from './Firebase';
-import { doc, setDoc, collection, onSnapshot, query} from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 class Register extends React.Component {
 
@@ -21,19 +21,8 @@ class Register extends React.Component {
             lastname:"",
             birthday:"",
             phone:"",
-            adress:"",
-            userData: []
+            adress:""
         }
-    }
-
-    componentDidMount(){
-        this.getUserData();
-    }
-
-    async getUserData() {
-        const response = await onSnapshot(query(collection(db, 'users')), snapshop => this.setState({userData: snapshop.docs.map(doc => ({
-          id:doc.id,data:doc.data()
-        }))}));
     }
 
     //Function to run when the form is submitted
@@ -43,54 +32,29 @@ class Register extends React.Component {
 
         //Values ​​of form elements
 
-        const username = this.state.username;
-        const phone = this.state.phone;
         const password = this.state.password;
         const confirmPassword = this.state.password2;
 
         const successMessage = document.getElementById("registration_successful");
         const errorMessage = document.getElementById("registration_failed");
-        const errorUserName = document.getElementById("errorUserName");
-        const errorPhone = document.getElementById("errorPhone");
         const errorPassword = document.getElementById("errorPassword");
         const errorEmail = document.getElementById("errorEmail");
         
         //Function used to make passwords equal to each other
         const validate = () => {
             
-            let valid1;
-            let valid2;
-            let valid3;
             let valid;
 
             if (password !== '' && confirmPassword !== ''){
 
                 if (password !== confirmPassword) {
                     errorPassword.style.display = "block";  //Make the passwords do not match error message visible
-                    valid1 = false;
+                    valid = false;
                 }
-                else { valid1 = true; }
+                else { valid = true; }
 
-                return valid1;
+                return valid;
             }
-
-            if(this.state.userData.indexOf(username)>0){
-                errorUserName.style.display = "block";
-                return valid2 = false;
-            }
-            else { return valid2 = true; }
-
-            if(this.state.userData.indexOf(phone)>0){
-                errorPhone.style.display = "block";
-                return valid3 = false;
-            }
-            else { return valid3 = true; }
-
-
-            if(valid1 && valid2 && valid3 == true){
-                return valid = true;
-            }
-            else { return valid = false; }
 
             return valid; //Element that will make the other function work according to the truth value
         }
@@ -316,18 +280,6 @@ class Register extends React.Component {
                     <div className="alert alert-danger" role="alert">
                         <h4 className="alert-heading">Registration Failed!</h4>
                         <p>Make sure you enter the correct values ​​and meet the requirements.</p>
-                    </div>
-                </div>
-                <div className='mt-3' id='errorUserName' style={{display: "none"}}>
-                    <div className="alert alert-danger" role="alert">
-                        <h4 className="alert-heading">Invalid Username!</h4>
-                        <p>Please try entering a different username.</p>
-                    </div>
-                </div>
-                <div className='mt-3' id='errorPhone' style={{display: "none"}}>
-                    <div className="alert alert-danger" role="alert">
-                        <h4 className="alert-heading">Invalid Phone Number!</h4>
-                        <p>Please try entering a different phone number.</p>
                     </div>
                 </div>
                 <div className='mt-3' id='errorPassword' style={{display: "none"}}>
