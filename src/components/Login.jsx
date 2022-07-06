@@ -39,6 +39,12 @@ class Login extends React.Component{
             
         }).catch((err)=>{
             errorMessage.style.display = "block"; //Show error message if there is an error
+            
+            setTimeout(function(){
+                errorMessage.style.display = "none"; //disable error message if there is an error
+                errorMessage.style.transitionDuration = 1+"s";
+            }, 3000);
+
             console.log(err);
         })
     }
