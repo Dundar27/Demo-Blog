@@ -4,7 +4,7 @@ import { Form, Button } from 'react-bootstrap';
 import { auth } from './Firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import db from './Firebase';
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, onSnapshot, query, collection } from "firebase/firestore";
 
 class Register extends React.Component {
 
@@ -21,8 +21,19 @@ class Register extends React.Component {
             lastname:"",
             birthday:"",
             phone:"",
-            adress:""
+            adress:"",
+            userNames: []
         }
+    }
+
+    componentDidMount(){
+        this.getUserNames();
+    }
+    
+    async getUserNames() {
+        const response = await onSnapshot(query(collection(db, 'usernames')), snapshop => this.setState({userNames: snapshop.docs.map(doc => ({
+          id:doc.id, data:doc.data()
+        }))}));
     }
 
     //Function to run when the form is submitted
@@ -32,25 +43,25 @@ class Register extends React.Component {
 
         //Values ​​of form elements
 
+        const username = this.state.username;
+        const userNames = this.state.userNames;
         const password = this.state.password;
         const confirmPassword = this.state.password2;
 
         const successMessage = document.getElementById("registration_successful");
         const errorMessage = document.getElementById("registration_failed");
+        const errorUserName = document.getElementById("errorUserName");
         const errorPassword = document.getElementById("errorPassword");
         const errorEmail = document.getElementById("errorEmail");
         
         //Function used to make passwords equal to each other
-        const validate = () => {
+        const passwordValidate = () => {
             
             let valid;
 
             if (password !== '' && confirmPassword !== ''){
 
-                if (password !== confirmPassword) {
-                    errorPassword.style.display = "block";  //Make the passwords do not match error message visible
-                    valid = false;
-                }
+                if (password !== confirmPassword) { errorPassword.style.display = "block"; valid = false; }
                 else { valid = true; }
 
                 return valid;
@@ -58,20 +69,30 @@ class Register extends React.Component {
 
             return valid; //Element that will make the other function work according to the truth value
         }
+
+        const userNameValidate = () => {
+            
+            let valid;
+
+            if ( userNames.indexOf(username) > 0 ) { errorUserName.style.display = "block"; valid = false; }
+            else { valid = true; } 
+
+            return valid;
+        }
         
         
         //Save the values ​​of the form elements to the database if there are no errors so far
-        if(validate().valueOf() === true){
+        if(passwordValidate().valueOf() && userNameValidate.valueOf() === true){
             
             //Function to get form values ​​and create a new user with firebase function
             createUserWithEmailAndPassword(auth, this.state.email, this.state.password).then((userCredential)=>{
 
-                console.log(userCredential);
-
-                userCredential.user.displayName = this.state.username;
+                //user datas
+                userCredential.user.displayName = this.state.username; 
                 userCredential.user.phoneNumber = this.state.phone;
 
                 setDoc(doc(db, "users", auth.currentUser.uid), {
+                    //profile datas
                     username: this.state.username,
                     firstname: this.state.firstname,
                     lastname: this.state.lastname,
@@ -80,10 +101,16 @@ class Register extends React.Component {
                     birthday: this.state.birthday,
                     id: auth.currentUser.uid,
                     imgurl: "",
+                    //social media adress
                     facebookProfileURL:"",
                     twitterProfileURL:"",
                     instagramProfileURL:""
                 });
+
+                //send to username
+                setDoc(doc(db, "usernames", auth.currentUser.uid),{
+                    username: this.state.username
+                })
 
                 successMessage.style.display = "block";  //Make registration successful message visible
 
@@ -201,6 +228,7 @@ class Register extends React.Component {
                                     pattern={'[a-zA-Z0-9._]{6,16}$'}
                                     required
                                 />
+                                <span className='form-text'>*Username must consist of letters and numbers</span>
                             </Form.Group>
 
                             <Form.Group className="mb-3 w-100 mx-2" id="formBasicEmail">
@@ -280,6 +308,12 @@ class Register extends React.Component {
                     <div className="alert alert-danger" role="alert">
                         <h4 className="alert-heading">Registration Failed!</h4>
                         <p>Make sure you enter the correct values ​​and meet the requirements.</p>
+                    </div>
+                </div>
+                <div className='mt-3' id='errorUserName' style={{display: "none"}}>
+                    <div className="alert alert-danger" role="alert">
+                        <h4 className="alert-heading">Invalid User Name!</h4>
+                        <p>This username is already in use, please enter a different username.</p>
                     </div>
                 </div>
                 <div className='mt-3' id='errorPassword' style={{display: "none"}}>
