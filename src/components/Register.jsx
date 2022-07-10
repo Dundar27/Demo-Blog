@@ -41,20 +41,21 @@ class Register extends React.Component {
      
         e.preventDefault();  //Prevent page refresh when form is submitted
 
-        //Values ​​of form elements
-
+        //The values ​​of the form elements required by the username validation function
         const username = this.state.username;
         const userNames = this.state.userNames;
+
+        //The values ​​of the form elements required by the password validation function
         const password = this.state.password;
         const confirmPassword = this.state.password2;
 
+        //Warning Messages
         const successMessage = document.getElementById("registration_successful");
         const errorMessage = document.getElementById("registration_failed");
-        const errorUserName = document.getElementById("errorUserName");
         const errorPassword = document.getElementById("errorPassword");
         const errorEmail = document.getElementById("errorEmail");
         
-        //Function used to make passwords equal to each other
+        //Password verification function
         const passwordValidate = () => {
             
             let valid;
@@ -70,11 +71,12 @@ class Register extends React.Component {
             return valid; //Element that will make the other function work according to the truth value
         }
 
+        //Username verification function
         const userNameValidate = () => {
             
             let valid;
 
-            if ( userNames.indexOf(username) > 0 ) { errorUserName.style.display = "block"; valid = false; }
+            if ( userNames.indexOf(username) > 0 ) { valid = false; }
             else { valid = true; } 
 
             return valid;
@@ -125,7 +127,13 @@ class Register extends React.Component {
             });
             
         }else{
+
             errorMessage.style.display = "block"; //Show error message if there is an error
+            
+            //Refreshes the page after 1.5 seconds and prevents errors.
+            setTimeout(function(){
+                window.location.reload(1);
+            }, 1500);
         }
     }
 
@@ -307,13 +315,7 @@ class Register extends React.Component {
                 <div className='mt-3' id='registration_failed' style={{display: "none"}}>
                     <div className="alert alert-danger" role="alert">
                         <h4 className="alert-heading">Registration Failed!</h4>
-                        <p>Make sure you enter the correct values ​​and meet the requirements.</p>
-                    </div>
-                </div>
-                <div className='mt-3' id='errorUserName' style={{display: "none"}}>
-                    <div className="alert alert-danger" role="alert">
-                        <h4 className="alert-heading">Invalid User Name!</h4>
-                        <p>This username is already in use, please enter a different username.</p>
+                        <p>Make sure you enter the correct values ​​and meet the requirements. Or try entering a different username.</p>
                     </div>
                 </div>
                 <div className='mt-3' id='errorPassword' style={{display: "none"}}>
