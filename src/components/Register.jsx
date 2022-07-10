@@ -36,8 +36,7 @@ class Register extends React.Component {
         }))}));
     }
 
-    //Function to run when the form is submitted
-    register = async(e) => {
+    async Register(e){
      
         e.preventDefault();  //Prevent page refresh when form is submitted
 
@@ -133,7 +132,7 @@ class Register extends React.Component {
             //Refreshes the page after 1.5 seconds and prevents errors.
             setTimeout(function(){
                 window.location.reload(1);
-            }, 1500);
+            }, 3000);
         }
     }
 
