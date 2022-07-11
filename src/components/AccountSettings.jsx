@@ -32,7 +32,8 @@ class ProfileSettings extends React.Component {
 
     user = auth.currentUser;
     //blogsRef = query(collection(db ,"blogs"), where("writer", "==", this.user.displayName));
-    userRef = doc(db, "users", this.user.uid);
+    userRef1 = doc(db, "users", this.user.uid);
+    userRef2 = doc(db, "usernames", this.user.uid);
 
     newEmail = async(e) => {
         e.preventDefault();
@@ -61,7 +62,7 @@ class ProfileSettings extends React.Component {
 
         deleteUser(this.user).then(()=> {
     
-            deleteDoc(this.userRef).then(()=>{
+            deleteDoc(this.userRef1).then(()=>{
                 
                 this.toggleShowA();
     
@@ -69,6 +70,15 @@ class ProfileSettings extends React.Component {
                 alert(error.code);
                 alert(error.message);
             }); 
+
+            deleteDoc(this.userRef2).then(()=>{
+                
+                this.toggleShowA();
+    
+            }).catch((error) => {
+                alert(error.code);
+                alert(error.message);
+            });
 
         }).catch((error) => {
             alert(error.code);
