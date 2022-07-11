@@ -10,18 +10,19 @@ class Register extends React.Component {
 
     constructor(props){
         super(props);
-        this.register = this.register.bind(this);
+        this.Register = this.Register.bind(this);
         this.handleChange = this.handleChange.bind(this);
+
         this.state={
+            firstname:"",
+            lastname:"",
+            birthday:"",
+            adress:"",
+            phone:"",
+            username:"",
             email:"", 
             password:"", 
             password2:"",
-            username:"", 
-            firstname:"", 
-            lastname:"",
-            birthday:"",
-            phone:"",
-            adress:"",
             userNames: []
         }
     }
@@ -29,80 +30,62 @@ class Register extends React.Component {
     componentDidMount(){
         this.getUserNames();
     }
-    
-    async getUserNames() {
-        const response = await onSnapshot(query(collection(db, 'usernames')), snapshop => this.setState({userNames: snapshop.docs.map(doc => ({
-          id:doc.id, data:doc.data()
+
+    async getUserNames(){
+        const response = await onSnapshot(collection(db, 'usernames'), snapshop => this.setState({userNames: snapshop.docs.map(doc => ({
+            data: doc.data()
         }))}));
     }
 
     async Register(e){
-     
-        e.preventDefault();  //Prevent page refresh when form is submitted
 
-        //The values ​​of the form elements required by the username validation function
+        e.preventDefault();
+
+        const firstname = this.state.firstname;
+        const lastname = this.state.lastname;
+        const birthday = this.state.birthday;
+        const adress = this.state.adress;
+        const phone = this.state.phone;
         const username = this.state.username;
+        const email = this.state.email;
+        const password = this.state.password;
+        const password2 = this.state.password2;
         const userNames = this.state.userNames;
 
-        //The values ​​of the form elements required by the password validation function
-        const password = this.state.password;
-        const confirmPassword = this.state.password2;
-
-        //Warning Messages
-        const successMessage = document.getElementById("registration_successful");
-        const errorMessage = document.getElementById("registration_failed");
-        const errorPassword = document.getElementById("errorPassword");
-        const errorEmail = document.getElementById("errorEmail");
-        
-        //Password verification function
-        const passwordValidate = () => {
+        function validate(){
             
-            let valid;
+            let valid, valid1, valid2;
 
-            if (password !== '' && confirmPassword !== ''){
+            if ( userNames.indexOf(username) > -1 ) { valid1 = false; }
+            else { valid1 = true; } 
 
-                if (password !== confirmPassword) { errorPassword.style.display = "block"; valid = false; }
-                else { valid = true; }
+            if (password !== password2) { valid2 = false; }
+            else { valid2 = true; }
 
-                return valid;
-            }
-
-            return valid; //Element that will make the other function work according to the truth value
-        }
-
-        //Username verification function
-        const userNameValidate = () => {
-            
-            let valid;
-
-            if ( userNames.indexOf(username) > 0 ) { valid = false; }
-            else { valid = true; } 
+            if ( valid1 && valid2 == true ) { valid = true }
+            else { valid = false }
 
             return valid;
         }
-        
-        
-        //Save the values ​​of the form elements to the database if there are no errors so far
-        if(passwordValidate().valueOf() && userNameValidate.valueOf() === true){
-            
-            //Function to get form values ​​and create a new user with firebase function
-            createUserWithEmailAndPassword(auth, this.state.email, this.state.password).then((userCredential)=>{
 
-                //user datas
-                userCredential.user.displayName = this.state.username; 
-                userCredential.user.phoneNumber = this.state.phone;
+        function createUser(){
+
+            createUserWithEmailAndPassword(auth, email, password).then((userCredential)=>{
+
+                userCredential.user.displayName = username; 
+                userCredential.user.phoneNumber = phone;
 
                 setDoc(doc(db, "users", auth.currentUser.uid), {
-                    //profile datas
-                    username: this.state.username,
-                    firstname: this.state.firstname,
-                    lastname: this.state.lastname,
-                    phone: this.state.phone,
-                    adress: this.state.adress,
-                    birthday: this.state.birthday,
+                    
+                    username: username,
+                    firstname: firstname,
+                    lastname: lastname,
+                    birthday: birthday,
+                    adress: adress,
+                    phone: phone,
                     id: auth.currentUser.uid,
+                    
                     imgurl: "",
-                    //social media adress
                     facebookProfileURL:"",
                     twitterProfileURL:"",
                     instagramProfileURL:""
@@ -110,30 +93,21 @@ class Register extends React.Component {
 
                 //send to username
                 setDoc(doc(db, "usernames", auth.currentUser.uid),{
-                    username: this.state.username
+                    username: username
                 })
-
-                successMessage.style.display = "block";  //Make registration successful message visible
 
                 //Redirect to login screen after 1 seconds
                 setTimeout(function(){
                     window.location = "/profile/";
-                }, 1500);
+                }, 750);
 
             }).catch((err)=>{
-                errorEmail.style.display = "block";
                 console.log(err);
             });
-            
-        }else{
-
-            errorMessage.style.display = "block"; //Show error message if there is an error
-            
-            //Refreshes the page after 1.5 seconds and prevents errors.
-            setTimeout(function(){
-                window.location.reload(1);
-            }, 3000);
         }
+
+        if ( validate().valueOf() === true ) { createUser(); }
+        else { alert('Registaration failed !'); }
     }
 
     //get user mail and password information
@@ -148,7 +122,7 @@ class Register extends React.Component {
             <div className='p-3 mt-5  container' id='register-component'>
                 <div>
                     <h1 className='text-center mb-5'>Register Form</h1>
-                    <Form onSubmit={this.register} className="mx-auto"> 
+                    <Form onSubmit={this.Register} className="mx-auto"> 
                                        
                         <div className='d-flex'>
                             <Form.Group className="mb-3 w-100" id="formBasicEmail">
@@ -304,36 +278,6 @@ class Register extends React.Component {
                             <Link to={"/login/"} className="w-100 btn btn-outline-primary">Login</Link>
                         </div>
                     </Form>
-                </div>
-                <div className='mt-3' id='registration_successful' style={{display: "none"}}>
-                    <div className="alert alert-success" role="alert">
-                        <h4 className="alert-heading">Registration Successful!</h4>
-                        <p>You have successfully registered. You are directed to the login form to enter the system.</p>
-                    </div>
-                </div>
-                <div className='mt-3' id='registration_failed' style={{display: "none"}}>
-                    <div className="alert alert-danger" role="alert">
-                        <h4 className="alert-heading">Registration Failed!</h4>
-                        <p>Make sure you enter the correct values ​​and meet the requirements. Or try entering a different username.</p>
-                    </div>
-                </div>
-                <div className='mt-3' id='errorPassword' style={{display: "none"}}>
-                    <div className="alert alert-danger" role="alert">
-                        <h4 className="alert-heading">Passwords Do Not Match!</h4>
-                        <p>Please make sure you enter the passwords correctly.</p>
-                    </div>
-                </div>
-                <div className='mt-3' id='errorEmail' style={{display: "none"}}>
-                    <div className="alert alert-danger" role="alert">
-                        <h4 className="alert-heading">This email address is used!</h4>
-                        <p>Please enter another email address.</p>
-                    </div>
-                </div>
-                <div className='mt-3'>
-                    <div className="alert alert-warning" role="alert">
-                        <h4 className="alert-heading">Warning!</h4>
-                        <p>Our site is still under development. You are now using the demo version. If you've discovered a bug, please let us know.</p>
-                    </div>
                 </div>
             </div>    
         )
