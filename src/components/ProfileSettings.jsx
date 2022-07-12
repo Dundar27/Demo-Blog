@@ -32,7 +32,7 @@ const ProfileSettings = (props) => {
                                 <div>
                                     <span>Age :</span>
                                 </div>
-                                <div>{new Date().getFullYear()-(user.data.birthday)}</div>    
+                                <div>{user.data.birthday !== '' || null ? new Date().getFullYear()-(user.data.birthday) : undefined}</div>    
                             </div> 
                             <div className='d-flex justify-content-between my-3'>
                                 <div>

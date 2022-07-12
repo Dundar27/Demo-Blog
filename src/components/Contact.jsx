@@ -35,8 +35,8 @@ class Contact extends React.Component{
 
         emailjs.sendForm('service_0zoh8i9', 'template_o5sjyyg', Form.current, 'cWuHlCDD3vOdezCYv')
         .then(() => {
-            this.toggleShowA();
             this.clearFields();
+            this.toggleShowA();
         }, (error) => {
             console.log(error.text);
         });

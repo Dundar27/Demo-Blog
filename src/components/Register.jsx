@@ -4,7 +4,8 @@ import { Form, Button } from 'react-bootstrap';
 import { auth } from './Firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import db from './Firebase';
-import { doc, setDoc, onSnapshot, query, collection } from "firebase/firestore";
+import { doc, setDoc, onSnapshot, collection } from "firebase/firestore";
+import ToastComponent from "./ToastComponent";
 
 class Register extends React.Component {
 
@@ -23,7 +24,10 @@ class Register extends React.Component {
             email:"", 
             password:"", 
             password2:"",
-            userNames: []
+            userNames: [],
+            showA: false,
+            showB: false,
+            showC: false
         }
     }
 
@@ -36,6 +40,30 @@ class Register extends React.Component {
             data: doc.data()
         }))}));
     }
+
+    toggleShowA = () => {
+        if(this.state.showA){
+            this.setState({showA : false})
+        }else{
+            this.setState({showA : true})
+        }
+    };
+
+    toggleShowB = () => {
+        if(this.state.showB){
+            this.setState({showB : false})
+        }else{
+            this.setState({showB : true})
+        }
+    };
+
+    toggleShowC = () => {
+        if(this.state.showC){
+            this.setState({showC : false})
+        }else{
+            this.setState({showC : true})
+        }
+    };
 
     async Register(e){
 
@@ -50,16 +78,25 @@ class Register extends React.Component {
         const email = this.state.email;
         const password = this.state.password;
         const password2 = this.state.password2;
-        const userNames = this.state.userNames;
+        const userNames = this.state.userNames.map(user => user.data.username);
+
+        const successMessage = document.getElementById("registration_successful");
+        const errorMessage = document.getElementById("registration_failed");
+
+        const ToastA = () => this.toggleShowA();
+        const ToastB = () => this.toggleShowB();
+        const ToastC = () => this.toggleShowC();
 
         function validate(){
             
             let valid, valid1, valid2;
 
-            if ( userNames.indexOf(username) > -1 ) { valid1 = false; }
-            else { valid1 = true; } 
+            if ( userNames.indexOf(username) > -1 ) 
+            { valid1 = false; ToastA(); }
+            else { valid1 = true;  } 
 
-            if (password !== password2) { valid2 = false; }
+            if (password !== password2) 
+            { valid2 = false; ToastC(); }
             else { valid2 = true; }
 
             if ( valid1 && valid2 == true ) { valid = true }
@@ -91,26 +128,27 @@ class Register extends React.Component {
                     instagramProfileURL:""
                 });
 
-                //send to username
                 setDoc(doc(db, "usernames", auth.currentUser.uid),{
                     username: username
                 })
 
-                //Redirect to login screen after 1 seconds
+                errorMessage.style.display = "none";
+                successMessage.style.display = "block";
+
                 setTimeout(function(){
                     window.location = "/profile/";
-                }, 750);
+                }, 1000);
 
             }).catch((err)=>{
                 console.log(err);
+                ToastB();
             });
         }
 
         if ( validate().valueOf() === true ) { createUser(); }
-        else { alert('Registaration failed !'); }
+        else { errorMessage.style.display = "block"; }
     }
 
-    //get user mail and password information
     handleChange(e){
         this.setState({
             [e.target.name] : e.target.value
@@ -198,7 +236,9 @@ class Register extends React.Component {
                         
                         <div className="d-flex">
                             <Form.Group className="mb-3 w-100" id="formBasicEmail">
+                                
                                 <Form.Label>User Name *</Form.Label>
+
                                 <Form.Control 
                                     type="text" 
                                     placeholder="Enter user name" 
@@ -213,7 +253,9 @@ class Register extends React.Component {
                             </Form.Group>
 
                             <Form.Group className="mb-3 w-100 mx-2" id="formBasicEmail">
+                                
                                 <Form.Label>Email address *</Form.Label>
+
                                 <Form.Control 
                                     type="email" 
                                     placeholder="Enter email" 
@@ -229,7 +271,9 @@ class Register extends React.Component {
 
                         <div className='d-flex'>     
                             <Form.Group className="mb-3 w-100" id="formBasicPassword1">
-                                <Form.Label>Password *</Form.Label>
+                                
+                                <Form.Label>Password *</Form.Label> 
+
                                 <Form.Control 
                                     type="password" 
                                     placeholder="Password" 
@@ -279,6 +323,42 @@ class Register extends React.Component {
                         </div>
                     </Form>
                 </div>
+                <div className='mt-3' id='registration_successful' style={{display: "none"}}>
+                    <div className='alert alert-success' role={alert}>
+                        <h4 className='alert-heading'>Registration Successful!</h4>
+                        <p>You have successfuly registered. You are directed to the profile page.</p>
+                    </div>
+                </div>
+                <div className='mt-3' id='registration_failed' style={{display: "none"}}>
+                    <div className='alert alert-danger' role={alert}>
+                        <h4 className='alert-heading'>Registration Failed!</h4>
+                        <p>Make sure you enter the correct values and meet the requriments.</p>
+                    </div>
+                </div>
+                <div className='mt-3'>
+                    <div className='alert alert-warning' role={alert}>
+                        <h4 className='alert-heading'>Warning!</h4>
+                        <p>
+                            Our site is still under development. You are now using the demo version. 
+                            If you've dicovered a bug, please let us know.
+                        </p>
+                    </div>
+                </div>
+                <ToastComponent 
+                    show={this.state.showA}
+                    toggleShow={this.toggleShowA}
+                    message={"This username is already in use. Please enter a different username."}
+                />
+                <ToastComponent
+                    show={this.state.showB}
+                    toggleShow={this.toggleShowB}
+                    message={"This mail adress is already in use. Please enter a different mail adress."}
+                />
+                <ToastComponent 
+                    show={this.state.showC}
+                    toggleShow={this.toggleShowC}
+                    message={"Please make sure you enter the passwords correctly.."}
+                />
             </div>    
         )
     }

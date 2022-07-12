@@ -72,7 +72,7 @@ const ProfileCard = (props) => {
                                         </Col> 
                                         <Col sm={6}>
                                             <span className="text-center">
-                                                {new Date().getFullYear()-(user.data.birthday)}
+                                                {user.data.birthday !== '' || null ? new Date().getFullYear()-(user.data.birthday) : undefined}
                                             </span>
                                         </Col> 
                                     </Row> 

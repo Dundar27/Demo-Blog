@@ -5,10 +5,14 @@
     background: rgb(200, 200, 200);
 }
 /*************Layout Component*************/
+#layout-component {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
 #layout-component .nav-link:hover{
     background-color: rgb(54, 54, 54);
 }
-
 /***************************************************Login Page**************************************************/
 #passwordreset {
     width: 50%;
@@ -32,5 +36,5 @@
     position: fixed;
     top: 40%;
     left: 38%;
-    box-shadow: 1px 1px 8px 5px rgba(0, 255, 8, 0.2) !important;
+    box-shadow: 1px 1px 8px 5px rgba(0, 0, 0, 0.2) !important;
 }

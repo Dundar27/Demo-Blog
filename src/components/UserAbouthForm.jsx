@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Button, Row, Col, Toast } from 'react-bootstrap';
 import db from './Firebase';
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, onSnapshot, collection } from "firebase/firestore";
 import { auth } from './Firebase';
 import { updateProfile } from "firebase/auth";
 
@@ -22,8 +22,20 @@ class UserAbouthForm extends React.Component{
             facebookProfileURL:"",
             twitterProfileURL:"",
             instagramProfileURL:"",
-            showA: false
+            userNames:[],
+            showA: false,
+            showB: false
         }
+    }
+
+    componentDidMount(){
+        this.getUserNames();
+    }
+
+    async getUserNames(){
+        const response = await onSnapshot(collection(db, 'usernames'), snapshop => this.setState({userNames: snapshop.docs.map(doc => ({
+            data: doc.data()
+        }))}));
     }
 
     toggleShowA = () => {
@@ -34,12 +46,22 @@ class UserAbouthForm extends React.Component{
         }
     };
 
+    toggleShowB = () => {
+        if(this.state.showB){
+            this.setState({showB : false})
+        }else{
+            this.setState({showB : true})
+        }
+    };
+
     writeUserData = async(e) =>{
     
         e.preventDefault();
 
         const user = auth.currentUser.uid;
+        const userNames = this.state.userNames.map(user => user.data.username);
         const docRef = doc(db, 'users/'+user);
+        const docRef2 = doc(db, 'usernames/'+user);
 
         const values = new Array(11);
         values[0] = this.state.firstname;
@@ -69,8 +91,13 @@ class UserAbouthForm extends React.Component{
                     break;
                 case 2:
                     if(values[2] !== "" || null){
-                        await updateDoc(docRef, {username: values[2]});
-                        updateProfile(auth.currentUser, {displayName:values[2]});
+                        if(userNames.indexOf(values[2] > -1))
+                        { this.toggleShowB() }
+                        else { 
+                            await updateDoc(docRef, {username: values[2]});
+                            await updateDoc(docRef2, {username: values[2]});
+                            updateProfile(auth.currentUser, {displayName:values[2]}); 
+                        }
                     }
                     break;
                 case 3:
@@ -118,7 +145,7 @@ class UserAbouthForm extends React.Component{
                 default:
                     console.log('error code');                     
             }
-        }
+        } 
         this.toggleShowA();
     }
 
@@ -291,8 +318,17 @@ class UserAbouthForm extends React.Component{
                         <strong className="me-auto mx-1">Demo Blog Page</strong>
                         <small>0 mins ago</small>
                     </Toast.Header>
-                    <Toast.Body className="mx-2 text-success">Successfuly</Toast.Body>
-                </Toast> 
+                    <Toast.Body className="mx-2 text-success">Successfuly.</Toast.Body>
+                </Toast>
+
+                <Toast show={this.state.showB} onClose={this.toggleShowB} className="toast" id="toast">
+                    <Toast.Header>
+                        <i className="fas fa-at"></i>
+                        <strong className="me-auto mx-1">Demo Blog Page</strong>
+                        <small>0 mins ago</small>
+                    </Toast.Header>
+                    <Toast.Body className="mx-2 text-danger">This username is already in use. Please enter a different username..</Toast.Body>
+                </Toast>
             </div>
         );
     }
