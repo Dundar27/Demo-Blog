@@ -72,11 +72,11 @@ class BlogsSettings extends React.Component{
                                 <td>{blog.data.catagories}</td>
                                 <td>
                                     <Link to={"/blog/edit-blog/"}>
-                                        <button className="btn btn-warning">
+                                        <button className="btn btn-warning text-light">
                                             <i className="fas fa-edit"></i>
                                         </button>
                                     </Link>
-                                    <button className="btn brn-danger" onClick={this.deleteBlog(blog.id)}>
+                                    <button className="btn btn-danger mx-2" onClick={this.deleteBlog(blog.id)}>
                                         <i className="fas fa-trash"></i>
                                     </button>
                                 </td>
