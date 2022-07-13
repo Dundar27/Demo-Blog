@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
 import { auth } from './Firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import db from './Firebase';
 import { doc, setDoc, onSnapshot, collection } from "firebase/firestore";
 import ToastComponent from "./ToastComponent";
@@ -27,7 +27,10 @@ class Register extends React.Component {
             userNames: [],
             showA: false,
             showB: false,
-            showC: false
+            showC: false,
+            showD: false,
+            showE: false,
+            showF: false
         }
     }
 
@@ -41,29 +44,17 @@ class Register extends React.Component {
         }))}));
     }
 
-    toggleShowA = () => {
-        if(this.state.showA){
-            this.setState({showA : false})
-        }else{
-            this.setState({showA : true})
-        }
-    };
+    toggleShowA = () => { this.state.showA ? this.setState({showA : false}) : this.setState({showA : true}); };
 
-    toggleShowB = () => {
-        if(this.state.showB){
-            this.setState({showB : false})
-        }else{
-            this.setState({showB : true})
-        }
-    };
+    toggleShowB = () => { this.state.showB ? this.setState({showB : false}) : this.setState({showB : true}); };
 
-    toggleShowC = () => {
-        if(this.state.showC){
-            this.setState({showC : false})
-        }else{
-            this.setState({showC : true})
-        }
-    };
+    toggleShowC = () => { this.state.showC ? this.setState({showC : false}) : this.setState({showC : true}); };
+
+    toggleShowD = () => { this.state.showD ? this.setState({showD : false}) : this.setState({showD : true}); };
+
+    toggleShowE = () => { this.state.showE ? this.setState({showE : false}) : this.setState({showE : true}); };
+
+    toggleShowF = () => { this.state.showF ? this.setState({showF : false}) : this.setState({showF : true}); };
 
     async Register(e){
 
@@ -86,6 +77,9 @@ class Register extends React.Component {
         const ToastA = () => this.toggleShowA();
         const ToastB = () => this.toggleShowB();
         const ToastC = () => this.toggleShowC();
+        const ToastD = () => this.toggleShowD();
+        const ToastE = () => this.toggleShowE();
+        const ToastF = () => this.toggleShowF();
 
         function validate(){
             
@@ -109,35 +103,54 @@ class Register extends React.Component {
 
             createUserWithEmailAndPassword(auth, email, password).then((userCredential)=>{
 
-                userCredential.user.displayName = username; 
-                userCredential.user.phoneNumber = phone;
-
-                setDoc(doc(db, "users", auth.currentUser.uid), {
-                    
-                    username: username,
-                    firstname: firstname,
-                    lastname: lastname,
-                    birthday: birthday,
-                    adress: adress,
-                    phone: phone,
-                    id: auth.currentUser.uid,
-                    
-                    imgurl: "",
-                    facebookProfileURL:"",
-                    twitterProfileURL:"",
-                    instagramProfileURL:""
+                sendEmailVerification(userCredential.user)
+                .then(() => {
+                    ToastD();
+                })
+                .catch(error => {
+                    ToastE();
                 });
 
-                setDoc(doc(db, "usernames", auth.currentUser.uid),{
-                    username: username
-                })
+                if(userCredential.user.emailVerified.valueOf() === true){
 
-                errorMessage.style.display = "none";
-                successMessage.style.display = "block";
+                    userCredential.user.displayName = username; 
+                    userCredential.user.phoneNumber = phone;
 
-                setTimeout(function(){
-                    window.location = "/profile/";
-                }, 1000);
+                    setDoc(doc(db, "users", auth.currentUser.uid), {
+                        
+                        username: username,
+                        firstname: firstname,
+                        lastname: lastname,
+                        birthday: birthday,
+                        adress: adress,
+                        phone: phone,
+                        id: auth.currentUser.uid,
+                                
+                        imgurl: "",
+                        facebookProfileURL:"",
+                        twitterProfileURL:"",
+                        instagramProfileURL:""
+                    });
+            
+                    setDoc(doc(db, "usernames", auth.currentUser.uid),{
+                        username: username
+                    })
+            
+                    errorMessage.style.display = "none";
+                    successMessage.style.display = "block";
+            
+                    setTimeout(function(){
+                        window.location = "/profile/";
+                    }, 1000);
+                }
+                else { 
+
+                    ToastF(); 
+
+                    setTimeout(function(){
+                        window.location = "/login/";
+                    }, 1000);
+                }
 
             }).catch((err)=>{
                 console.log(err);
@@ -358,6 +371,21 @@ class Register extends React.Component {
                     show={this.state.showC}
                     toggleShow={this.toggleShowC}
                     message={"Please make sure you enter the passwords correctly.."}
+                />
+                <ToastComponent 
+                    show={this.state.showD}
+                    toggleShow={this.toggleShowD}
+                    message={"Email verification sent"}
+                />
+                <ToastComponent 
+                    show={this.state.showE}
+                    toggleShow={this.toggleShowE}
+                    message={"Email verification not sent"}
+                />
+                <ToastComponent 
+                    show={this.state.showF}
+                    toggleShow={this.toggleShowF}
+                    message={"First, verify your email address."}
                 />
             </div>    
         )
