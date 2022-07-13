@@ -32,10 +32,10 @@ class Login extends React.Component{
             errorMessage.style.display = "none";
 
             //Redirect to login screen after 1.5 seconds
-            setTimeout(function(){
-                window.location = "/";
-            }, 500);
-            console.log(u)
+            auth.currentUser.emailVerified ? 
+            (setTimeout ( function () { window.location = "/"; }, 500)) :
+            (setTimeout ( function () { window.location = "/verification/"; }, 500));
+            console.log(u);
             
         }).catch((err)=>{
             errorMessage.style.display = "block"; //Show error message if there is an error

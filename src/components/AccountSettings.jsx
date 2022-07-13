@@ -58,6 +58,7 @@ class ProfileSettings extends React.Component {
     }
 
     deleteAccount = async(e) => {
+
         e.preventDefault();
 
         deleteUser(this.user).then(()=> {
@@ -104,6 +105,7 @@ class ProfileSettings extends React.Component {
                             name="email"
                             onChange={this.handleChange}
                             value={this.state.email}
+                            required
                         />
                                             
                         <Form.Text className="text-muted">
@@ -128,6 +130,7 @@ class ProfileSettings extends React.Component {
                             minLength={8}
                             maxLength={16}
                             pattern={'(?=.*[A-Za-z])(?=.*[0-9]){8,16}'} 
+                            required
                         />
 
                         <Form.Text className="text-muted">

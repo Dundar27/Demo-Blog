@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { auth } from './Firebase';
+import { sendEmailVerification } from 'firebase/auth';
 import ToastComponent from "./ToastComponent";
 
 const Verification = (props) => {
@@ -14,7 +15,8 @@ const Verification = (props) => {
 
     const emailVerification = (event) => {
         event.preventDefault();
-        auth.currentUser.emailVerified ? window.location = '/profile/' : toggleShowF();
+        if(auth.currentUser.emailVerified) { window.location = '/profile/' }
+        else { toggleShowF(); sendEmailVerification(auth.currentUser); }
     }
 
     return (
