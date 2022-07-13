@@ -47,7 +47,7 @@ class Settings extends React.Component {
                   {this.props.userControl ? (<AccountSettings />) : (<div></div>)}
                 </Tab>
                 <Tab eventKey="blogs" title="Blogs">
-                  {auth.currentUser.emailVerified ? (<BlogsSettings />) : 
+                  {auth.currentUser.emailVerified ? (<BlogsSettings userControl={this.props.userControl} />) : 
                   (<div>
                     <Toast className="toast" id="toast">
                       <Toast.Header>

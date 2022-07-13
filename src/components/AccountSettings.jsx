@@ -61,30 +61,34 @@ class ProfileSettings extends React.Component {
 
         e.preventDefault();
 
-        deleteUser(this.user).then(()=> {
+        
+        if(window.confirm("Are you sure you want to delete your account?")){
+            deleteUser(this.user).then(()=> {
     
-            deleteDoc(this.userRef1).then(()=>{
-                
-                this.toggleShowA();
+                deleteDoc(this.userRef1).then(()=>{
+                    
+                    this.toggleShowA();
+        
+                }).catch((error) => {
+                    alert(error.code);
+                    alert(error.message);
+                }); 
     
-            }).catch((error) => {
-                alert(error.code);
-                alert(error.message);
-            }); 
-
-            deleteDoc(this.userRef2).then(()=>{
-                
-                this.toggleShowA();
+                deleteDoc(this.userRef2).then(()=>{
+                    
+                    this.toggleShowA();
+        
+                }).catch((error) => {
+                    alert(error.code);
+                    alert(error.message);
+                });
     
             }).catch((error) => {
                 alert(error.code);
                 alert(error.message);
             });
-
-        }).catch((error) => {
-            alert(error.code);
-            alert(error.message);
-        }); 
+        }
+        else { alert("You must confirm the warning message before you can delete your account."); }
     }
 
     handleChange(e){

@@ -110,6 +110,26 @@ class App extends React.Component {
               </div>
             }/>
 
+            <Route path="/blog/create-post/" element={
+              this.state.user && auth.currentUser.emailVerified ?
+              (<div>
+                {/*<CreatePost />*/}
+              </div>) : 
+              (<div>
+                <NoPage />
+              </div>)
+            }/>
+
+            <Route path="/blog/edit-post/" element={
+              this.state.user && auth.currentUser.emailVerified ?
+              (<div>
+                {/*<EditPost />*/}
+              </div>) : 
+              (<div>
+                <NoPage />
+              </div>)
+            }/>
+
             <Route path="/register/" element={
               this.state.user ?
               (<div>
