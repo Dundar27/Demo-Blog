@@ -7,6 +7,7 @@ import db from './Firebase';
 import { doc, setDoc, onSnapshot, collection } from "firebase/firestore";
 import ToastComponent from "./ToastComponent";
 
+
 class Register extends React.Component {
 
     constructor(props){
@@ -29,8 +30,7 @@ class Register extends React.Component {
             showB: false,
             showC: false,
             showD: false,
-            showE: false,
-            showF: false
+            showE: false
         }
     }
 
@@ -53,8 +53,6 @@ class Register extends React.Component {
     toggleShowD = () => { this.state.showD ? this.setState({showD : false}) : this.setState({showD : true}); };
 
     toggleShowE = () => { this.state.showE ? this.setState({showE : false}) : this.setState({showE : true}); };
-
-    toggleShowF = () => { this.state.showF ? this.setState({showF : false}) : this.setState({showF : true}); };
 
     async Register(e){
 
@@ -79,7 +77,6 @@ class Register extends React.Component {
         const ToastC = () => this.toggleShowC();
         const ToastD = () => this.toggleShowD();
         const ToastE = () => this.toggleShowE();
-        const ToastF = () => this.toggleShowF();
 
         function validate(){
             
@@ -103,54 +100,39 @@ class Register extends React.Component {
 
             createUserWithEmailAndPassword(auth, email, password).then((userCredential)=>{
 
-                sendEmailVerification(userCredential.user)
-                .then(() => {
-                    ToastD();
-                })
-                .catch(error => {
-                    ToastE();
-                });
+                userCredential.user.displayName = username; 
+                userCredential.user.phoneNumber = phone;
 
-                if(userCredential.user.emailVerified.valueOf() === true){
-
-                    userCredential.user.displayName = username; 
-                    userCredential.user.phoneNumber = phone;
-
-                    setDoc(doc(db, "users", auth.currentUser.uid), {
+                setDoc(doc(db, "users", auth.currentUser.uid), {
                         
-                        username: username,
-                        firstname: firstname,
-                        lastname: lastname,
-                        birthday: birthday,
-                        adress: adress,
-                        phone: phone,
-                        id: auth.currentUser.uid,
-                                
-                        imgurl: "",
-                        facebookProfileURL:"",
-                        twitterProfileURL:"",
-                        instagramProfileURL:""
-                    });
+                    username: username,
+                    firstname: firstname,
+                    lastname: lastname,
+                    birthday: birthday,
+                    adress: adress,
+                    phone: phone,
+                    id: auth.currentUser.uid,
+                            
+                    imgurl: "",
+                    facebookProfileURL:"",
+                    twitterProfileURL:"",
+                    instagramProfileURL:""
+                });
+        
+                setDoc(doc(db, "usernames", auth.currentUser.uid),{
+                    username: username
+                })
             
-                    setDoc(doc(db, "usernames", auth.currentUser.uid),{
-                        username: username
-                    })
-            
-                    errorMessage.style.display = "none";
-                    successMessage.style.display = "block";
-            
-                    setTimeout(function(){
-                        window.location = "/profile/";
-                    }, 1000);
-                }
-                else { 
+                errorMessage.style.display = "none";
+                successMessage.style.display = "block";
 
-                    ToastF(); 
-
-                    setTimeout(function(){
-                        window.location = "/login/";
-                    }, 1000);
-                }
+                sendEmailVerification(userCredential.user)
+                .then(() => { ToastD(); })
+                .catch(error => { ToastE(); });
+        
+                setTimeout(function(){
+                    window.location = "/verification/";
+                }, 1000);
 
             }).catch((err)=>{
                 console.log(err);
@@ -381,11 +363,6 @@ class Register extends React.Component {
                     show={this.state.showE}
                     toggleShow={this.toggleShowE}
                     message={"Email verification not sent"}
-                />
-                <ToastComponent 
-                    show={this.state.showF}
-                    toggleShow={this.toggleShowF}
-                    message={"First, verify your email address."}
                 />
             </div>    
         )

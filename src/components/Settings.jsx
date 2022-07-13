@@ -47,10 +47,10 @@ class Settings extends React.Component {
 
               </Tab>
               <Tab eventKey="account" title="Account">
-                <AccountSettings />
+                {this.props.user ? (<AccountSettings />) : (<div></div>)}
               </Tab>
               <Tab eventKey="blogs" title="Blogs">
-                <BlogsSettings />
+                {this.props.user ? (<BlogsSettings />) : (<div></div>)}
               </Tab>
             </Tabs>
           </Col>

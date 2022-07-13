@@ -30,7 +30,13 @@
     color: green;
     transition-duration: 1s;
 }
-
+/**************************************Verification Component************************************/
+#verification-component form, #verification-component button{
+    width: 50%;
+    margin: auto;
+    position: absolute;
+    left: 25%;
+}
 /****************************************Toast***************************************************/
 .toast{
     position: fixed;

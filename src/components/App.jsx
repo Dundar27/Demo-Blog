@@ -13,6 +13,7 @@ import Login from "./Login";
 import NoPage from "./NoPage";
 import PasswordReset from "./PasswordReset";
 import Contact from "./Contact";
+import Verification from "./Verification";
 //Style files
 import "./style.css"
 //Database functions
@@ -112,9 +113,6 @@ class App extends React.Component {
             <Route path="/register/" element={
               this.state.user ?
               (<div>
-                <Navbar
-                  userControl={this.state.user}
-                />
                 <NoPage /> 
               </div>) : 
               (<div>
@@ -125,12 +123,19 @@ class App extends React.Component {
               </div>)}
             />
 
+            <Route path="/verification/" element={
+              this.state.user ? 
+              (<div>
+                <Verification />
+              </div>) :
+              (<div>
+                <Login />
+              </div>)
+            } />
+
             <Route path="/login/" element={
               this.state.user ?
               (<div>
-                <Navbar
-                  userControl={this.state.user}
-                />
                 <NoPage /> 
               </div>) : 
               (<div>
