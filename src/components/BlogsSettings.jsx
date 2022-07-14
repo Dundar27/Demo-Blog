@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Table from 'react-bootstrap/Table';
+import {Table, Button} from 'react-bootstrap';
 import db from './Firebase';
 import { collection, onSnapshot, query, where, doc, deleteDoc } from "firebase/firestore";
 
@@ -8,9 +8,11 @@ class BlogsSettings extends React.Component{
 
     constructor(props){
         super(props);
+
         this.state={
             userData: [],
-            userBlogPosts: []
+            userBlogPosts: [],
+            selected: false
         }
     }
 
@@ -46,39 +48,49 @@ class BlogsSettings extends React.Component{
                 alert(error.message);
             });
         }
+
     }
 
     render(){
         return(
-            <div>
-                <Link to={"/blog/create-post/"}>
-                    <button className="btn btn-primary w-100 mt-3">
-                        <i className="fas fa-plus"></i> Create Blog Post
-                    </button>
+            <div id="blogssettings-component">
+                    
+                <Link to={"/blog/create-post/"} className="mt-3">
+                    <Button variant="primary" className="w-100">
+                        <i className="fas fa-plus"></i> Create
+                    </Button> 
                 </Link> <hr />
+
                 <Table responsive="sm" className="my-3">
                     <thead>
                         <tr>
-                            <th>#</th>
                             <th>Blog Title</th>
+                            <th>Blog Description</th>
                             <th>Catagories</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.state.userBlogPosts.map(blog => (
-                            <tr>
-                                <td>*</td>
+                            <tr id={blog.id}>
+
                                 <td>{blog.data.title}</td>
+
+                                <td className="text-center">
+                                    {blog.data.description}
+                                </td>
+
                                 <td>{blog.data.catagories}</td>
+
                                 <td>
-                                    <Link to={"/blog/edit-blog/"}>
-                                        <button className="btn btn-warning text-light">
-                                            <i className="fas fa-edit"></i>
-                                        </button>
+                                    <Link to={"/blog/edit-blog/"} className="mx-2">
+                                        <Button variant="warning" className="text-light">    
+                                                <i className="fas fa-edit"></i> Edit 
+                                        </Button>
                                     </Link>
-                                    <button className="btn btn-danger mx-2" onClick={this.deleteBlog(blog.id)}>
-                                        <i className="fas fa-trash"></i>
-                                    </button>
+                                    <Button variant="danger" className="mx-2">
+                                        <i className="fas fa-trash"></i> Delete
+                                    </Button>
                                 </td>
                             </tr>
                         ))}

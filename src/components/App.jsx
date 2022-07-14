@@ -14,6 +14,7 @@ import NoPage from "./NoPage";
 import PasswordReset from "./PasswordReset";
 import Contact from "./Contact";
 import Verification from "./Verification";
+import CreateBlogPost from "./CreateBlogPost";
 //Style files
 import "./style.css"
 //Database functions
@@ -111,22 +112,26 @@ class App extends React.Component {
             }/>
 
             <Route path="/blog/create-post/" element={
-              this.state.user && auth.currentUser.emailVerified ?
+              this.state.user ?
+              (
+                auth.currentUser.emailVerified ?
+                (<div><CreateBlogPost /></div>) :
+                (<div><Verification /></div>)
+              ) : 
               (<div>
-                {/*<CreatePost />*/}
-              </div>) : 
-              (<div>
-                <NoPage />
+                <Login />
               </div>)
             }/>
 
             <Route path="/blog/edit-post/" element={
-              this.state.user && auth.currentUser.emailVerified ?
+              this.state.user ?
+              (
+                auth.currentUser.emailVerified ?
+                (<div>{/*<EditPost />*/}</div>) :
+                (<div><Verification /></div>)
+              ) : 
               (<div>
-                {/*<EditPost />*/}
-              </div>) : 
-              (<div>
-                <NoPage />
+                <Login />
               </div>)
             }/>
 
