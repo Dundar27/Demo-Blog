@@ -76,19 +76,17 @@ class BlogsSettings extends React.Component{
 
                                 <td>{blog.data.title}</td>
 
-                                <td className="text-center">
-                                    {blog.data.description}
-                                </td>
+                                <td>{blog.data.description}</td>
 
                                 <td>{blog.data.catagories}</td>
 
                                 <td>
-                                    <Link to={"/blog/edit-blog/"} className="mx-2">
+                                    <Link to={`/blog/edit-blog/${blog.id}`} className="mx-2">
                                         <Button variant="warning" className="text-light">    
                                                 <i className="fas fa-edit"></i> Edit 
                                         </Button>
                                     </Link>
-                                    <Button variant="danger" className="mx-2">
+                                    <Button variant="danger" className="mx-2" onClick={() => this.deleteBlog(blog.id)}>
                                         <i className="fas fa-trash"></i> Delete
                                     </Button>
                                 </td>

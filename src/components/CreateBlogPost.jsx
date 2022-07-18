@@ -67,7 +67,7 @@ class CreateBlogPost extends React.Component {
       () => {
         // Upload completed successfully, now we can get the download URL
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-          this.setState({ imageUrl: url });
+          return this.setState({ imageUrl: url });
         });
       }
     );
