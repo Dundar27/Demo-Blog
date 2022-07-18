@@ -15,220 +15,287 @@ import PasswordReset from "./PasswordReset";
 import Contact from "./Contact";
 import Verification from "./Verification";
 import CreateBlogPost from "./CreateBlogPost";
+import EditBlogPost from "./EditBlogPost";
 //Style files
-import "./style.css"
+import "./style.css";
 //Database functions
 import db, { auth } from "./Firebase";
-import {collection, query, onSnapshot, orderBy, limit} from "firebase/firestore";
+import {
+  collection,
+  query,
+  onSnapshot,
+  orderBy,
+  limit,
+} from "firebase/firestore";
 
 class App extends React.Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state= {
-      populerBlogPosts: [],   
-      blogPosts: [],  //To keep data of blog cards
+    this.state = {
+      populerBlogPosts: [],
+      blogPosts: [], //To keep data of blog cards
       searchQuery: "", // To filter blog cards
-      user: false
-    }
+      user: false,
+    };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.getBlogPosts();
     this.getPopulerBlogPosts();
     this.authListener();
   }
 
   //Check if the user is logged in
-  authListener(){
-    auth.onAuthStateChanged((user)=> {
-      if(user){
-        this.setState({user});
+  authListener() {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user });
+      } else {
+        this.setState({ user: false });
       }
-      else{
-        this.setState({user: false});
-      }
-    })
+    });
   }
 
   // Function to get blog data from firebase database
   async getBlogPosts() {
-    const response = await onSnapshot(query(collection(db, 'blogs')), snapshop => this.setState({blogPosts: snapshop.docs.map(doc => ({
-      id:doc.id,data:doc.data()
-    }))}));
+    const response = await onSnapshot(
+      query(collection(db, "blogs")),
+      (snapshop) =>
+        this.setState({
+          blogPosts: snapshop.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          })),
+        })
+    );
   }
 
   // Function to get blog data from firebase database
   async getPopulerBlogPosts() {
-    const response = await onSnapshot(query(collection(db, 'blogs'), orderBy('like'), limit(4)), snapshop => this.setState({populerBlogPosts: snapshop.docs.map(doc => ({
-      id:doc.id,data:doc.data()
-    }))}));
+    const response = await onSnapshot(
+      query(collection(db, "blogs"), orderBy("like"), limit(4)),
+      (snapshop) =>
+        this.setState({
+          populerBlogPosts: snapshop.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          })),
+        })
+    );
   }
 
   //Get data in search button
-  searchBlogPostProp = (event) =>  {
-    this.setState({searchQuery: event.target.value});
-  }
+  searchBlogPostProp = (event) => {
+    this.setState({ searchQuery: event.target.value });
+  };
 
-  render(){
-
+  render() {
     //Function to remove case insensitivity of data in search button
-    let filtered = this.state.blogPosts.filter(
-      (blog) => {
-          return (blog.data.title.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1 ||
-                 blog.data.writer.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1 ||
-                 blog.data.catagories.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1)
-      }
-    ).sort((a, b) => {
+    let filtered = this.state.blogPosts
+      .filter((blog) => {
+        return (
+          blog.data.title
+            .toLowerCase()
+            .indexOf(this.state.searchQuery.toLowerCase()) !== -1 ||
+          blog.data.writer
+            .toLowerCase()
+            .indexOf(this.state.searchQuery.toLowerCase()) !== -1 ||
+          blog.data.catagories
+            .toLowerCase()
+            .indexOf(this.state.searchQuery.toLowerCase()) !== -1
+        );
+      })
+      .sort((a, b) => {
         return a.id < b.id ? 1 : a.id > b.id ? -1 : 0;
-    });
+      });
 
     return (
-        <BrowserRouter>
-          <Routes>
-
-            <Route path="/" exact element={
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            exact
+            element={
               <div>
-                <Navbar 
-                  userControl={this.state.user}
-                />
+                <Navbar userControl={this.state.user} />
                 <Slider />
-                <MainSection getPopulerBlogPosts={filtered}/>
-                <Footer userControl={this.state.user}/>
+                <MainSection getPopulerBlogPosts={filtered} />
+                <Footer userControl={this.state.user} />
               </div>
-            }/>
+            }
+          />
 
-            <Route path="/blog/" element={
+          <Route
+            path="/blog/"
+            element={
               <div>
-                <Navbar 
-                  userControl={this.state.user}
-                />
-                <Blog 
+                <Navbar userControl={this.state.user} />
+                <Blog
                   getBlogPosts={filtered}
                   searchProp={this.searchBlogPostProp}
                 />
-                <Footer userControl={this.state.user}/>
+                <Footer userControl={this.state.user} />
               </div>
-            }/>
+            }
+          />
 
-            <Route path="/blog/create-post/" element={
-              this.state.user ?
-              (
-                auth.currentUser.emailVerified ?
-                (<div><CreateBlogPost /></div>) :
-                (<div><Verification /></div>)
-              ) : 
-              (<div>
-                <Login />
-              </div>)
-            }/>
+          <Route
+            path="/blog/create-post/"
+            element={
+              this.state.user ? (
+                auth.currentUser.emailVerified ? (
+                  <div>
+                    <CreateBlogPost />
+                  </div>
+                ) : (
+                  <div>
+                    <Verification />
+                  </div>
+                )
+              ) : (
+                <div>
+                  <Login />
+                </div>
+              )
+            }
+          />
 
-            <Route path="/blog/edit-post/" element={
-              this.state.user ?
-              (
-                auth.currentUser.emailVerified ?
-                (<div>{/*<EditPost />*/}</div>) :
-                (<div><Verification /></div>)
-              ) : 
-              (<div>
-                <Login />
-              </div>)
-            }/>
+          <Route
+            path={"/blog/edit-post/:id"}
+            element={
+              this.state.user ? (
+                auth.currentUser.emailVerified ? (
+                  <div>
+                    <EditBlogPost />
+                  </div>
+                ) : (
+                  <div>
+                    <Verification />
+                  </div>
+                )
+              ) : (
+                <div>
+                  <Login />
+                </div>
+              )
+            }
+          />
 
-            <Route path="/register/" element={
-              this.state.user ?
-              (<div>
-                <NoPage /> 
-              </div>) : 
-              (<div>
-                <Navbar
-                  userControl={this.state.user}
-                />
-                <Register /> 
-              </div>)}
-            />
+          <Route
+            path="/register/"
+            element={
+              this.state.user ? (
+                <div>
+                  <NoPage />
+                </div>
+              ) : (
+                <div>
+                  <Navbar userControl={this.state.user} />
+                  <Register />
+                </div>
+              )
+            }
+          />
 
-            <Route path="/verification/" element={
-              this.state.user ? 
-              (<div>
-                <Verification />
-              </div>) :
-              (<div>
-                <Login />
-              </div>)
-            } />
+          <Route
+            path="/verification/"
+            element={
+              this.state.user ? (
+                <div>
+                  <Verification />
+                </div>
+              ) : (
+                <div>
+                  <Login />
+                </div>
+              )
+            }
+          />
 
-            <Route path="/login/" element={
-              this.state.user ?
-              (<div>
-                <NoPage /> 
-              </div>) : 
-              (<div>
-                <Navbar
-                  userControl={this.state.user}
-                />
-                <Login /> 
-              </div>)}
-            />
+          <Route
+            path="/login/"
+            element={
+              this.state.user ? (
+                <div>
+                  <NoPage />
+                </div>
+              ) : (
+                <div>
+                  <Navbar userControl={this.state.user} />
+                  <Login />
+                </div>
+              )
+            }
+          />
 
-            <Route path="/passwordReset/" element={
+          <Route
+            path="/passwordReset/"
+            element={
               <div>
-                <PasswordReset/>
+                <PasswordReset />
               </div>
-            } >
+            }
+          ></Route>
 
-            </Route>
+          <Route
+            path="/profile/"
+            element={
+              this.state.user ? (
+                <div>
+                  <Navbar userControl={this.state.user} />
+                  <Profile
+                    userControl={this.state.user}
+                    searchProp={this.searchBlogPostProp}
+                  />
+                </div>
+              ) : (
+                <div>
+                  <Navbar />
+                  <Login />
+                </div>
+              )
+            }
+          />
 
-            <Route path='/profile/' element={
-              this.state.user ? 
-              (<div>
-                <Navbar
-                  userControl={this.state.user}
-                />
-                <Profile 
-                  userControl={this.state.user}
-                  searchProp={this.searchBlogPostProp}
-                />
-              </div>) :
-              (<div>
-                <Navbar/>
-                <Login/>
-              </div>)
-            }/>
-
-            <Route path='/profiles/' element={
+          <Route
+            path="/profiles/"
+            element={
               <div>
-                <NoPage/>
+                <NoPage />
               </div>
-            }/>
+            }
+          />
 
-            <Route path='/profile/settings/' element={
-              this.state.user ? 
-              (<div>
-                <Navbar
-                  userControl={this.state.user}
-                />
-                <Settings 
-                  userControl={this.state.user}
-                />
-              </div>) :
-              (<div>
-                <Navbar/>
-                <Login/>
-              </div>)}
-            /> 
+          <Route
+            path="/profile/settings/"
+            element={
+              this.state.user ? (
+                <div>
+                  <Navbar userControl={this.state.user} />
+                  <Settings userControl={this.state.user} />
+                </div>
+              ) : (
+                <div>
+                  <Navbar />
+                  <Login />
+                </div>
+              )
+            }
+          />
 
-            <Route path="/contact/" element={
-              (<div>
-                <Navbar userControl={this.state.user}/>
+          <Route
+            path="/contact/"
+            element={
+              <div>
+                <Navbar userControl={this.state.user} />
                 <Contact />
-              </div>)
-            } />     
+              </div>
+            }
+          />
 
-            <Route path="*" element={<NoPage />} />
-            
-          </Routes> 
-        </BrowserRouter>
+          <Route path="*" element={<NoPage />} />
+        </Routes>
+      </BrowserRouter>
     );
   }
 }
