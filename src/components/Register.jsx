@@ -90,7 +90,7 @@ class Register extends React.Component {
             { valid2 = false; ToastC(); }
             else { valid2 = true; }
 
-            if ( valid1 && valid2 == true ) { valid = true }
+            if ( valid1 && valid2 === true ) { valid = true }
             else { valid = false }
 
             return valid;

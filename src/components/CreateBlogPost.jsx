@@ -1,8 +1,8 @@
 import React from "react";
 import db from "./Firebase";
-import { auth, storage } from "./Firebase";
+import { auth /*storage*/ } from "./Firebase";
 import { setDoc, doc } from "firebase/firestore";
-import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+//import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { Card, Form, Button } from "react-bootstrap";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -13,8 +13,8 @@ class CreateBlogPost extends React.Component {
     this.state = {
       title: "",
       content: "",
-      image: "",
-      imageUrl: null,
+      //image: "",
+      imageUrl: "",
       description: "",
       catagories: ""
     };
@@ -26,7 +26,7 @@ class CreateBlogPost extends React.Component {
     const id = uuidv4();
     const date = new Date();
 
-    const storageRef = ref(
+    /* const storageRef = ref(
       storage,
       `/post_image/${auth.currentUser.displayName}/${this.state.image.name}`
     );
@@ -47,6 +47,8 @@ class CreateBlogPost extends React.Component {
           case "running":
             console.log("Upload is running");
             break;
+          default :
+            console.log("CreateBlogPost.jsx line 51, default case working...?");
         }
       },
       (error) => {
@@ -67,10 +69,10 @@ class CreateBlogPost extends React.Component {
       () => {
         // Upload completed successfully, now we can get the download URL
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-          return this.setState({ imageUrl: url });
+          this.setState({ imageUrl: url });
         });
       }
-    );
+    ); */
 
     await setDoc(doc(db, "blogs", id),
       {
@@ -93,11 +95,11 @@ class CreateBlogPost extends React.Component {
     });
   };
 
-  handleChangeFile = (e) => {
+  /* handleChangeFile = (e) => {
     this.setState({
       image: e.target.files[0],
     });
-  };
+  }; */
 
   render() {
     return (
@@ -137,7 +139,7 @@ class CreateBlogPost extends React.Component {
                 />
               </Form.Group>
 
-              <Form.Group className="mb-3">
+              {/* <Form.Group className="mb-3">
                 <Form.Label>Main Image</Form.Label>
                 <Form.Control
                   type="file"
@@ -146,19 +148,19 @@ class CreateBlogPost extends React.Component {
                   required
                   onChange={this.handleChangeFile}
                 />
-              </Form.Group>
+              </Form.Group> */}
 
-              {/*<Form.Group className="mb-3">
+              <Form.Group className="mb-3">
                 <Form.Label>Main Image URL</Form.Label>
                 <Form.Control
                   type="url"
                   id="createPost_img"
-                  name="image"
+                  name="imageUrl"
                   required
                   onChange={this.handleChange}
                   value={this.state.image}
                 />
-              </Form.Group>*/}
+              </Form.Group>
 
               <Form.Group className="mb-3 w-100">
                 <Form.Label>Short Description</Form.Label>
