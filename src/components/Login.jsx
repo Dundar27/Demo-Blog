@@ -61,7 +61,7 @@ class Login extends React.Component{
             <div className='p-3 mt-5 container' id='login-component'>
                 <div>
                     <h1 className='text-center mb-3'>Login Form</h1>
-                    <Form className="mx-auto" onSubmit={this.login} > 
+                    <Form className="mx-auto" method="post" onSubmit={this.login} > 
                     
                         <Form.Group className="mb-3" id="formBasicEmail">
                             <Form.Label>Email address</Form.Label>

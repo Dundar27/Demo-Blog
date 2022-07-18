@@ -155,7 +155,7 @@ class Register extends React.Component {
             <div className='p-3 mt-5  container' id='register-component'>
                 <div>
                     <h1 className='text-center mb-5'>Register Form</h1>
-                    <Form onSubmit={this.Register} className="mx-auto"> 
+                    <Form method="post" onSubmit={this.Register} className="mx-auto"> 
                                        
                         <div className='d-flex'>
                             <Form.Group className="mb-3 w-100" id="formBasicEmail">

@@ -1,8 +1,10 @@
 import React from "react";
-import db, { auth, storage } from "./Firebase";
-import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import db from "./Firebase";
+import { auth, storage } from "./Firebase";
 import { setDoc, doc } from "firebase/firestore";
-import { Card, Form, Button, ProgressBar } from "react-bootstrap";
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { Card, Form, Button } from "react-bootstrap";
+import { v4 as uuidv4 } from 'uuid';
 
 class CreateBlogPost extends React.Component {
   constructor(props) {
@@ -11,37 +13,27 @@ class CreateBlogPost extends React.Component {
     this.state = {
       title: "",
       content: "",
-      img: "",
-      imgUrl: null,
+      image: "",
+      imageUrl: null,
       description: "",
-      catagories: "",
-      progresspercent: 0,
+      catagories: ""
     };
   }
 
-  handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  handleChangeFile = (e) => {
-    this.setState({
-      img: e.target.files[0],
-    });
-  };
-
   createPost = async (e) => {
-    let id = Math.floor(Math.random() * 100) * Math.floor(Math.random() * 100);
-    let date = new Date().getDate();
+    e.preventDefault();
+
+    const id = uuidv4();
+    const date = new Date();
+
     const storageRef = ref(
       storage,
-      `/post_image/${auth.currentUser.displayName}/${this.state.img.name}`
+      `/post_image/${auth.currentUser.displayName}/${this.state.image.name}`
     );
-    const uploadTask = uploadBytesResumable(storageRef, this.state.img);
+    const uploadTask = uploadBytesResumable(storageRef, this.state.image);
 
     // Listen for state changes, errors, and completion of the upload.
-    uploadTask.on(
+    await uploadTask.on(
       "state_changed",
       (snapshot) => {
         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
@@ -62,35 +54,49 @@ class CreateBlogPost extends React.Component {
         // https://firebase.google.com/docs/storage/web/handle-errors
         switch (error.code) {
           case "storage/unauthorized":
-            // User doesn't have permission to access the object
+            console.log("User doesn't have permission to access the object");
             break;
           case "storage/canceled":
-            // User canceled the upload
+            console.log("User canceled the upload");
             break;
           case "storage/unknown":
-            // Unknown error occurred, inspect error.serverResponse
+            console.log("Unknown error occurred, inspect error.serverResponse");
             break;
         }
       },
       () => {
         // Upload completed successfully, now we can get the download URL
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          this.setState({ imgUrl: downloadURL });
+          this.setState({ imageUrl: downloadURL });
         });
       }
     );
-    setDoc(doc(db, "blogs", id.toString()), {
-      id: id,
-      title: this.state.title,
-      content: this.state.content,
-      img: this.state.imgUrl,
-      description: this.state.description,
-      catagories: this.state.catagories,
-      date: date,
-      writter: auth.currentUser.displayName,
-    }).catch((error) => alert(error));
+
+    await setDoc(doc(db, "blogs", id),
+      {
+        id: id,
+        title: this.state.title,
+        content: this.state.content,
+        image: this.state.imageUrl,
+        description: this.state.description,
+        catagories: this.state.catagories,
+        date: date,
+        writter: auth.currentUser.displayName,
+      });
 
     window.location = "/profile/settings/";
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  handleChangeFile = (e) => {
+    this.setState({
+      image: e.target.files[0],
+    });
   };
 
   render() {
@@ -101,7 +107,7 @@ class CreateBlogPost extends React.Component {
             <Card.Title>Create Blog Post</Card.Title>
           </Card.Header>
           <Card.Body className="container">
-            <Form onSubmit={this.createPost}>
+            <Form method="post" onSubmit={this.createPost}>
               <Form.Group className="mb-3 w-100">
                 <Form.Label>Title</Form.Label>
                 <Form.Control
@@ -136,17 +142,23 @@ class CreateBlogPost extends React.Component {
                 <Form.Control
                   type="file"
                   id="createPost_img"
-                  name="img"
+                  name="image"
                   required
                   onChange={this.handleChangeFile}
-                /> <br />
-                {!this.state.imgUrl && (
-                  <ProgressBar now={this.state.progresspercent} label={`${this.state.progresspercent}%`} />
-                )}
-                {this.state.imgUrl && (
-                  <Card.Text className="text-center">Uploaded file</Card.Text>
-                )}
+                />
               </Form.Group>
+
+              {/*<Form.Group className="mb-3">
+                <Form.Label>Main Image URL</Form.Label>
+                <Form.Control
+                  type="url"
+                  id="createPost_img"
+                  name="image"
+                  required
+                  onChange={this.handleChange}
+                  value={this.state.image}
+                />
+              </Form.Group>*/}
 
               <Form.Group className="mb-3 w-100">
                 <Form.Label>Short Description</Form.Label>
