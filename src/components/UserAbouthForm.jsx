@@ -62,6 +62,7 @@ class UserAbouthForm extends React.Component{
         const userNames = this.state.userNames.map(user => user.data.username);
         const docRef = doc(db, 'users/'+user);
         const docRef2 = doc(db, 'usernames/'+user);
+        const docRef3 = doc(db, 'writers/'+user);
 
         const values = new Array(11);
         values[0] = this.state.firstname;
@@ -96,6 +97,7 @@ class UserAbouthForm extends React.Component{
                         else { 
                             await updateDoc(docRef, {username: values[2]});
                             await updateDoc(docRef2, {username: values[2]});
+                            await updateDoc(docRef3, {username: values[2]});
                             updateProfile(auth.currentUser, {displayName:values[2]}); 
                         }
                     }
@@ -119,6 +121,7 @@ class UserAbouthForm extends React.Component{
                 case 6:
                     if(values[6] !== "" || null){
                         await updateDoc(docRef, {imgurl: values[6]});
+                        await updateDoc(docRef3, {imgurl: values[6]});
                         updateProfile(auth.currentUser, {photoURL:values[6]});
                     }
                     break;  

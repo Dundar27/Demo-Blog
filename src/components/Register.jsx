@@ -123,6 +123,11 @@ class Register extends React.Component {
           username: username
         })
 
+        setDoc(doc(db, "writers", auth.currentUser.uid), {
+          username: username,
+          imgurl: ""
+        })
+
         errorMessage.style.display = "none";
         successMessage.style.display = "block";
 

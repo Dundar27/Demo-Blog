@@ -34,6 +34,7 @@ class ProfileSettings extends React.Component {
     //blogsRef = query(collection(db ,"blogs"), where("writer", "==", this.user.displayName));
     userRef1 = doc(db, "users", this.user.uid);
     userRef2 = doc(db, "usernames", this.user.uid);
+    docRef = doc(db, 'writers', this.user.uid);
 
     newEmail = async(e) => {
         e.preventDefault();
@@ -75,6 +76,15 @@ class ProfileSettings extends React.Component {
                 }); 
     
                 deleteDoc(this.userRef2).then(()=>{
+                    
+                    this.toggleShowA();
+        
+                }).catch((error) => {
+                    alert(error.code);
+                    alert(error.message);
+                });
+
+              deleteDoc(this.docRef).then(()=>{
                     
                     this.toggleShowA();
         
