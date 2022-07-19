@@ -13,7 +13,7 @@ const Footer = (props) => {
             </div>
             <div className="text-center p-3" style={{backgroundColor: "rgba(0, 0, 0, 0.2)"}}>
                 © 2022 Copyright :
-                <Link className="text-white" to="/terms"> demo-blog-page.com</Link>
+                <Link className="text-white" to="/policys"> demo-blog-page.com</Link>
             </div>
         </footer>
     )

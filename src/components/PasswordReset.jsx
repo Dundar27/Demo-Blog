@@ -45,8 +45,8 @@ class passwordReset extends React.Component{
 
     render(){
         return(
-            <div className="container my-5" id="passwordreset">
-                <h2>Password Reset</h2> <br />
+            <div className="container my-5 w-50" id="passwordreset">
+                <h2 className="text-center">Password Reset</h2> <br />
                 <Form onSubmit={this.sendMail}>
                     <Form.Group className="mb-3" id="formBasicEmail">
                         <Form.Label>Email address</Form.Label>

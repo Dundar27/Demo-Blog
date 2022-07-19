@@ -16,6 +16,7 @@ import Contact from "./Contact";
 import Verification from "./Verification";
 import CreateBlogPost from "./CreateBlogPost";
 import EditBlogPost from "./EditBlogPost";
+import PrivacyPolicy from "./PrivacyPolicy";
 //Style files
 import "./style.css";
 //Database functions
@@ -292,6 +293,8 @@ class App extends React.Component {
               </div>
             }
           />
+
+          <Route path="/policys/" element={<PrivacyPolicy />} />
 
           <Route path="*" element={<NoPage />} />
         </Routes>

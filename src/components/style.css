@@ -1,46 +1,21 @@
-/**********************************************Home Page*************************************************/
+/***********************************************************************************************/
 
-/*************Blog Component*************/
-#blogs-component, #header-component{
-    background: rgb(200, 200, 200);
+#blogs-component, #header-component { background: rgb(200, 200, 200); }
+#layout-component .nav-link:hover { background-color: rgb(54, 54, 54); }
+#layout-component, #blogs-component .help-box { position: sticky; }
+
+.contact a, #blogs-component a{
+  text-decoration: none;
+  padding: 5px;
+  border-radius: 15px;
 }
-/*************Layout Component*************/
+.toast{
+  position: fixed;
+  top: 40%;
+  left: 38%;
+  box-shadow: 1px 1px 8px 5px rgba(0, 0, 0, 0.2) !important;
+}
 #layout-component {
-    position: sticky;
     top: 0;
     z-index: 10;
-}
-#layout-component .nav-link:hover{
-    background-color: rgb(54, 54, 54);
-}
-/***************************************************Login Page**************************************************/
-#passwordreset {
-    width: 50%;
-}
-#passwordreset h2{
-    text-align: center;
-}
-
-/********************************************Contact********************************************/
-.contact a{
-    text-decoration: none;
-    color: rgb(71, 71, 71);
-}
-.contact a:hover{
-    color: green;
-    transition-duration: 1s;
-}
-/**************************************Verification Component************************************/
-#verification-component form, #verification-component button{
-    width: 50%;
-    margin: auto;
-    position: absolute;
-    left: 25%;
-}
-/****************************************Toast***************************************************/
-.toast{
-    position: fixed;
-    top: 40%;
-    left: 38%;
-    box-shadow: 1px 1px 8px 5px rgba(0, 0, 0, 0.2) !important;
 }
