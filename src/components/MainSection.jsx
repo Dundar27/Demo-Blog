@@ -25,7 +25,7 @@ const MainSection = (props) => {
                 <Card.Body>
                   <ListGroup>
                     <ListGroup.Item >
-                      <Link to={'blog/writers/'}>Writers</Link>
+                      <Link to={'/writers/'}>Writers</Link>
                     </ListGroup.Item>
                     <ListGroup.Item>
                       <Link to={'blog/catagories/'}>Catagories</Link>
