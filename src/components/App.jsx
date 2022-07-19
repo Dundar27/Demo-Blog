@@ -297,7 +297,9 @@ class App extends React.Component {
 
           <Route path="/writers/" element={
             <div>
+              <Navbar userControl={this.state.user} />
               <Writers />
+              <Footer userControl={this.state.user} />
             </div>
             }
           />   
