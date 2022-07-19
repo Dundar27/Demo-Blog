@@ -8,7 +8,7 @@ const BlogPosts = (props) => {
     <Row>
       {props.BlogPosts.map((blog) => (
         <Col sm={6} >
-          <Card className='my-4 mx-3' id={blog.id}>
+          <Card className='my-4 mx-3'>
             <Card.Header className='text-center p-3'>
               <Card.Title className='w-100'>
                 {blog.data.title}
