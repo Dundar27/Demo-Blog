@@ -7,11 +7,11 @@ const WriterPosts = (props) => {
   return (
     <Row>
       {props.WriterPosts.map((writer) => (
-        <Col sm={6} >
+        <Col sm={3} >
           <Card className='my-4 mx-3'>
             <Card.Header className='text-center p-3'>
               <Card.Title className='w-100'>
-                {writer.data.title}
+                {writer.data.username}
               </Card.Title>
             </Card.Header>
 
@@ -21,7 +21,7 @@ const WriterPosts = (props) => {
 
             </Card.Body>
 
-            <Card.Footer className='mt-2'>
+            <Card.Footer className='mt-2 text-center'>
               <Link to={'profile/' + writer.id} className="btn btn-outline-primary btn-rounded">Go to profile</Link>
             </Card.Footer>
           </Card>

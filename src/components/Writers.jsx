@@ -1,11 +1,37 @@
 import React from "react";
 import SearchBar from './SearchBar';
+import WriterPosts from "./WriterPosts";
+import db from "./Firebase";
+import {
+  collection,
+  query,
+  onSnapshot
+} from "firebase/firestore";
 
 class Writers extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      writerPosts:[]
+    }
+  }
+
+  componentDidMount(){
+    this.getWritersData();
+  }  
+
+  async getWritersData(){
+    const response = await onSnapshot(
+      query(collection(db, "writers")),
+      (snapshop) =>
+        this.setState({
+          writerPosts: snapshop.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          })),
+        })
+    );
   }
 
   render() {
@@ -19,7 +45,7 @@ class Writers extends React.Component {
         <SearchBar />
 
         <div>
-        
+          <WriterPosts WriterPosts={this.state.writerPosts}/>
         </div>
       </div>
     );

@@ -17,6 +17,7 @@ import Verification from "./Verification";
 import CreateBlogPost from "./CreateBlogPost";
 import EditBlogPost from "./EditBlogPost";
 import PrivacyPolicy from "./PrivacyPolicy";
+import Writers from "./Writers";
 //Style files
 import "./style.css";
 //Database functions
@@ -293,6 +294,13 @@ class App extends React.Component {
               </div>
             }
           />
+
+          <Route path="/writers/" element={
+            <div>
+              <Writers />
+            </div>
+            }
+          />   
 
           <Route path="/policys/" element={<PrivacyPolicy />} />
 
