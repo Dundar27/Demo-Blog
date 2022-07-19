@@ -20,9 +20,9 @@ class Blog extends React.Component{
 
                 <SearchBar searchProp={this.props.searchProp}/>
 
-                <Row>
+                <div>
                     <BlogPosts BlogPosts={this.props.getBlogPosts} />
-                </Row>
+                </div>
             </div>
         );
     }
