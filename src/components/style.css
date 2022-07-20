@@ -4,11 +4,6 @@
 #layout-component .nav-link:hover { background-color: rgb(54, 54, 54); }
 #layout-component, #blogs-component .help-box { position: sticky; }
 
-.contact a, #blogs-component a{
-  text-decoration: none;
-  padding: 5px;
-  border-radius: 15px;
-}
 .toast{
   position: fixed;
   top: 40%;

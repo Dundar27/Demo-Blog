@@ -28,10 +28,10 @@ const BlogPosts = (props) => {
             <Card.Footer className='mt-2'>
               <div className='d-flex justify-content-between'>
                 <div>
-                  Writer: <Link to={'/profile/' + blog.data.writer} className="btn-outline-dark"> {blog.data.writer} </Link>
+                  Writer: <Link to={'/profile/' + blog.data.writer} className="p-1 btn btn-outline-dark"> {blog.data.writer} </Link>
                 </div>
                 <div>
-                  Catagories: <Link to={'/blog/catagories/' + blog.data.catagories} className="btn-outline-dark"> {blog.data.catagories} </Link>
+                  Catagories: <Link to={'/blog/catagories/' + blog.data.catagories} className="btn p-1 btn-outline-dark"> {blog.data.catagories} </Link>
                 </div>
               </div>
             </Card.Footer>

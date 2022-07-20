@@ -22,7 +22,7 @@ const WriterPosts = (props) => {
             </Card.Body>
 
             <Card.Footer className='mt-2 text-center'>
-              <Link to={'profile/' + writer.id} className="btn btn-outline-primary btn-rounded">Go to profile</Link>
+              <Link to={'profile/' + writer.data.username} className="btn btn-outline-primary btn-rounded">Go to profile</Link>
             </Card.Footer>
           </Card>
         </Col>

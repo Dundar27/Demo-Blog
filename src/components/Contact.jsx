@@ -65,10 +65,10 @@ class Contact extends React.Component {
               </Figure>
 
               <div>
-                <a href="tel:+905359791374" className="btn-outline-success">
+                <a href="tel:+905359791374" className="p-1 btn btn-outline-success">
                   <i class="fas fa-phone-alt"></i> +90 535 979 1374
                 </a>
-                <a href="mailto:davutburakduundar@gmail.com" className="mx-3 btn-outline-success">
+                <a href="mailto:davutburakduundar@gmail.com" className="mx-3 p-1 btn btn-outline-success">
                   <i class="fas fa-at"></i> davutburakduundar@gmail.com
                 </a>
               </div>
