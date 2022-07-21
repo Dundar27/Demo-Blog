@@ -240,7 +240,7 @@ class App extends React.Component {
           ></Route>
 
           <Route
-            path="/profile/:username"
+            path="/profile/"
             element={
               this.state.user ? (
                 <div>
