@@ -1,5 +1,4 @@
 import React from "react";
-//import { useParams } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import db from './Firebase';
 import { collection, onSnapshot, query, where } from "firebase/firestore";

@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 //Components
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -163,7 +163,7 @@ class App extends React.Component {
           />
 
           <Route
-            path={`/blog/edit-post/:id`}
+            path={`/blog/edit-post/`}
             element={
               this.state.user ? (
                 auth.currentUser.emailVerified ? (
