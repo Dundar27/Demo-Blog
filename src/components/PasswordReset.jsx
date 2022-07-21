@@ -65,6 +65,9 @@ class passwordReset extends React.Component{
                         Send Mail
                     </Button>
                 </Form>
+                <button onClick={()=>(history.back())} className='btn btn-outline-primary w-100 my-3'>
+                    <h6 className='m-0'>Back to</h6>
+                </button>
 
                 <Toast show={this.state.showA} onClose={this.toggleShowA} className="toast" id="toast">
                     <Toast.Header>
