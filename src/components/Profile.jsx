@@ -17,51 +17,16 @@ class Profile extends React.Component {
     }
   }
 
-  /*
-  const [userData, setUserData] = useState([]);
-  const [userBlogPosts, setUserBlogPosts] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  let { username } = useParams();
-
-  useEffect(() => {
-    onSnapshot(
-      query(collection(db, 'users'), where('username', '==', username)),
-      (snapshop) =>
-        setUserData({
-          userData: snapshop.docs.map((doc) => ({
-            id: doc.id,
-            data: doc.data(),
-          })),
-        })
-    );
-    onSnapshot(
-      query(collection(db, 'blogs'), where('writer', '==', username)),
-      (snapshop) =>
-        setUserBlogPosts({
-          userBlogPosts: snapshop.docs.map((doc) => ({
-            id: doc.id,
-            data: doc.data(),
-          })),
-        })
-    );
-  }, []);
-
-  const searchBlogPostProp = (event) => {
-    setSearchQuery({ searchQuery: event.target.value });
-  };*/
-
-  
-
-  username  = () => {let username = useParams(); return username;}
+  username  = useParams();
 
   async getUserData() {
-    const response = await onSnapshot(query(collection(db, 'users'), where("username", "==", this.username())), snapshop => this.setState({userData: snapshop.docs.map(doc => ({
+    const response = await onSnapshot(query(collection(db, 'users'), where("username", "==", this.username)), snapshop => this.setState({userData: snapshop.docs.map(doc => ({
       id:doc.id,data:doc.data()
     }))}));
   }
 
   async getUserBlogPosts() {
-    const response = await onSnapshot(query(collection(db, 'blogs'), where("writer", "==", this.username())), snapshop => this.setState({userBlogPosts: snapshop.docs.map(doc => ({
+    const response = await onSnapshot(query(collection(db, 'blogs'), where("writer", "==", this.username)), snapshop => this.setState({userBlogPosts: snapshop.docs.map(doc => ({
       id:doc.id,data:doc.data()
     }))}));
   }

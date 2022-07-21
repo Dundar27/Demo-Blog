@@ -28,7 +28,7 @@ const navbarLayout = (props) => {
                   <Link to="/writers/" className="nav-link text-light">
                     Writers
                   </Link>
-                  <Link to="/profile/" className="nav-link text-light">
+                  <Link to={"/profile/"}className="nav-link text-light">
                     Profile
                   </Link>
                 </>) :
