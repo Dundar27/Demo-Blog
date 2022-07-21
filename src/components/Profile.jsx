@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import db from './Firebase';
@@ -21,8 +21,6 @@ class Profile extends React.Component {
     this.getUserData();
     this.getUserBlogPosts();
   }
-
-  //params  = useParams();
 
   async getUserData() {
     const response = await onSnapshot(
