@@ -13,7 +13,8 @@ class Writers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      writerPosts:[]
+      writerPosts:[],
+      searchQuery:""
     }
   }
 
@@ -34,7 +35,24 @@ class Writers extends React.Component {
     );
   }
 
+  searchWriterPostProp = (event) => {
+    this.setState({ searchQuery: event.target.value });
+  };
+
   render() {
+
+    let filtered = this.state.writerPosts
+      .filter((writer) => {
+        return (
+          writer.data.username
+            .toLowerCase()
+            .indexOf(this.state.searchQuery.toLowerCase()) !== -1
+        );
+      })
+      .sort((a, b) => {
+        return a.id < b.id ? 1 : a.id > b.id ? -1 : 0;
+      });
+
     return (
       <div className="p-4" id="writers-component">
         <div className='my-5'>
@@ -42,10 +60,10 @@ class Writers extends React.Component {
           <hr /> <p><i>You can find a lot of writers on the writers page</i></p>
         </div>
 
-        <SearchBar />
+        <SearchBar searchProp={this.searchWriterPostProp}/>
 
         <div>
-          <WriterPosts WriterPosts={this.state.writerPosts}/>
+          <WriterPosts WriterPosts={filtered}/>
         </div>
       </div>
     );

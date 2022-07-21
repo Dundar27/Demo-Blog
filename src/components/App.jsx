@@ -260,15 +260,6 @@ class App extends React.Component {
           />
 
           <Route
-            path="/profiles/"
-            element={
-              <div>
-                <NoPage />
-              </div>
-            }
-          />
-
-          <Route
             path="/profile/settings/"
             element={
               this.state.user ? (
