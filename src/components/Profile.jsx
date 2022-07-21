@@ -50,28 +50,30 @@ class Profile extends React.Component {
     setSearchQuery({ searchQuery: event.target.value });
   };*/
 
-  username  = useParams();
+  
+
+  username  = () => {let username = useParams(); return username;}
+
+  async getUserData() {
+    const response = await onSnapshot(query(collection(db, 'users'), where("username", "==", this.username())), snapshop => this.setState({userData: snapshop.docs.map(doc => ({
+      id:doc.id,data:doc.data()
+    }))}));
+  }
+
+  async getUserBlogPosts() {
+    const response = await onSnapshot(query(collection(db, 'blogs'), where("writer", "==", this.username())), snapshop => this.setState({userBlogPosts: snapshop.docs.map(doc => ({
+      id:doc.id,data:doc.data()
+    }))}));
+  }
 
   componentDidMount(){
     this.getUserData();
     this.getUserBlogPosts();
   }
 
-  async getUserData() {
-    const response = await onSnapshot(query(collection(db, 'users'), where("username", "==", this.username)), snapshop => this.setState({userData: snapshop.docs.map(doc => ({
-      id:doc.id,data:doc.data()
-    }))}));
-  }
-
-  async getUserBlogPosts() {
-    const response = await onSnapshot(query(collection(db, 'blogs'), where("writer", "==", this.username)), snapshop => this.setState({userBlogPosts: snapshop.docs.map(doc => ({
-      id:doc.id,data:doc.data()
-    }))}));
-  }
-
   searchBlogPostProp = (event) => {
     this.setState({ searchQuery: event.target.value });
-  };
+  }
   
   render(){
 
