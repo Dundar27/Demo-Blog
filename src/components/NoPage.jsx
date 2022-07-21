@@ -10,7 +10,7 @@ const NoPage = () => {
                     <h2>File not found</h2>
                     <ul className="navbar-nav me-auto mt-4">
                         <li className="nav-item">
-                            <Link to='/' className='btn btn-outline-primary'><h6 className='m-0'>Back to Home</h6></Link>
+                            <button onClick={()=>(history.back())} className='btn btn-outline-primary'><h6 className='m-0'>Back to</h6></button>
                         </li>
                     </ul>
                 </div>
