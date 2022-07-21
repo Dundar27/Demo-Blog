@@ -3,6 +3,7 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import db from './Firebase';
 import { collection, onSnapshot, query, where } from "firebase/firestore";
+import SearchBar from './SearchBar';
 import BlogPosts from "./BlogPosts";
 import ProfileCard from "./ProfileCard";
 
@@ -12,7 +13,8 @@ class Profile extends React.Component {
     super(props);
     this.state= {
       userData: [],
-      userBlogPosts: []
+      userBlogPosts: [],
+      searchQuery:""
     }
   }
 
@@ -33,7 +35,23 @@ class Profile extends React.Component {
     }))}));
   }
 
+  searchBlogPostProp = (event) => {
+    this.setState({ searchQuery: event.target.value });
+  };
+
   render(){
+
+    let filtered = this.state.userBlogPosts
+      .filter((blog) => {
+        return (
+          blog.data.title
+            .toLowerCase()
+            .indexOf(this.state.searchQuery.toLowerCase()) !== -1
+        );
+      })
+      .sort((a, b) => {
+        return a.id < b.id ? 1 : a.id > b.id ? -1 : 0;
+      });
 
   return (
     <div id="account-component">
@@ -50,7 +68,9 @@ class Profile extends React.Component {
               <div>
                 <h4>My Blog Posts</h4> <hr />
 
-                <BlogPosts BlogPosts={this.state.userBlogPosts} />
+                <SearchBar searchProp={this.searchBlogPostProp}/>
+
+                <BlogPosts BlogPosts={filtered} />
 
               </div>
           </Col>
