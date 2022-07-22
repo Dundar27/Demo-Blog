@@ -22,7 +22,7 @@ const BlogPosts = (props) => {
                   {blog.data.description}
                 </Card.Text>
               </div>
-              <Link to={'post/' + blog.id} className="btn btn-outline-primary btn-rounded">Read the Blog Post</Link>
+              <Link to={'/blog/post/' + blog.id} className="btn btn-outline-primary btn-rounded">Read the Blog Post</Link>
             </Card.Body>
 
             <Card.Footer className='mt-2'>

@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 //Components
 import Navbar from "./Navbar";
 import Footer from "./Footer";
