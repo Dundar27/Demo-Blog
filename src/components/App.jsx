@@ -7,6 +7,7 @@ import Slider from "./Slider";
 import MainSection from "./MainSection";
 import Settings from "./Settings";
 import Profile from "./Profile";
+import CopyProfile from "./CopyProfile";
 import Blog from "./Blog";
 import Register from "./Register";
 import Login from "./Login";
@@ -240,12 +241,12 @@ class App extends React.Component {
           ></Route>
 
           <Route
-            path="/profile/"
+            path="/profile/:username"
             element={
               this.state.user ? (
                 <div>
                   <Navbar userControl={this.state.user} />
-                  <Profile
+                  <CopyProfile
                     userControl={this.state.user}
                     searchProp={this.searchBlogPostProp}
                   />
