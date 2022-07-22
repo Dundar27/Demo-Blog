@@ -3,12 +3,8 @@ import { Button } from "react-bootstrap";
 
 const SearchBar = (props) => { 
 
-    function handleForSubmit(event){
-        event.preventDefault();
-    }
-
     return(
-        <form className="d-flex mx-3" onSubmit={handleForSubmit} id="searchBar-component">
+        <form className="d-flex mx-3" id="searchbar-component">
             <input className="form-control me-2" type="text" placeholder="Search..."  onChange={props.searchProp}/>
             <div className="d-flex">
                 <Button variant="primary" className='mx-1'>
