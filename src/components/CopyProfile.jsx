@@ -15,13 +15,13 @@ function CopyProfile(){
   let { username } = useParams();
   
   useEffect(()=>{
-    onSnapshot(query(collection(db, "users"), where("username", "==", username)), (snapshot)=> setUserData({
+    onSnapshot(query(collection(db, "users"), where("username", "==", username)), (snapshop)=> setUserData({
       userData: snapshop.docs.map((doc) => ({id: doc.id, data: doc.data()}))
     }));
-    onSnapshot(query(collection(db, "blogs"), where("writer", "==", username)), (snapshot)=>  setUserBlogPosts({
+    onSnapshot(query(collection(db, "blogs"), where("writer", "==", username)), (snapshop)=>  setUserBlogPosts({
       userBlogPosts: snapshop.docs.map((doc) => ({id: doc.id, data: doc.data()}))
     }));
-  });
+  }, [username]);
   
   function searchBlogPostProp(event){
     setSearchQuery({searchQuery: event.target.value});
