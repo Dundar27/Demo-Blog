@@ -6,6 +6,7 @@ import Footer from "./Footer";
 import Slider from "./Slider";
 import MainSection from "./MainSection";
 import Settings from "./Settings";
+import Router from "./Router";
 import Profile from "./Profile";
 import Blog from "./Blog";
 import Register from "./Register";
@@ -245,7 +246,7 @@ class App extends React.Component {
               this.state.user ? (
                 <div>
                   <Navbar userControl={this.state.user} />
-                  <Profile
+                  <Router
                     userControl={this.state.user}
                     searchProp={this.searchBlogPostProp}
                   />

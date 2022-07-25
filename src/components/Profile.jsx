@@ -17,8 +17,6 @@ class Profile extends React.Component {
     };
   }
 
-  username  = useParams();
-
   componentDidMount() {
     this.getUserData();
     this.getUserBlogPosts();
@@ -28,7 +26,7 @@ class Profile extends React.Component {
     const response = await onSnapshot(
       query(
         collection(db, 'users'),
-        where('username', '==', this.username)
+        where('username', '==', this.props.username)
       ),
       (snapshop) =>
         this.setState({
@@ -44,7 +42,7 @@ class Profile extends React.Component {
     const response = await onSnapshot(
       query(
         collection(db, 'blogs'),
-        where('writer', '==', this.username)
+        where('writer', '==', this.props.username)
       ),
       (snapshop) =>
         this.setState({
