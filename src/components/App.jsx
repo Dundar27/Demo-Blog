@@ -174,7 +174,7 @@ class App extends React.Component {
           />
 
           <Route
-            path="/blog/create-post/"
+            path="/blog/post/create/"
             element={
               this.state.user ? (
                 auth.currentUser.emailVerified ? (
@@ -195,7 +195,7 @@ class App extends React.Component {
           />
 
           <Route
-            path={`/blog/edit-post/`}
+            path={`/blog/post/edit/:id`}
             element={
               this.state.user ? (
                 auth.currentUser.emailVerified ? (

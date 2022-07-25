@@ -105,6 +105,7 @@ class Register extends React.Component {
 
         setDoc(doc(db, "users", auth.currentUser.uid), {
 
+          email: email,
           username: username,
           firstname: firstname,
           lastname: lastname,

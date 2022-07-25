@@ -21,6 +21,11 @@ class Profile extends React.Component {
     this.getUserBlogPosts();
   }
 
+  componentDidUpdate(){
+    this.getUserData();
+    this.getUserBlogPosts();
+  }
+
   async getUserData() {
     const response = await onSnapshot(
       query(

@@ -98,7 +98,7 @@ class BlogsSettings extends React.Component {
 
     return (
       <div id="blogssettings-component">
-        <Link to={'/blog/create-post/'} className="mt-3">
+        <Link to={'/blog/post/create/'} className="mt-3">
           <Button variant="primary" className="w-100">
             <i className="fas fa-plus"></i> Create
           </Button>
@@ -124,7 +124,7 @@ class BlogsSettings extends React.Component {
                 <td>{blog.data.catagories}</td>
 
                 <td>
-                  <Link to={`/blog/edit-blog/${blog.id}`} className="mx-2">
+                  <Link to={`/blog/edit/${blog.id}`} className="mx-2">
                     <Button variant="warning" className="text-light">
                       <i className="fas fa-edit"></i> Edit
                     </Button>

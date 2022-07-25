@@ -111,7 +111,7 @@ const ProfileCard = (props) => {
                                             </span>
                                             <br />
                                             <span className="text-center">
-                                                {auth.currentUser.email}
+                                                {user.data.email}
                                             </span>
                                         </Col> 
                                     </Row> 
