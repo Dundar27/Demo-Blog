@@ -12,7 +12,7 @@ class EditBlogPost extends React.Component {
       content: '',
       imageUrl: '',
       description: '',
-      catagories: '',
+      catagories: ''
     };
   }
 
@@ -27,15 +27,15 @@ class EditBlogPost extends React.Component {
         this.setState({
           post: snapshop.docs.map((doc) => ({
             id: doc.id,
-            data: doc.data(),
-          })),
+            data: doc.data()
+          }))
         })
     );
   }
 
   handleChange = (e) => {
     this.setState({
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
   };
 
