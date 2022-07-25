@@ -4,10 +4,16 @@ import db from './Firebase';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
 
 class EditBlogPost extends React.Component {
-  constructor(props) {
+  
+  constructor(props){
     super(props);
     this.state = {
-      post: []
+      post: [],
+      title:"",
+      content:"",
+      imageUrl:"",
+      description:"",
+      catagories:""
     };
   }
 
@@ -25,13 +31,13 @@ class EditBlogPost extends React.Component {
         this.setState({
           post: snapshop.docs.map((doc) => ({
             id: doc.id,
-            data: doc.data(),
+            data: doc.data()
           })),
         })
     );
   }
 
-  handleChange = (e) => {
+  handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value,
     });
