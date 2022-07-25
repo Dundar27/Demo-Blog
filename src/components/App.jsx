@@ -18,7 +18,7 @@ import PasswordReset from './PasswordReset';
 import Contact from './Contact';
 import Verification from './Verification';
 import CreateBlogPost from './CreateBlogPost';
-import EditBlogPost from './EditBlogPost';
+import RouterEditPost from './RouterEditPost';
 import PrivacyPolicy from './PrivacyPolicy';
 import Writers from './Writers';
 //Style files
@@ -200,7 +200,7 @@ class App extends React.Component {
               this.state.user ? (
                 auth.currentUser.emailVerified ? (
                   <div>
-                    <EditBlogPost />
+                    <RouterEditPost />
                   </div>
                 ) : (
                   <div>
