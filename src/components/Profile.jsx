@@ -1,4 +1,5 @@
 import React from 'react';
+import {useParams} from "react-router-dom";
 import { Row, Col } from 'react-bootstrap';
 import db from './Firebase';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
@@ -12,9 +13,11 @@ class Profile extends React.Component {
     this.state = {
       userData: [],
       userBlogPosts: [],
-      searchQuery: '',
+      searchQuery: ""
     };
   }
+
+  username  = useParams();
 
   componentDidMount() {
     this.getUserData();
@@ -25,7 +28,7 @@ class Profile extends React.Component {
     const response = await onSnapshot(
       query(
         collection(db, 'users'),
-        where('username', '==', this.props.userControl.displayName)
+        where('username', '==', this.username)
       ),
       (snapshop) =>
         this.setState({
@@ -41,7 +44,7 @@ class Profile extends React.Component {
     const response = await onSnapshot(
       query(
         collection(db, 'blogs'),
-        where('writer', '==', this.props.userControl.displayName)
+        where('writer', '==', this.username)
       ),
       (snapshop) =>
         this.setState({
