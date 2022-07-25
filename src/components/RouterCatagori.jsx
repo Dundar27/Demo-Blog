@@ -1,8 +1,8 @@
-import React, {useSatate} from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
-import Catagori from "./Catasgori";
+import Catagori from "./Catagori";
 
-const RouterCatagorie = (props) => {
+const RouterCatagori = (props) => {
 
   let { catagori } = useParams();
 
@@ -15,4 +15,4 @@ const RouterCatagorie = (props) => {
   )
 }
 
-export default RouterCatagorie;
+export default RouterCatagori;
