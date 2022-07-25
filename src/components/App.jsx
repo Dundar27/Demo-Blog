@@ -9,7 +9,7 @@ import Settings from './Settings';
 import Router from './RouterProfile';
 import Blog from './Blog';
 import CatagoriesList from './CatagoriesList';
-import RouterCatagori from "./RouterCatagori";
+import RouterCatagori from './RouterCatagori';
 import Register from './Register';
 import Login from './Login';
 import NoPage from './NoPage';
@@ -155,7 +155,7 @@ class App extends React.Component {
           />
 
           <Route
-            path="/blog/catagories/:catagorie"
+            path="/blog/catagories/:catagori"
             element={
               <RouterCatagori
                 catagories={this.state.blogPosts.map(
