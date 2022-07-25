@@ -14,3 +14,8 @@
     top: 0;
     z-index: 10;
 }
+#go-back-btn{
+  position: fixed;
+  right: 3%;
+  bottom: 3%;
+}

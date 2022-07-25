@@ -461,6 +461,9 @@ const PrivacyPolicy = () => {
         <li>By sending us an email: [___WEBSITE_CONTACT_EMAIL___]</li>
       </ul>
       <p></p>
+      <button onClick={()=>(history.back())} className='btn btn-outline-primary' id="go-back-btn">
+        <i class="fas fa-arrow-left fa-2x"></i>
+      </button>
     </div>
   )
 }

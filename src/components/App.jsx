@@ -7,8 +7,8 @@ import Slider from "./Slider";
 import MainSection from "./MainSection";
 import Settings from "./Settings";
 import Router from "./Router";
-import Profile from "./Profile";
 import Blog from "./Blog";
+import CatagoriesList from "./CatagoriesList";
 import Register from "./Register";
 import Login from "./Login";
 import NoPage from "./NoPage";
@@ -30,6 +30,7 @@ import {
   orderBy,
   limit,
 } from "firebase/firestore";
+import CatagoriesList from "./CatagoriesList";
 
 class App extends React.Component {
   constructor(props) {
@@ -140,6 +141,11 @@ class App extends React.Component {
                 <Footer userControl={this.state.user} />
               </div>
             }
+          />
+
+          <Route 
+            path="/blog/catagories-list/"
+            element={<CatagoriesList catagories={this.state.blogPosts.map((catagori)=> catagori.data.catagories)}/>}
           />
 
           <Route
