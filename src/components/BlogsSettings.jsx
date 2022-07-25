@@ -124,7 +124,7 @@ class BlogsSettings extends React.Component {
                 <td>{blog.data.catagories}</td>
 
                 <td>
-                  <Link to={`/blog/edit/${blog.id}`} className="mx-2">
+                  <Link to={`/blog/post/edit/${blog.id}`} className="mx-2">
                     <Button variant="warning" className="text-light">
                       <i className="fas fa-edit"></i> Edit
                     </Button>
