@@ -82,7 +82,7 @@ class Profile extends React.Component {
                 <h4>Abouth Me</h4> <br />
                 <p>
                   {this.state.userData.map((user) => user.data.usermessage)}
-                </p>{' '}
+                </p>
                 <br />
               </div>
               <div>
