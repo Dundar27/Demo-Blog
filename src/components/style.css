@@ -3,6 +3,7 @@
 #blogs-component, #header-component { background: rgb(200, 200, 200); }
 #layout-component .nav-link:hover { background-color: rgb(54, 54, 54); }
 #layout-component, #blogs-component .help-box { position: sticky; }
+#catagories-list a{ text-decoration: none; }
 
 .toast{
   position: fixed;

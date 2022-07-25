@@ -6,7 +6,7 @@ import Footer from "./Footer";
 import Slider from "./Slider";
 import MainSection from "./MainSection";
 import Settings from "./Settings";
-import Router from "./Router";
+import Router from "./RouterProfile";
 import Blog from "./Blog";
 import CatagoriesList from "./CatagoriesList";
 import Register from "./Register";
@@ -115,13 +115,13 @@ class App extends React.Component {
 
     return (
       <BrowserRouter>
+        <Navbar userControl={this.state.user} />
         <Routes>
           <Route
             path="/"
             exact
             element={
               <div>
-                <Navbar userControl={this.state.user} />
                 <Slider />
                 <MainSection getPopulerBlogPosts={filtered} />
                 <Footer userControl={this.state.user} />
@@ -133,7 +133,6 @@ class App extends React.Component {
             path="/blog/"
             element={
               <div>
-                <Navbar userControl={this.state.user} />
                 <Blog
                   getBlogPosts={filtered}
                   searchProp={this.searchBlogPostProp}
@@ -144,7 +143,7 @@ class App extends React.Component {
           />
 
           <Route 
-            path="/blog/catagories-list/"
+            path="/blog/catagories/"
             element={<CatagoriesList catagories={this.state.blogPosts.map((catagori)=> catagori.data.catagories)}/>}
           />
 
@@ -199,7 +198,6 @@ class App extends React.Component {
                 </div>
               ) : (
                 <div>
-                  <Navbar userControl={this.state.user} />
                   <Register />
                 </div>
               )
@@ -230,7 +228,6 @@ class App extends React.Component {
                 </div>
               ) : (
                 <div>
-                  <Navbar userControl={this.state.user} />
                   <Login />
                 </div>
               )
@@ -251,7 +248,6 @@ class App extends React.Component {
             element={
               this.state.user ? (
                 <div>
-                  <Navbar userControl={this.state.user} />
                   <Router
                     userControl={this.state.user}
                     searchProp={this.searchBlogPostProp}
@@ -259,7 +255,6 @@ class App extends React.Component {
                 </div>
               ) : (
                 <div>
-                  <Navbar />
                   <Login />
                 </div>
               )
@@ -271,12 +266,10 @@ class App extends React.Component {
             element={
               this.state.user ? (
                 <div>
-                  <Navbar userControl={this.state.user} />
                   <Settings userControl={this.state.user} />
                 </div>
               ) : (
                 <div>
-                  <Navbar />
                   <Login />
                 </div>
               )
@@ -287,22 +280,26 @@ class App extends React.Component {
             path="/contact/"
             element={
               <div>
-                <Navbar userControl={this.state.user} />
                 <Contact />
+                <Footer userControl={this.state.user} />
               </div>
             }
           />
 
           <Route path="/writers/" element={
             <div>
-              <Navbar userControl={this.state.user} />
               <Writers />
               <Footer userControl={this.state.user} />
             </div>
             }
           />   
 
-          <Route path="/policys/" element={<PrivacyPolicy />} />
+          <Route path="/policys/" element={
+            <div>
+              <PrivacyPolicy />
+              <Footer userControl={this.state.user} />
+            </div>
+          } />
 
           <Route path="*" element={<NoPage />} />
         </Routes>

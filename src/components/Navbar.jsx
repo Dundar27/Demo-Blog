@@ -9,7 +9,7 @@ const navbarLayout = (props) => {
   const userControl = props.userControl;
 
   return (
-    <div id="layout-component">
+    <div id="layout-component" className="sticky-top">
       <Navbar bg="dark" expand="sm">
         <Container fluid>
           <Navbar.Collapse id="navbarScroll">
