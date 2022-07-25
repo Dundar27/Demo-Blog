@@ -113,7 +113,7 @@ class Register extends React.Component {
           phone: phone,
           id: auth.currentUser.uid,
 
-          imgurl: "",
+          imgurl: "http://ssl.gstatic.com/accounts/ui/avatar_2x.png",
           facebookProfileURL: "",
           twitterProfileURL: "",
           instagramProfileURL: ""

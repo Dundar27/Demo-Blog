@@ -9,17 +9,12 @@ const ProfileCard = (props) => {
             {props.userData.map(user =>(
                 <Card>
                     <div className="text-center p-3">
-                        {(user.data.imgurl !== "" || null || undefined || NaN) ? 
-                        (<img
+                        
+                        <img
                         src={user.data.imgurl}
                         className="avatar w-100"
                         alt="avatar"
-                        />):(
-                        <img
-                        src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"
-                        className="avatar w-100"
-                        alt="avatar"
-                        /> )}
+                        />
                                     
                         <h3 className="mt-3">
                         {user.data.username}

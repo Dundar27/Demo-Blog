@@ -7,11 +7,13 @@ const Router = (props) => {
   let {username} = useParams();
 
   return (
-    <Profile 
-      username = {username}
-      userControl={props.userControl}
-      searchProp={props.searchProp}
-    >
+    <div>
+      <Profile 
+        username = {username}
+        userControl={props.userControl}
+        searchProp={props.searchProp}
+      />
+    </div>
   );
 }
 

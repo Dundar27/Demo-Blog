@@ -30,9 +30,6 @@ const MainSection = (props) => {
                     <ListGroup.Item>
                       <Link to={'blog/catagories/'}>Catagories</Link>
                     </ListGroup.Item>
-                    <ListGroup.Item >
-                      <Link to={'blog/populer-blogs/'}>Populer Blog Posts</Link>
-                    </ListGroup.Item>
                   </ListGroup>
                 </Card.Body>
               </Card>
