@@ -1,36 +1,37 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 //Components
-import Navbar from "./Navbar";
-import Footer from "./Footer";
-import Slider from "./Slider";
-import MainSection from "./MainSection";
-import Settings from "./Settings";
-import Router from "./RouterProfile";
-import Blog from "./Blog";
-import CatagoriesList from "./CatagoriesList";
-import Register from "./Register";
-import Login from "./Login";
-import NoPage from "./NoPage";
-import PasswordReset from "./PasswordReset";
-import Contact from "./Contact";
-import Verification from "./Verification";
-import CreateBlogPost from "./CreateBlogPost";
-import EditBlogPost from "./EditBlogPost";
-import PrivacyPolicy from "./PrivacyPolicy";
-import Writers from "./Writers";
+import Navbar from './Navbar';
+import Footer from './Footer';
+import Slider from './Slider';
+import MainSection from './MainSection';
+import Settings from './Settings';
+import Router from './RouterProfile';
+import Blog from './Blog';
+import CatagoriesList from './CatagoriesList';
+import RouterCatagori from "./RouterCatagori";
+import Register from './Register';
+import Login from './Login';
+import NoPage from './NoPage';
+import PasswordReset from './PasswordReset';
+import Contact from './Contact';
+import Verification from './Verification';
+import CreateBlogPost from './CreateBlogPost';
+import EditBlogPost from './EditBlogPost';
+import PrivacyPolicy from './PrivacyPolicy';
+import Writers from './Writers';
 //Style files
-import "./style.css";
+import './style.css';
 //Database functions
-import db, { auth } from "./Firebase";
+import db, { auth } from './Firebase';
 import {
   collection,
   query,
   onSnapshot,
   orderBy,
   limit,
-} from "firebase/firestore";
-import CatagoriesList from "./CatagoriesList";
+} from 'firebase/firestore';
+import CatagoriesList from './CatagoriesList';
 
 class App extends React.Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class App extends React.Component {
     this.state = {
       populerBlogPosts: [],
       blogPosts: [], //To keep data of blog cards
-      searchQuery: "", // To filter blog cards
+      searchQuery: '', // To filter blog cards
       user: false,
     };
   }
@@ -63,7 +64,7 @@ class App extends React.Component {
   // Function to get blog data from firebase database
   async getBlogPosts() {
     const response = await onSnapshot(
-      query(collection(db, "blogs")),
+      query(collection(db, 'blogs')),
       (snapshop) =>
         this.setState({
           blogPosts: snapshop.docs.map((doc) => ({
@@ -77,7 +78,7 @@ class App extends React.Component {
   // Function to get blog data from firebase database
   async getPopulerBlogPosts() {
     const response = await onSnapshot(
-      query(collection(db, "blogs"), orderBy("like"), limit(4)),
+      query(collection(db, 'blogs'), orderBy('like'), limit(4)),
       (snapshop) =>
         this.setState({
           populerBlogPosts: snapshop.docs.map((doc) => ({
@@ -142,9 +143,26 @@ class App extends React.Component {
             }
           />
 
-          <Route 
+          <Route
             path="/blog/catagories/"
-            element={<CatagoriesList catagories={this.state.blogPosts.map((catagori)=> catagori.data.catagories)}/>}
+            element={
+              <CatagoriesList
+                catagories={this.state.blogPosts.map(
+                  (catagori) => catagori.data.catagories
+                )}
+              />
+            }
+          />
+
+          <Route
+            path="/blog/catagories/:catagorie"
+            element={
+              <RouterCatagori
+                catagories={this.state.blogPosts.map(
+                  (catagori) => catagori.data.catagories
+                )}
+              />
+            }
           />
 
           <Route
@@ -286,20 +304,25 @@ class App extends React.Component {
             }
           />
 
-          <Route path="/writers/" element={
-            <div>
-              <Writers />
-              <Footer userControl={this.state.user} />
-            </div>
+          <Route
+            path="/writers/"
+            element={
+              <div>
+                <Writers />
+                <Footer userControl={this.state.user} />
+              </div>
             }
-          />   
+          />
 
-          <Route path="/policys/" element={
-            <div>
-              <PrivacyPolicy />
-              <Footer userControl={this.state.user} />
-            </div>
-          } />
+          <Route
+            path="/policys/"
+            element={
+              <div>
+                <PrivacyPolicy />
+                <Footer userControl={this.state.user} />
+              </div>
+            }
+          />
 
           <Route path="*" element={<NoPage />} />
         </Routes>
