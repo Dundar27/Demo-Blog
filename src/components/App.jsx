@@ -8,6 +8,7 @@ import MainSection from './MainSection';
 import Settings from './Settings';
 import Router from './RouterProfile';
 import Blog from './Blog';
+import RouterPost from './RouterPost';
 import CatagoriesList from './CatagoriesList';
 import RouterCatagori from './RouterCatagori';
 import Register from './Register';
@@ -140,6 +141,13 @@ class App extends React.Component {
                 />
                 <Footer userControl={this.state.user} />
               </div>
+            }
+          />
+
+          <Route
+            path="/blog/post/:id"
+            element={
+              <RouterPost />
             }
           />
 

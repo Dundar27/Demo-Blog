@@ -1,30 +1,30 @@
 import React from "react";
 import db from './Firebase';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
-import BlogPosts from './BlogPosts';
+import PostContent from './PostContent';
 
-class Catagori extends React.Component {
-
+class Post extends React.Component{
+  
   constructor(props) {
     super(props);
     this.state = {
-      posts:[]
+      post:[]
     };
   }
 
   componentDidMount(){
-    this.getPosts();
+    this.getPost();
   }
-
-  async getPosts() {
+  
+  async getPost() {
     const response = await onSnapshot(
       query(
         collection(db, 'blogs'),
-        where('catagories', '==', this.props.catagori)
+        where('id', '==', this.props.id)
       ),
       (snapshop) =>
         this.setState({
-          posts: snapshop.docs.map((doc) => ({
+          post: snapshop.docs.map((doc) => ({
             id: doc.id,
             data: doc.data(),
           })),
@@ -35,10 +35,10 @@ class Catagori extends React.Component {
   render(){
     return(
       <div>
-        <BlogPosts BlogPosts={this.state.posts} />
+        <PostContent post={this.state.post}/>
       </div>
     )
   }
 }
 
-export default Catagori;
+export default Post;
